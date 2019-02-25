@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>nastop</title>
+    <link rel="stylesheet" href="../Style/style.css">
+</head>
+<body>
+<header id="regHeader">
+    <h1>Registration</h1>
+</header>
+<main id="regMain">
+    <form action="../index.php?target=User&action=register" method="post" onsubmit="return passValid()" enctype="multipart/form-data">
+        <table id="regTable">
+            <tr>
+                <td>Username:</td>
+                <td><input type="text" required name="username" style="width: 50%;"></td>
+            </tr>
+            <tr><td><br></td></tr>
+            <tr>
+                <td>First Name:</td>
+                <td><input type="text" required name="firstName" style="width: 50%;"></td>
+            </tr>
+            <tr><td><br></td></tr>
+            <tr>
+                <td>Last Name:</td>
+                <td><input type="text" required name="lastName" style="width: 50%;"></td>
+            </tr>
+            <tr><td><br></td></tr>
+            <tr>
+                <td>Gender:</td>
+                <td><select name="gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select></td>
+            </tr>
+            <tr><td><br></td></tr>
+            <tr>
+                <td>Age:</td>
+                <td><input type="number" required name="age" style="width: 50%;"></td>
+            </tr>
+            <tr><td><br></td></tr>
+            <tr>
+                <td>E-mail:</td>
+                <td><input type="email" required name="email" style="width: 50%;"></td>
+            </tr>
+            <tr><td><br></td></tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type="password" required name="password" id="password" style="width: 50%;"></td>
+            </tr>
+            <tr><td><br></td></tr>
+            <tr>
+                <td>Repeat Password:</td>
+                <td><input type="password" required id="repass" style="width: 50%;"></td>
+            </tr>
+            <tr><td><br></td></tr>
+            <tr>
+                <td>GSM:</td>
+                <td><input type="text" required name="GSM" style="width: 50%;"></td>
+            </tr>
+            <tr><td><br></td></tr>
+            <tr>
+                <td>Image:</td>
+                <td><input type="file" required name="pic" style="width: 50%;"></td>
+            </tr>
+            <tr><td><br></td></tr>
+            <tr>
+                <td><a href="login.html"><input type="button" name="submit" id="login" value="Login"></a></td>
+                <td><input type="submit" id="regButton" name="regButton" value="Register"></td>
+            </tr>
+            <tr><td><br></td></tr>
+        </table>
+    </form>
+</main>
+<footer>
+
+</footer>
+
+<script>
+
+    function passValid(){
+        var password,repass;
+        password = document.getElementById("password").value;
+        repass = document.getElementById("repass").value;
+        if(password != repass){
+            alert("Passwords must be same!");
+            return false;
+        }
+        else return true;
+    }
+
+</script>
+</body>
+</html>

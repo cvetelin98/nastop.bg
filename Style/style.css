@@ -1,0 +1,139 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    width: 80%;
+    height: 35vh;
+    background-color: cadetblue;
+    margin-left: 10%;
+    text-align: center;
+}
+
+#regHeader {
+    width: 80%;
+    height: 11vh;
+    background-color: cadetblue;
+    margin-left: 10%;
+    text-align: center;
+}
+
+#logHeader {
+    width: 80%;
+    height: 11vh;
+    background-color: cadetblue;
+    margin-left: 10%;
+    text-align: center;
+}
+
+h1 {
+    text-align: right;
+    font-size: 5vw;
+    color: black;
+    font-weight: bold;
+}
+
+main {
+    width: 80%;
+    height: 55vh;
+    background-color: cornflowerblue;
+    margin-left: 10%;
+}
+
+#regMain {
+    width: 80%;
+    height: 79vh;
+    background-color: cornflowerblue;
+    margin-left: 10%;
+}
+
+#logMain {
+    width: 80%;
+    height: 79vh;
+    background-color: cornflowerblue;
+    margin-left: 10%;
+}
+
+#regTable {
+    text-align: center;
+    width: 70%;
+    font-size: 2vw;
+    margin: auto;
+}
+
+#regButton {
+    width: 21%;
+    height: 3.5vh;
+}
+
+footer {
+    width: 80%;
+    height: 10vh;
+    background-color: cadetblue;
+    margin-left: 10%;
+}
+
+#loginTable {
+    text-align: center;
+    width: 20%;
+    height: 20vh;
+    background-color: cadetblue;
+    margin: auto;
+    font-size: 1.5vw;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+
