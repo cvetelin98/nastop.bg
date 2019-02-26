@@ -7,8 +7,17 @@
 </head>
 <body>
 <header id="logHeader">
-    <h1>Welcome</h1>
+    <div id="nav">
+        <ul>
+            <li><a class="active" href="main.php">Home</a></li>
+            <li><a href="#news">My shared travels</a></li>
+            <li><a href="profile.php">Profile edit</a></li>
+            <li><a href="addCar.html">Add car</a></li>
+            <li style="float:right"><a href="#about">Log out</a></li>
+        </ul>
+    </div>
 </header>
+
 <main id="logMain">
     <form action="../index.php?target=Car&action=add" method="post" enctype="multipart/form-data">
         <table id="loginTable">
