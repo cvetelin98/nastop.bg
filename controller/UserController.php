@@ -88,4 +88,11 @@ class UserController {
         $users = UserDao::getAll();
         echo json_encode($users);
     }
+
+    public function logout(){
+        if(isset($_POST["logOut"])){
+            session_destroy();
+            header("Location: ../view/main.php");
+        }
+    }
 }
