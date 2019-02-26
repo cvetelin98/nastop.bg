@@ -10,7 +10,8 @@ class UserDao {
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
 //        $pdo = \DBConnection::getSingletonPDO();
-        $stmt = $pdo->prepare("INSERT INTO users (username,first_name,last_name,gender,age,email,password,GSM,user_image) VALUES (?,?,?,?,?,?,?,?,?)");
+        $stmt = $pdo->prepare("INSERT INTO users (username,first_name,last_name,gender,age,email,password,GSM,user_image) 
+                                        VALUES (?,?,?,?,?,?,?,?,?)");
         $stmt->execute([$user->getUsername(),$user->getFirstName(),$user->getLastName(),$user->getGender(),$user->getAge(),$user->getEmail(),$user->getPassword(),$user->getGsm(),$user->getUserImage()]);
         $user->setUserId($pdo->lastInsertId());
     }
@@ -19,7 +20,8 @@ class UserDao {
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
 //        $pdo = \DBConnection::getSingletonPDO();
-        $stmt = $pdo->prepare("SELECT user_id,first_name,last_name,gender,age,email,password,GSM,user_image FROM users WHERE username = ?");
+        $stmt = $pdo->prepare("SELECT user_id,first_name,last_name,gender,age,email,password,GSM,user_image
+                                        FROM users WHERE username = ?");
         $stmt->execute([$username]);
         if($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
             $user = new User($username,$row->first_name,$row->last_name,$row->gender,$row->age,$row->email,$row->password,$row->GSM,$row->user_image);
@@ -51,3 +53,4 @@ class UserDao {
     }
 
 }
+
