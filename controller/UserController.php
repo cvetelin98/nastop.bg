@@ -88,4 +88,9 @@ class UserController {
         $users = UserDao::getAll();
         echo json_encode($users);
     }
+
+    public function edit(){
+
+
+    }
 }
