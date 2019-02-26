@@ -89,8 +89,14 @@ class UserController {
         echo json_encode($users);
     }
 
+
     public function edit(){
+    }
 
-
+    public function logout(){
+        if(isset($_POST["logOut"])){
+            session_destroy();
+            header("Location: ../view/main.php");
+        }
     }
 }
