@@ -7,16 +7,16 @@ use model\User;
 class UserDao {
 
     public static function addUser(User $user){
-        /** @var PDO $pdo */
+        /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
 //        $pdo = \DBConnection::getSingletonPDO();
-        $stmt = $pdo->prepare("INSERT INTO users (username,first_name,last_name,gender,age,email,password,GSM,user_image)");
+        $stmt = $pdo->prepare("INSERT INTO users (username,first_name,last_name,gender,age,email,password,GSM,user_image) VALUES (?,?,?,?,?,?,?,?,?)");
         $stmt->execute([$user->getUsername(),$user->getFirstName(),$user->getLastName(),$user->getGender(),$user->getAge(),$user->getEmail(),$user->getPassword(),$user->getGsm(),$user->getUserImage()]);
         $user->setUserId($pdo->lastInsertId());
     }
 
     public static function getByUsername($username){
-        /** @var PDO $pdo */
+        /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
 //        $pdo = \DBConnection::getSingletonPDO();
         $stmt = $pdo->prepare("SELECT user_id,first_name,last_name,gender,age,email,password,GSM,user_image FROM users WHERE username = ?");
@@ -32,7 +32,7 @@ class UserDao {
     }
 
     public static function getAll(){
-        /** @var PDO $pdo */
+        /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
 //        $pdo = \DBConnection::getSingletonPDO();
         $stmt = $pdo->prepare("SELECT user_id,username,first_name,last_name,gender,age,email,password,GSM,user_image,total_voted,rating FROM users");

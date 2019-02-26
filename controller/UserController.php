@@ -9,30 +9,9 @@ class UserController {
 
     public function register(){
 
-        $requestBody = file_get_contents('php://input');
-        $data = json_decode($requestBody);
-        $username = $data->username;
-        $password = $data->password;
-        $age = $data->age;
-        $name = $data->name;
-        /** @var User $user */
-        $user = UserDao::getByUsername($username);
-        if($user != null){
-            header("HTTP/1.1 400 User already exists");
-        }
-        else{
-//            $newUser = new User($name,$age,$email,$password);
-//            $dao->addUser($newUser);
-            echo "User registered successfully";
-        }
-
     }
 
     public function login(){
-//        $requestBody = file_get_contents('php://input');
-//        $data = json_decode($requestBody);
-//        $username = $data->username;
-//        $password = $data->password;
         if (isset($_POST["logButton"])) {
             $username = $_POST["username"];
             $password = $_POST["password"];

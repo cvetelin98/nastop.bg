@@ -10,7 +10,7 @@ define("DB_NAME",'nastop');
 define("DB_USER",'root');
 define("DB_pass",'');
 
-$GLOBALS["PDO"] = new PDO("mysql:".DB_HOST.":3306;dbname=".DB_NAME,DB_USER);
+$GLOBALS["PDO"] = new PDO("mysql:host=".DB_HOST.":3306;dbname=".DB_NAME,DB_USER);
 
 session_start();
 
