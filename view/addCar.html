@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>nastop</title>
+    <link rel="stylesheet" href="../Style/style.css">
+</head>
+<body>
+<header id="logHeader">
+    <h1>Welcome</h1>
+</header>
+<main id="logMain">
+    <form action="../index.php?target=Car&action=add" method="post" enctype="multipart/form-data">
+        <table id="loginTable">
+            <tr>
+                <td>Brand:</td>
+                <td><input type="text" name="brand" required></td>
+            </tr>
+            <tr>
+                <td>Color:</td>
+                <td><input type="text" name="color" required></td>
+            </tr>
+            <tr>
+                <td>Places:</td>
+                <td><input type="number" name="car_places" required></td>
+            </tr>
+            <tr>
+                <td>Image:</td>
+                <td><input type="file" name="car_image" required></td>
+            </tr>
+            <tr>
+                <td><input type="submit" name="saveButton" id="submit" value="Save"></td>
+            </tr>
+        </table>
+    </form>
+</main>
+<footer>
+
+</footer>
+</body>
+</html>
