@@ -66,13 +66,11 @@ class UserController {
             $user = UserDao::getByUsername($username);
             if ($user == null) {
                 echo "KYDE SME? NQMA POTREBITEL";
-                var_dump($user);
 //                header("HTTP/1.1 401 Wrong Credentials");
                 die();
                 //include "../View/register.html";
             } else {
-                if (!password_verify($user->getPassword(), $password)) {
-                    $user = null;
+                if (!password_verify($password,$user->getPassword())) {
                    echo "KYDE SME? GRESHNA PAROLA";
 //                    header("HTTP/1.1 401 Wrong Credentials");
                     die();
