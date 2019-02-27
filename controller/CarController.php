@@ -22,7 +22,7 @@ class CarController{
         $brand = $_POST["brand"];
         $color = $_POST["color"];
         $places = $_POST["car_places"];
-        $user_id = $_SESSION["user"]->getUserId();
+        $user_id = $_SESSION["user_id"];
         $temp_name = $_FILES["car_image"]["tmp_name"];
 
         if (is_uploaded_file($temp_name)) {
