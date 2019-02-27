@@ -57,7 +57,7 @@ class UserController {
             }
             UserDao::addUser($user);
             $_SESSION["username"] = $user->getUsername();
-            $_SESSION["id"] = $user->getUserId();
+            $_SESSION["user_id"] = $user->getUserId();
             $_SESSION["first_name"] = $user->getFirstName();
             $_SESSION["last_name"] = $user->getLastName();
             $_SESSION["gender"] = $user->getGender();
@@ -96,7 +96,7 @@ class UserController {
                     //include "../View/login.html";
                 } else {
                     $_SESSION["username"] = $user->getUsername();
-                    $_SESSION["id"] = $user->getUserId();
+                    $_SESSION["user_id"] = $user->getUserId();
                     $_SESSION["first_name"] = $user->getFirstName();
                     $_SESSION["last_name"] = $user->getLastName();
                     $_SESSION["gender"] = $user->getGender();

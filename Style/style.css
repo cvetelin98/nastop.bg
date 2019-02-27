@@ -247,3 +247,17 @@ li a:hover:not(.active) {
     font-weight: bold;
     float: left;
 }
+
+#proTable{
+    text-align: center;
+    width: 20%;
+    height: 20vh;
+    background-color: #f2a22b;
+    margin: auto;
+    font-size: 1.5vw;
+    position: absolute;
+    top: 52.3%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}

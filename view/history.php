@@ -5,14 +5,14 @@
     <title>nastop</title>
     <link rel="stylesheet" href="../Style/style.css">
 </head>
-<body>
+<body onload="history()">
 <header class="navHeader">
     <h1 class="smallHeader">Nastop.bg</h1>
     <div id="nav">
         <ul>
             <li><a href="home.php">Home</a></li>
             <li><a href="profile.php">My Profile</a></li>
-            <li><a class="active" href="history.html">My Shared Travels</a></li>
+            <li><a class="active" href="history.php">My Shared Travels</a></li>
             <li><a href="edit.php">Edit Profile</a></li>
             <li><a href="addCar.html">Add a Car</a></li>
             <li><a href="addTravel.html">Add a Travel</a></li>
@@ -36,8 +36,6 @@
 </footer>
 </body>
 <script>
-
-
 
 </script>
 

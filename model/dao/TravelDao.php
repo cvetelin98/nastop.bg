@@ -44,8 +44,9 @@ class TravelDao {
     public static function getAllByUser($username){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
-        $stmt = $pdo->prepare("SELECT travel_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels");
-        $stmt->execute();
+        $stmt = $pdo->prepare("SELECT travel_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels as t 
+                                          JOIN users as u ON t.user_id = u.user_id WHERE u.username = ?");
+        $stmt->execute(array($username));
         $travels = [];
         while($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
             $travel = new Travel($row->getStartingDestination(),$row->getFinalDestination(),$row->getDateOfTravelling(),$row->getFreePlaces(),$row->getPrice());
