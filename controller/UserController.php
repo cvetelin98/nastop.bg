@@ -91,6 +91,7 @@ class UserController {
 
 
     public function edit(){
+
     }
 
     public function logout(){

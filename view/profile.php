@@ -1,56 +1,69 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit</title>
+    <title>nastop</title>
     <link rel="stylesheet" href="../Style/style.css">
 </head>
 <body>
-<div id="nav">
-<ul>
-    <li><a class="active" href="main.php">Home</a></li>
-    <li><a href="#news">My shared travels</a></li>
-    <li><a href="profile.php">Profile edit</a></li>
-    <li><a href="addCar.html">Add car</a></li>
-    <li style="float:right"><a href="#about">Log out</a></li>
-</ul>
-</div>
-<div>
-    <button><a href="publicProfile.php">Public profile</a></button>
-    <h3>Edit your profile:</h3>
-    <form action="../index.php?target=User&action=edit" method="post" enctype="multipart/form-data">
-        <table id="regTable">
-            <tr>
-                <td>GSM:</td>
-                <td><input type="number"  name="GSM" value="" style="width: 50%;"></td>
-            </tr>
-            <tr><td><br></td></tr>
-            <tr>
-                <td>Current password:</td>
-                <td><input type="password"  name="cur_pass" style="width: 50%;"></td>
-            </tr>
-            <tr><td><br></td></tr>
-            <tr>
-                <td>New password:</td>
-                <td><input type="password"  name="new_pass" style="width: 50%;"></td>
-            </tr>
-            <tr><td><br></td></tr>
-            <tr>
-                <td>Confirm password:</td>
-                <td><input type="password"  name="new_pass2" style="width: 50%;"></td>
-            </tr>
-            <tr><td><br></td></tr>
-            <tr>
-                <td>Profile picture:</td>
-                <td><input type="file" required name="pic" style="width: 50%;"></td>
-            </tr>
-            <tr>
-                <td><input type="submit" id="submit" name="save" value="Save changes" style="width: 50%;"></td>
-            </tr>
-        </table>
-</div>
+<header class="navHeader">
+    <h1 class="smallHeader">Nastop.bg</h1>
+    <div id="nav">
+        <ul>
+            <li><a href="home.php">Home</a></li>
+            <li><a class="active" href="profile.php">My Profile</a></li>
+            <li><a href="history.html">My Shared Travels</a></li>
+            <li><a href="edit.php">Edit Profile</a></li>
+            <li><a href="addCar.html">Add a Car</a></li>
+            <li style="float:right"><a href="../index.php?target=User&action=logout">Log out</a></li>
+            <!--TODO FIX LOGOUT !-->
+        </ul>
+    </div>
+    <img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="100%" height="150px;">
+</header>
+<!--TODO TABLE WITH MY TRAVELS !-->
+<main id="logMain">
 
+    <table>
+        <tr>
+            <td>
+                <img src='../images/<?php echo $_SESSION["user"]->getUserImage(); ?>'>
+            </td>
+        </tr>
+        <tr>
+            <td>Name: <?php echo $_SESSION["user"]->getFirstName(); ?></td>
+            <td>Name: <?php echo $_SESSION["user"]->getLastName(); ?></td>
+        </tr>
+        <tr>
+            <td>Age: <?php echo $_SESSION["user"]->getAge(); ?></td>
+        </tr>
+        <tr>
+            <td>GSM: <?php echo $_SESSION["user"]->getGsm(); ?></td>
+        </tr>
+        <tr>
+            <td>Gender: <?php echo $_SESSION["user"]->getGender(); ?></td>
+        </tr>
 
+    </table>
 
 </body>
 </html>
+
+</main>
+<footer id="mainFooter">
+    <h3 style="font-size: 30px;float:left;margin-left:55px;">You can always go nastop!</h3>
+    <h3 style="font-size: 20px;float:left; margin-left:25px;">Nastop.bg е място, където се срещат шофьори със свободни места и желаещи да пътуват.
+        Вие сте шофьор: Не плащайте сам цялото гориво! Споделете този разход с други хора!
+        Желате да пътувате: Возете се удобно в кола на по-ниска цена от билет за автобус.</h3>
+    <img src="https://prevozvalnik.bg/img/bulgaria-footer.png" style="margin-right: 25px">
+    <h3 style="font-size: 15px;margin-right:55px;">Copyright 2019 © Nastop.bg</h3>
+</footer>
+</body>
+</html>
+

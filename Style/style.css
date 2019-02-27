@@ -98,7 +98,7 @@ main {
 
 #logMain {
     width: 80%;
-    height: 79vh;
+    height: 83vh;
     background-color: cornflowerblue;
     margin-left: 10%;
 }
@@ -190,7 +190,7 @@ footer {
     height: 30vh;
     background-color: white;
     margin-left: 10%;
-    text-align: center;;
+    text-align: center;
 }
 
 ul {
@@ -223,10 +223,26 @@ li a:hover:not(.active) {
 }
 
 .active {
-    background-color: #4CAF50;
+    background-color: #1c7f2a;
 
 }
 #nav{
-    width: 50%;
+    width: 65%;
     float: right;
+}
+
+.navHeader {
+    width: 80%;
+    height: 6.8vh;
+    background-color: cadetblue;
+    margin-left: 10%;
+    text-align: center;
+}
+
+.smallHeader {
+    text-align: left;
+    font-size: 3vw;
+    color: black;
+    font-weight: bold;
+    float: left;
 }

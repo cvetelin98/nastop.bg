@@ -2,7 +2,7 @@
 
 //TODO Travels DAO and initializing $travels !
 
-$travels = TravelDao::getAll();
+//$travels = TravelDao::getAll();
 
 ?>
 
@@ -51,7 +51,7 @@ $travels = TravelDao::getAll();
         Вие сте шофьор: Не плащайте сам цялото гориво! Споделете този разход с други хора!
         Желате да пътувате: Возете се удобно в кола на по-ниска цена от билет за автобус.</h3>
     <img src="https://prevozvalnik.bg/img/bulgaria-footer.png" style="margin-right: 25px">
-    <h3 style="font-size: 15px;margin-right:55px;">Copyright 2015 © Nastop.bg</h3>
+    <h3 style="font-size: 15px;margin-right:55px;">Copyright 2019 © Nastop.bg</h3>
 </footer>
 
 </body>
