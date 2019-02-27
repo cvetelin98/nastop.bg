@@ -46,9 +46,9 @@ session_start();
         <tr>
             <td>Age: <?php echo $_SESSION["age"]; ?></td>
         </tr>
-<!--        <tr>-->
-<!--            <td>GSM: --><?php //echo $_SESSION["gsm"]; ?><!--</td>-->
-<!--        </tr>-->
+        <tr>
+            <td>GSM: <?php echo $_SESSION["gsm"]; ?></td>
+        </tr>
         <tr>
             <td>Gender: <?php echo $_SESSION["gender"]; ?></td>
         </tr>

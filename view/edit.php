@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,12 +34,12 @@
         <table id="regTable">
             <tr>
                 <td>GSM:</td>
-                <td><input type="number"  name="GSM" value="" style="width: 50%;"></td>
+                <td><input type="number" value="<?php echo $_SESSION["gsm"] ?>" name="GSM" value="" style="width: 50%;"></td>
             </tr>
             <tr><td><br></td></tr>
             <tr>
                 <td>Current password:</td>
-                <td><input type="password"  name="cur_pass" style="width: 50%;"></td>
+                <td><input type="password" name="cur_pass" style="width: 50%;"></td>
             </tr>
             <tr><td><br></td></tr>
             <tr>
@@ -50,7 +54,7 @@
             <tr><td><br></td></tr>
             <tr>
                 <td>Profile picture:</td>
-                <td><input type="file" required name="pic" style="width: 50%;"></td>
+                <td><input type="file"  name="pic" style="width: 50%;"></td>
             </tr>
             <tr>
                 <td><input type="submit" id="submit" name="save" value="Save changes" style="width: 50%;"></td>

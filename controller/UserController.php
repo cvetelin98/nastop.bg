@@ -104,6 +104,7 @@ class UserController {
                     $_SESSION["user_image"] = $user->getUserImage();
                     $_SESSION["total_vodet"] = $user->getTotalVoted();
                     $_SESSION["rating"] = $user->getRating();
+                    $_SESSION["gsm"] = $user->getGsm();
                     $_SESSION["logged"] = true;
 //                    echo "Successful login - welcome, " . $user->getUsername();
                     header("Location: view/home.php");
@@ -120,6 +121,9 @@ class UserController {
 
     public function edit(){
 
+        if(isset($_POST["gsm"])){
+
+        }
     }
 
     public function logout(){
