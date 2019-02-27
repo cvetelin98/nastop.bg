@@ -8,9 +8,6 @@
 
 namespace controller;
 
-
-use model\Car;
-use model\dao\CarDao;
 use model\dao\TravelDao;
 use model\Travel;
 
@@ -21,6 +18,7 @@ class TravelController{
             throw new \Exception("Sorry, invalid data! - isset");
         }
 
+        $user_id = $_SESSION["user_id"];
         $starting_destination = $_POST["starting_destination"];
         $final_destination = $_POST["final_destination"];
         $date_of_travelling = $_POST["date_of_travelling"];
@@ -31,7 +29,7 @@ class TravelController{
             throw new \Exception("Sorry, invalid data! - empty");
         }
 
-        $travel = new Travel($starting_destination, $final_destination, $date_of_travelling, $free_places,$price);
+        $travel = new Travel($user_id,$starting_destination, $final_destination, $date_of_travelling, $free_places,$price);
 
         TravelDao::addTravel($travel);
     }

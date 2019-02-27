@@ -5,6 +5,7 @@ namespace model;
 class Travel extends JsonObject {
 
     private $travel_id;
+    private $user_id;
     private $starting_destination;
     private $final_destination;
     private $date_of_travelling;
@@ -82,6 +83,22 @@ class Travel extends JsonObject {
     public function setTravelId($travel_id)
     {
         $this->travel_id = $travel_id;
+    }
+
+    /**
+     * @param mixed $user_id
+     */
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
     }
 
 }
