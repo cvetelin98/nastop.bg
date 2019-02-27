@@ -8,6 +8,8 @@ use model\User;
 class UserController {
 
     public function register(){
+
+        $validReg = false;
         if (!isset($_POST["username"], $_POST["firstName"], $_POST["lastName"], $_POST["password"], $_POST["repass"],
             $_POST["age"], $_POST["gender"], $_POST["email"], $_POST["GSM"])) {
             throw new \Exception("Sorry, invalid data! - isset");
@@ -54,8 +56,25 @@ class UserController {
                 throw new \Exception("Invalid data - age");
             }
             UserDao::addUser($user);
+            $_SESSION["username"] = $user->getUsername();
+            $_SESSION["id"] = $user->getUserId();
+            $_SESSION["first_name"] = $user->getFirstName();
+            $_SESSION["last_name"] = $user->getLastName();
+            $_SESSION["gender"] = $user->getGender();
+            $_SESSION["age"] = $user->getAge();
+            $_SESSION["gsm"] = $user->getGsm();
+            $_SESSION["user_image"] = $user->getUserImage();
+            $_SESSION["total_voted"] = $user->getTotalVoted();
+            $_SESSION["rating"] = $user->getRating();
+            $_SESSION["logged"] = true;
+            $validReg = true;
+            header("Location: view/home.php");
+
         }
-        var_dump($user);
+        if(!$validReg){
+            header("Location: view/register.html");
+
+        }
     }
 
     public function login(){
@@ -76,7 +95,15 @@ class UserController {
                     die();
                     //include "../View/login.html";
                 } else {
-                    $_SESSION["user"] = $user;
+                    $_SESSION["username"] = $user->getUsername();
+                    $_SESSION["id"] = $user->getUserId();
+                    $_SESSION["first_name"] = $user->getFirstName();
+                    $_SESSION["last_name"] = $user->getLastName();
+                    $_SESSION["gender"] = $user->getGender();
+                    $_SESSION["age"] = $user->getAge();
+                    $_SESSION["user_image"] = $user->getUserImage();
+                    $_SESSION["total_vodet"] = $user->getTotalVoted();
+                    $_SESSION["rating"] = $user->getRating();
                     $_SESSION["logged"] = true;
 //                    echo "Successful login - welcome, " . $user->getUsername();
                     header("Location: view/home.php");
