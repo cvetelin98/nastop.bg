@@ -1,7 +1,5 @@
 <?php
 
-//TODO Travels DAO and initializing $travels !
-
 //$travels = TravelDao::getAll();
 
 ?>
