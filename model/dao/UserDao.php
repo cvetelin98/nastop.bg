@@ -55,7 +55,7 @@ class UserDao {
 
         $query = "UPDATE users SET GSM = ?, password = ?, user_image = ? WHERE user_id = ?";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$user->getGsm(), $user->getPassword(), $user->getUserImage(), $_SESSION["id"]]);
+        $stmt->execute([$user->getGsm(), $user->getPassword(), $user->getUserImage(), $_SESSION["user_id"]]);
 
         if($stmt->rowCount() != 0){
             echo "success update";
