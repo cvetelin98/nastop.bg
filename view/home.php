@@ -19,7 +19,7 @@
         <ul>
             <li><a class="active" href="home.php">Home</a></li>
             <li><a href="profile.php">My Profile</a></li>
-            <li><a href="history.html">My Shared Travels</a></li>
+            <li><a href="history.php">My Shared Travels</a></li>
             <li><a href="edit.php">Edit Profile</a></li>
             <li><a href="addCar.html">Add a Car</a></li>
             <li><a href="addTravel.html">Add a Travel</a></li>
@@ -39,8 +39,8 @@
                     <td><?php echo $travel["starting_destination"] ?></td>
                     <td><?php echo $travel["final_destination"] ?></td>
                     <td><?php echo $travel["date_of_travelling"] ?></td>
+                    <td><?php echo $travel["free_places"] ?></td>
                     <td><?php echo $travel["price"] ?></td>
-                    <td><?php echo $travel["description"] ?></td>
                 </tr>
             <?php }
         }

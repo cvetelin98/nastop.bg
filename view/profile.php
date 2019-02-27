@@ -18,7 +18,7 @@ session_start();
         <ul>
             <li><a href="home.php">Home</a></li>
             <li><a class="active" href="profile.php">My Profile</a></li>
-            <li><a href="history.html">My Shared Travels</a></li>
+            <li><a href="history.php">My Shared Travels</a></li>
             <li><a href="edit.php">Edit Profile</a></li>
             <li><a href="addCar.html">Add a Car</a></li>
             <li><a href="addTravel.html">Add a Travel</a></li>
@@ -31,10 +31,10 @@ session_start();
 <!--TODO TABLE WITH MY TRAVELS !-->
 <main id="logMain">
 
-    <table>
+    <table id="proTable">
         <tr>
             <td>
-                <img width="200px" src="../<?php echo $_SESSION["user_image"]?>"">
+                <img width="450px" src="../<?php echo $_SESSION["user_image"]?>"">
             </td>
         </tr>
         <tr>

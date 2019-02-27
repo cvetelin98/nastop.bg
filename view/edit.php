@@ -16,7 +16,7 @@ session_start();
         <ul>
             <li><a href="home.php">Home</a></li>
             <li><a href="profile.php">My Profile</a></li>
-            <li><a href="history.html">My Shared Travels</a></li>
+            <li><a href="history.php">My Shared Travels</a></li>
             <li><a class="active" href="edit.php">Edit Profile</a></li>
             <li><a href="addCar.html">Add a Car</a></li>
             <li><a href="addTravel.html">Add a Travel</a></li>
