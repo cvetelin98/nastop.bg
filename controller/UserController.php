@@ -78,7 +78,8 @@ class UserController {
                 } else {
                     $_SESSION["user"] = $user;
                     $_SESSION["logged"] = true;
-                    echo "Successful login - welcome, " . $user->getUsername();
+//                    echo "Successful login - welcome, " . $user->getUsername();
+                    header("Location: view/home.php");
                 }
             }
         }
@@ -95,9 +96,7 @@ class UserController {
     }
 
     public function logout(){
-        if(isset($_POST["logOut"])){
             session_destroy();
-            header("Location: ../view/main.php");
-        }
+            header("Location: view/main.php");
     }
 }
