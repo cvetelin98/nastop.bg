@@ -162,6 +162,32 @@ class User extends JsonObject {
         $this->rating = $rating;
     }
 
+    /**
+ * @param mixed $gsm
+ */
+    public function setGsm($gsm)
+    {
+        $this->gsm = $gsm;
+    }
+
+    /**
+     * @param mixed $user_image
+     */
+    public function setImage($user_image)
+    {
+        $this->user_image = $user_image;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+
+
     public function removePass(){
         unset($this->password);
     }

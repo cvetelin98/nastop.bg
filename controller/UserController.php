@@ -5,9 +5,11 @@ namespace controller;
 use model\dao\UserDao;
 use model\User;
 
-class UserController {
+class UserController
+{
 
-    public function register(){
+    public function register()
+    {
 
         $validReg = false;
         if (!isset($_POST["username"], $_POST["firstName"], $_POST["lastName"], $_POST["password"], $_POST["repass"],
@@ -69,15 +71,15 @@ class UserController {
             $_SESSION["logged"] = true;
             $validReg = true;
             header("Location: view/home.php");
-
         }
-        if(!$validReg){
+        if (!$validReg) {
             header("Location: view/register.html");
 
         }
     }
 
-    public function login(){
+    public function login()
+    {
         if (isset($_POST["logButton"])) {
             $username = $_POST["username"];
             $password = $_POST["password"];
@@ -89,8 +91,8 @@ class UserController {
                 die();
                 //include "../View/register.html";
             } else {
-                if (!password_verify($password,$user->getPassword())) {
-                   echo "KYDE SME? GRESHNA PAROLA";
+                if (!password_verify($password, $user->getPassword())) {
+                    echo "KYDE SME? GRESHNA PAROLA";
 //                    header("HTTP/1.1 401 Wrong Credentials");
                     die();
                     //include "../View/login.html";
@@ -113,21 +115,64 @@ class UserController {
         }
     }
 
-    public function all(){
+    public function all()
+    {
         $users = UserDao::getAll();
         echo json_encode($users);
     }
 
 
-    public function edit(){
-
-        if(isset($_POST["gsm"])){
-
+    public function edit()
+    {
+        /** @var User $user */
+        $user = UserDao::getByUsername($_SESSION["username"]);
+        if(isset($_POST["GSM"])){
+            $user->setGsm($_POST["GSM"]);
         }
+
+        if (isset($_POST["cur_pass"], $_POST["new_pass"], $_POST["new_conf"])) {
+            $cur_pass = $_POST["cur_pass"];
+            $new_pass = $_POST["new_pass"];
+            $new_conf = $_POST["new_conf"];
+            $pass_db = $user->getPassword();
+
+            if (!(empty($cur_pass) || empty($new_pass) || empty($new_conf))) {
+                if (!password_verify($cur_pass, $pass_db)) {
+                    throw new \Exception("Sorry, invalid password!");
+                }
+                if ($new_pass !== $new_conf) {
+                    throw new \Exception("Sorry, new passwords - mismatch!");
+                } else {
+                    $new_pass = password_hash($new_pass, PASSWORD_BCRYPT);
+                    $user->setPassword($new_pass);
+                }
+            }
+        }
+
+        if(isset($_FILES["pic"])){
+            $temp_name = $_FILES["pic"]["tmp_name"];
+
+            if (is_uploaded_file($temp_name)) {
+                $filename = time();
+                if (move_uploaded_file($temp_name, "images/$filename")) {
+                    $image_url = "images/$filename";
+                    $user->setImage($image_url);
+
+                } else {
+                    throw new \Exception("File is not moved!");
+                }
+            }
+        }
+
+        UserDao::updateUser($user);
+        $_SESSION["gsm"] = $user->getGsm();
+        $_SESSION["user_image"] = $user->getUserImage();
     }
 
-    public function logout(){
-            session_destroy();
-            header("Location: view/main.php");
+
+    public function logout()
+    {
+        session_destroy();
+        header("Location: view/main.php");
     }
 }

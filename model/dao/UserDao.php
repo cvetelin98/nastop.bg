@@ -49,5 +49,19 @@ class UserDao {
         return $users;
     }
 
+    public static function updateUser(User $user){
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+
+        $query = "UPDATE users SET GSM = ?, password = ?, user_image = ? WHERE user_id = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$user->getGsm(), $user->getPassword(), $user->getUserImage(), $_SESSION["id"]]);
+
+        if($stmt->rowCount() != 0){
+            echo "success update";
+        }else{
+            echo "fail update";
+        }
+    }
 }
 
