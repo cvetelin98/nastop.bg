@@ -16,7 +16,7 @@
 </ul>
 </div>
 <div>
-    <button><a href="">Public profile</a></button>
+    <button><a href="publicProfile.php">Public profile</a></button>
     <h3>Edit your profile:</h3>
     <form action="../index.php?target=User&action=edit" method="post" enctype="multipart/form-data">
         <table id="regTable">
