@@ -26,31 +26,35 @@ session_start();
             <!--TODO FIX LOGOUT !-->
         </ul>
     </div>
-    <img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="100%" height="150px;">
 </header>
+<img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="80%" height="150px;">
 <!--TODO TABLE WITH MY TRAVELS !-->
 <main id="logMain">
 
     <table>
         <tr>
             <td>
-                <img src='../images/<?php echo $_SESSION["user"]->getUserImage(); ?>'>
+                <img width="200px" src="../<?php echo $_SESSION["user_image"]?>"">
             </td>
         </tr>
         <tr>
-            <td>Name: <?php echo $_SESSION["user"]->getFirstName(); ?></td>
-            <td>Name: <?php echo $_SESSION["user"]->getLastName(); ?></td>
+            <td>Username: <?php echo $_SESSION["username"]; ?></td>
         </tr>
         <tr>
-            <td>Age: <?php echo $_SESSION["user"]->getAge(); ?></td>
+            <td>Name: <?php echo $_SESSION["first_name"]." ".$_SESSION["last_name"]; ?></td>
         </tr>
         <tr>
-            <td>GSM: <?php echo $_SESSION["user"]->getGsm(); ?></td>
+            <td>Age: <?php echo $_SESSION["age"]; ?></td>
+        </tr>
+<!--        <tr>-->
+<!--            <td>GSM: --><?php //echo $_SESSION["gsm"]; ?><!--</td>-->
+<!--        </tr>-->
+        <tr>
+            <td>Gender: <?php echo $_SESSION["gender"]; ?></td>
         </tr>
         <tr>
-            <td>Gender: <?php echo $_SESSION["user"]->getGender(); ?></td>
+            <td>Rating: <?php echo $_SESSION["rating"]; ?></td>
         </tr>
-
     </table>
 
 </body>

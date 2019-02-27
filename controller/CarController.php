@@ -42,7 +42,7 @@ class CarController{
         $car = new Car($user_id, $brand, $image_url, $color, $places);
 
         CarDao::add($car);
+        header("Location: view/profile.php");
     }
-
 
 }
