@@ -57,6 +57,19 @@ session_start();
         </tr>
     </table>
 
+    <form method="post">
+        <div id="comment">
+            <table>
+                <tr>
+        <td><textarea name="comment" rows="4" cols="35" placeholder="add a comment ?" style="text-align:center;"></textarea></td>
+                </tr>
+                    <tr>
+                    <td><input type="submit" name="sendComment" value="Comment"></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+
 </body>
 </html>
 

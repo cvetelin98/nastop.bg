@@ -12,7 +12,7 @@ class TravelDao {
 
         $stmt = $pdo->prepare("SELECT city_id FROM cities WHERE city_name = ?");
         $stmt->execute(array($city_name));
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
 
         return $row["city_id"];
 
@@ -21,16 +21,22 @@ class TravelDao {
     public static function addTravel(Travel $travel){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
-        $stmt = $pdo->prepare("INSERT INTO travels (user_id,starting_destination,final_destination,date_of_travelling,free_places,price) 
+        $stmt = $pdo->prepare("INSERT INTO travels (user_id,starting_destination,final_destination,date_of_travelling,free_places,price)
                                         VALUES (?,?,?,?,?,?)");
-        $stmt->execute([$travel->getUserId(),TravelDao::getCityId($travel->getStartingDestination()),TravelDao::getCityId($travel->getFinalDestination()),$travel->getDateOfTravelling(),$travel->getFreePlaces(),$travel->getPrice()]);
+        $stmt->execute([
+            $travel->getUserId(),
+            self::getCityId($travel->getStartingDestination()),
+            self::getCityId($travel->getFinalDestination()),
+            $travel->getDateOfTravelling(),
+            $travel->getFreePlaces(),
+            $travel->getPrice()]);
         $travel->setTravelId($pdo->lastInsertId());
     }
 
     public static function getAll(){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
-        $stmt = $pdo->prepare("SELECT travel_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels");
+        $stmt = $pdo->prepare("SELECT travel_id,user_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels");
         $stmt->execute();
         $travels = [];
         while($row = $stmt->fetch(\PDO::FETCH_OBJ)) {

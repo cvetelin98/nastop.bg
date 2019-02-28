@@ -52,8 +52,6 @@ session_start();
 <!--        </tr>-->
 <!--    </table>-->
 
-     <textarea id="comments" rows="3" cols="30" placeholder="add a comment ?"></textarea>
-
 
 </body>
 </html>

@@ -1,5 +1,7 @@
 <?php
+
 namespace controller;
+
 
 use model\dao\TravelDao;
 use model\Travel;
@@ -22,10 +24,11 @@ class TravelController{
             throw new \Exception("Sorry, invalid data! - empty");
         }
 
-        $travel = new Travel($user_id,$starting_destination, $final_destination, $date_of_travelling, $free_places,$price);
+        $travel = new Travel($starting_destination, $final_destination, $date_of_travelling, $free_places,$price);
+        $travel->setUserId($user_id);
 
         TravelDao::addTravel($travel);
+        header("Location: view/profile.php");
     }
-
-
+    
 }
