@@ -17,15 +17,15 @@ class UserController
             throw new \Exception("Sorry, invalid data! - isset");
         }
 
-        $username = $_POST["username"];
-        $first_name = $_POST["firstName"];
-        $last_name = $_POST["lastName"];
-        $password = $_POST["password"];
-        $password2 = $_POST["repass"];
-        $age = $_POST["age"];
-        $gender = $_POST["gender"];
-        $email = $_POST["email"];
-        $GSM = $_POST["GSM"];
+        $username = trim($_POST["username"]);
+        $first_name = trim($_POST["firstName"]);
+        $last_name = trim($_POST["lastName"]);
+        $password = trim($_POST["password"]);
+        $password2 = trim($_POST["repass"]);
+        $age = trim($_POST["age"]);
+        $gender = trim($_POST["gender"]);
+        $email = trim($_POST["email"]);
+        $GSM = trim($_POST["GSM"]);
         $temp_name = $_FILES["pic"]["tmp_name"];
 
         if (is_uploaded_file($temp_name)) {
@@ -51,11 +51,14 @@ class UserController
         if ($userDB != null) {
             throw new \Exception("User already exists!");
         } else {
-            if ($password !== $password2) {
+            if ($password !== $password2 && strlen($password) < 6) {
                 throw new \Exception("Password mismatch");
             }
-            if ($age < 16) {
+            if ($age < 16 && !(is_int($age))) {
                 throw new \Exception("Invalid data - age");
+            }
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                throw new \Exception("Invalid data - email");
             }
             UserDao::addUser($user);
             $_SESSION["username"] = $user->getUsername();
@@ -104,7 +107,7 @@ class UserController
                     $_SESSION["gender"] = $user->getGender();
                     $_SESSION["age"] = $user->getAge();
                     $_SESSION["user_image"] = $user->getUserImage();
-                    $_SESSION["total_vodet"] = $user->getTotalVoted();
+                    $_SESSION["total_voted"] = $user->getTotalVoted();
                     $_SESSION["rating"] = $user->getRating();
                     $_SESSION["gsm"] = $user->getGsm();
                     $_SESSION["logged"] = true;

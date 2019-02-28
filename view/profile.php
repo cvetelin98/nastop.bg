@@ -34,7 +34,7 @@ session_start();
     <table id="proTable">
         <tr>
             <td>
-                <img width="450px" src="../<?php echo $_SESSION["user_image"]?>"">
+                <img width="450px"  src="../<?php echo $_SESSION["user_image"]?>"">
             </td>
         </tr>
         <tr>

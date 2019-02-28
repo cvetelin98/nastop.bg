@@ -27,8 +27,12 @@ class TravelController{
         $travel = new Travel($starting_destination, $final_destination, $date_of_travelling, $free_places,$price);
         $travel->setUserId($user_id);
 
-        TravelDao::addTravel($travel);
-        header("Location: view/profile.php");
+
+        if(TravelDao::addTravel($travel)) {
+            header("Location: view/home.php");
+        }else{
+            // TODO error header;
+        }
     }
     
 }
