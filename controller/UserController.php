@@ -170,6 +170,7 @@ class UserController
         UserDao::updateUser($user);
         $_SESSION["gsm"] = $user->getGsm();
         $_SESSION["user_image"] = $user->getUserImage();
+        header("Location: view/profile.php");
     }
 
 

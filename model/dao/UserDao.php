@@ -63,5 +63,19 @@ class UserDao {
             echo "fail update";
         }
     }
+
+    public static function checkUserCars($username){
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+        $stmt = $pdo->prepare("SELECT car_id FROM cars as c JOIN users as u ON c.user_id = u.user_id 
+                                        WHERE u.username = ?");
+        $stmt->execute([$username]);
+        if($stmt->rowCount() > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
 

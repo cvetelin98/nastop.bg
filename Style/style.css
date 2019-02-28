@@ -263,8 +263,27 @@ li a:hover:not(.active) {
 }
 
 #comment {
-    margin-left:35%;
+    margin-left: 28%;
     position: absolute;
-    margin-top: 29%;
+    margin-top: 7%;
     text-align: center;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.card img {
+    float: left;
+}
+
+.card p, .card h4 {
+    text-align: center;
+    font-size: 2.21em;
+}
+
+img {
+    border-radius: 5px 5px 0 0;
 }
