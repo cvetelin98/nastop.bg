@@ -15,7 +15,7 @@
     <div id="nav">
         <ul>
             <li><a href="index.php?target=User&action=viewHome">Home</a></li>
-            <li><a class="active" href="../index.php?target=User&action=viewProfile">My Profile</a></li>
+            <li><a class="active" href="index.php?target=User&action=viewProfile">My Profile</a></li>
             <li><a href="index.php?target=User&action=viewHistory">My Shared Travels</a></li>
             <li><a href="index.php?target=User&action=viewEdit">Edit Profile</a></li>
             <li><a href="index.php?target=Car&action=ViewAdd">Add a Car</a></li>
@@ -29,7 +29,7 @@
 <main id="logMain">
 
     <div class="card">
-        <img width="18.3%"  src="<?php echo $_SESSION["user_image"]?>">
+        <img width="30%" height="212vh" src="<?php echo $_SESSION["user_image"]?>">
         <div class="container">
             <h4><b>Name: <?php echo $_SESSION["first_name"]." ".$_SESSION["last_name"]; ?></b></h4>
             <p>Username: <?php echo $_SESSION["username"]; ?></p>
@@ -40,16 +40,32 @@
         </div>
     </div>
     <h1 style="text-align: left; font-size: 3vw;">Your cars:</h1>
+<!--    --><?php //foreach($cars as $car) { ?>
+<!--    <div class="card">-->
+<!--        <img width="35%"  src="--><?php //echo $car->getCarImage(); ?><!--">-->
+<!--        <div class="container">-->
+<!--            <h4><b>Name: --><?php //echo $car->getCarName(); ?><!--</b></h4>-->
+<!--            <p>Color: --><?php //echo $car->getCarColor(); ?><!--</p>-->
+<!--            <p>Places: --><?php //echo $car->getCarPlaces(); ?><!--</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    --><?php //} ?>
+    <table id="carShow">
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Places</th>
+        </tr>
     <?php foreach($cars as $car) { ?>
-    <div class="card">
-        <img width="35%"  src="../<?php echo $car["car_image"]?>">
-        <div class="container">
-            <h4><b>Name: <?php echo $car["car_name"]; ?></b></h4>
-            <p>Color: <?php echo $car["car_color"]; ?></p>
-            <p>Places: <?php echo $car["car_places"]; ?></p>
-        </div>
-    </div>
+        <tr>
+            <td><img width="65%"  src="<?php echo $car->getCarImage(); ?>"></td>
+            <td><?php echo $car->getCarName(); ?></td>
+            <td><?php echo $car->getCarColor(); ?></td>
+            <td><?php echo $car->getCarPlaces(); ?></td>
+        </tr>
     <?php } ?>
+    </table>
 
     <form method="post">
         <div id="comment">

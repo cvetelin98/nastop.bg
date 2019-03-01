@@ -2,6 +2,7 @@
 
 namespace controller;
 
+use model\dao\CarDao;
 use model\dao\TravelDao;
 use model\dao\UserDao;
 use model\User;
@@ -26,6 +27,7 @@ class UserController
     }
 
     public function viewProfile(){
+        $cars = UserDao::getUserCars($_SESSION["username"]);
         if($_SESSION["logged"]) {
             require "view/profile.php";
         }
@@ -105,7 +107,8 @@ class UserController
             $_SESSION["logged"] = true;
             $validReg = true;
             $travels = TravelDao::getAll();
-            require "view/home.php";
+//            require "view/home.php";
+            header("Location: index.php?target=User&action=viewHome");
         }
         if (!$validReg) {
             require "view/register.html";
@@ -145,13 +148,12 @@ class UserController
                     $_SESSION["logged"] = true;
 //                    echo "Successful login - welcome, " . $user->getUsername();
                     $travels = TravelDao::getAll();
-                    require "view/home.php";
+//                    require "view/home.php";
+                    header("Location: index.php?target=User&action=viewHome");
                 }
             }
         }
     }
-
-
 
     public function edit()
     {
@@ -203,7 +205,6 @@ class UserController
         }
         else require "view/login.html";
     }
-
 
     public function logout()
     {

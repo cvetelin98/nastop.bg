@@ -6,6 +6,7 @@ class Travel extends JsonObject {
 
     private $travel_id;
     private $user_id;
+    private $car_id;
     private $starting_destination;
     private $final_destination;
     private $date_of_travelling;
@@ -99,6 +100,22 @@ class Travel extends JsonObject {
     public function getUserId()
     {
         return $this->user_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCarId()
+    {
+        return $this->car_id;
+    }
+
+    /**
+     * @param mixed $car_id
+     */
+    public function setCarId($car_id)
+    {
+        $this->car_id = $car_id;
     }
 
 }

@@ -21,7 +21,7 @@ class TravelController{
 
     public function add(){
         if($_SESSION["logged"]) {
-            if (!isset($_POST["starting_destination"], $_POST["final_destination"], $_POST["date_of_travelling"], $_POST["free_places"], $_POST["price"])) {
+            if (!isset($_POST["starting_destination"], $_POST["final_destination"], $_POST["date_of_travelling"], $_POST["free_places"], $_POST["price"],$_POST["car"])) {
                 throw new \Exception("Sorry, invalid data! - isset");
             }
 
@@ -31,17 +31,19 @@ class TravelController{
             $date_of_travelling = $_POST["date_of_travelling"];
             $free_places = $_POST["free_places"];
             $price = $_POST["price"];
+            $car_id = $_POST["car"];
 
-            if (empty($starting_destination) || empty($final_destination) || empty($date_of_travelling) || empty($free_places) || empty($price)) {
+            if (empty($starting_destination) || empty($final_destination) || empty($date_of_travelling) || empty($free_places) || empty($price) || empty($car_id)) {
                 throw new \Exception("Sorry, invalid data! - empty");
             }
 
             $travel = new Travel($starting_destination, $final_destination, $date_of_travelling, $free_places, $price);
             $travel->setUserId($user_id);
+            $travel->setCarId($car_id);
 
 
             if (TravelDao::addTravel($travel)) {
-                require"view/home.php";
+                header("Location: index.php?target=User&action=viewHome");
             } else {
                 // TODO error header;
             }

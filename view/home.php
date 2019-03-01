@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="Style/style.css">
 </head>
 <body>
-<!--<img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="80%" height="100px;">-->
+
 <header class="navHeader">
     <h1 class="smallHeader">Nastop.bg</h1>
     <div id="nav">
@@ -29,19 +29,26 @@
 <main id="mainInMain">
     <br>
     <p style="font-size: 30px;">&nbsp Selected Travels for sharing:</p>
-    <table>
+    <table id="showTable">
+        <tr>
+            <th>Starting Point</th>
+            <th>Final Point</th>
+            <th>Date</th>
+            <th>Free Places</th>
+            <th>Price</th>
+        </tr>
         <?php if(count($travels) > 0) {
             foreach ($travels as $travel) { ?>
                 <tr>
-                    <td><?php echo $travel["starting_destination"] ?></td>
-                    <td><?php echo $travel["final_destination"] ?></td>
-                    <td><?php echo $travel["date_of_travelling"] ?></td>
-                    <td><?php echo $travel["free_places"] ?></td>
-                    <td><?php echo $travel["price"] ?></td>
+                    <td><?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?></td>
+                    <td><?php echo \model\dao\TravelDao::getCityName($travel->getFinalDestination()); ?></td>
+                    <td><?php echo $travel->getDateOfTravelling(); ?></td>
+                    <td><?php echo $travel->getFreePlaces(); ?></td>
+                    <td><?php echo $travel->getPrice(); ?></td>
                 </tr>
             <?php }
         }
-        else { ?> <tr><td colspan="5" style="font-size: 30px"> <?php echo "No data available"; ?></td></tr> <?php } ?>
+        else { ?> <tr><td colspan="5" style="font-size: 30px"> <?php echo "&nbsp No data available"; ?></td></tr> <?php } ?>
     </table>
 
 </main>

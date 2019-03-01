@@ -31,19 +31,26 @@
 
     <br>
     <p style="font-size: 30px;">&nbsp My Past Travels:</p>
-    <table>
+    <table id="showTable">
+        <tr>
+            <th>Starting Point</th>
+            <th>Final Point</th>
+            <th>Date</th>
+            <th>Free Places</th>
+            <th>Price</th>
+        </tr>
         <?php if(count($travels) > 0) {
             foreach ($travels as $travel) { ?>
                 <tr>
-                    <td><?php echo $travel["starting_destination"] ?></td>
-                    <td><?php echo $travel["final_destination"] ?></td>
-                    <td><?php echo $travel["date_of_travelling"] ?></td>
-                    <td><?php echo $travel["price"] ?></td>
-                    <td><?php echo $travel["description"] ?></td>
+                    <td><?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?></td>
+                    <td><?php echo \model\dao\TravelDao::getCityName($travel->getFinalDestination()); ?></td>
+                    <td><?php echo $travel->getDateOfTravelling(); ?></td>
+                    <td><?php echo $travel->getFreePlaces(); ?></td>
+                    <td><?php echo $travel->getPrice(); ?></td>
                 </tr>
             <?php }
         }
-        else { ?> <tr><td colspan="5" style="font-size: 30px"> <?php echo "No data available"; ?></td></tr> <?php } ?>
+        else { ?> <tr><td colspan="5" style="font-size: 30px"> <?php echo "&nbspNo data available"; ?></td></tr> <?php } ?>
     </table>
 
 </main>

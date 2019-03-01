@@ -28,20 +28,12 @@
 </header>
 
 <main id="logMain">
-<!--    --><?php //if(UserDao::checkUserCars($_SESSION["username"])){ ?>
-    <form action="../index.php?target=Travel&action=add" method="post" onsubmit="return validation()">
-        <table id="loginTable">
-<!--            <tr>-->
-<!--                <td>Start:</td>-->
-<!--                <td><input type="text" name="starting_destination" id="starting_destination" required></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td>Final:</td>-->
-<!--                <td><input type="text" name="final_destination" id="final_destination" required></td>-->
-<!--            </tr>-->
+    <?php if(\model\dao\UserDao::checkUserCars($_SESSION["username"])){ ?>
+    <form action="index.php?target=Travel&action=add" method="post" onsubmit="return validation()">
+        <table id="travelTable">
             <tr>
                 <td>Start:</td>
-                <td><select name="starting_destination" required>
+                <td><select name="starting_destination" id="starting_destination" required>
                         <?php foreach ($cities as $city) {?>
                         <option value="<?php echo $city ?>"><?php echo $city ?></option>
                         <?php } ?>
@@ -49,7 +41,7 @@
             </tr>
             <tr>
                 <td>Final:</td>
-                <td><select name="final_destination" required>
+                <td><select name="final_destination" id="final_destination" required>
                         <?php foreach ($cities as $city) {?>
                             <option value="<?php echo $city ?>"><?php echo $city ?></option>
                         <?php } ?>
@@ -68,7 +60,6 @@
                 <td><input type="number" name="price" id="price" required></td>
             </tr>
             <tr>
-                <?php var_dump($cars[0]->getCarId()); ?>
                 <td>Car:</td>
                 <td><select name="car" required>
                         <?php foreach ($cars as $car) {?>
@@ -81,10 +72,12 @@
             </tr>
         </table>
     </form>
-<!--    --><?php //}
-//    else { ?>
-<!--    <h1>You don't have car for sharing ! Sorry :( </h1>-->
-<!--    --><?php //} ?>
+    <?php }
+    else { ?>
+        <div id="noCars">
+    <h1 style="font-size: 3vw;";>You don't have car for sharing ! Sorry :( </h1>
+        </div>
+    <?php } ?>
 </main>
 <footer id="mainFooter">
     <h3 style="font-size: 30px;float:left;margin-left:55px;">You can always go nastop!</h3>

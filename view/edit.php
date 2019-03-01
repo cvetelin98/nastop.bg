@@ -25,12 +25,12 @@
     </div>
 </header>
 <img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="80%" height="150px;">
-<main id="logMain">
+<main id="editMain">
 <div>
     <h1 style="font-size: 5vh; text-align: center;">Edit your profile:</h1>
     <br>
     <form action="../index.php?target=User&action=edit" method="post" enctype="multipart/form-data">
-        <table id="regTable">
+        <table id="editTable">
             <tr>
                 <td>GSM:</td>
                 <td><input type="number" value="<?php echo $_SESSION["gsm"] ?>" name="GSM" value="" style="width: 50%;"></td>
@@ -56,7 +56,7 @@
                 <td><input type="file"  name="pic" style="width: 50%;"></td>
             </tr>
             <tr>
-                <td><input type="submit" id="submit" name="save" value="Save changes" style="width: 50%;"></td>
+                <td colspan="2"><input type="submit" id="submit" name="save" value="Save changes" style="width: 50%;"></td>
             </tr>
         </table>
 </div>
