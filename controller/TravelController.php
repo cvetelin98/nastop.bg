@@ -30,5 +30,5 @@ class TravelController{
         TravelDao::addTravel($travel);
         header("Location: view/profile.php");
     }
-    
+
 }
