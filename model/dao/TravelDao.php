@@ -21,16 +21,22 @@ class TravelDao {
     public static function addTravel(Travel $travel){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
-        $stmt = $pdo->prepare("INSERT INTO travels (user_id,starting_destination,final_destination,date_of_travelling,free_places,price)
+            $stmt = $pdo->prepare("INSERT INTO travels (user_id,starting_destination,final_destination,date_of_travelling,free_places,price)
                                         VALUES (?,?,?,?,?,?)");
-        $stmt->execute([
-            $travel->getUserId(),
-            self::getCityId($travel->getStartingDestination()),
-            self::getCityId($travel->getFinalDestination()),
-            $travel->getDateOfTravelling(),
-            $travel->getFreePlaces(),
-            $travel->getPrice()]);
-        $travel->setTravelId($pdo->lastInsertId());
+            $stmt->execute([
+                $travel->getUserId(),
+                self::getCityId($travel->getStartingDestination()),
+                self::getCityId($travel->getFinalDestination()),
+                $travel->getDateOfTravelling(),
+                $travel->getFreePlaces(),
+                $travel->getPrice()]);
+            $travel->setTravelId($pdo->lastInsertId());
+
+        if($stmt->rowCount() > 0){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public static function getAll(){
@@ -62,5 +68,18 @@ class TravelDao {
         return $travels;
     }
 
-}
+    public static function getAllCities(){
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+        $stmt = $pdo->prepare("SELECT city_name FROM cities");
+        $stmt->execute();
+        $cities = [];
+            $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            $cities = [];
+            foreach ($rows as $row) {
+                $cities[] = $row["city_name"];
+        }
+        return $cities;
+    }
 
+}

@@ -21,7 +21,7 @@ session_start();
             <li><a href="history.php">My Shared Travels</a></li>
             <li><a href="edit.php">Edit Profile</a></li>
             <li><a href="addCar.html">Add a Car</a></li>
-            <li><a href="addTravel.html">Add a Travel</a></li>
+            <li><a href="addTravel.php">Add a Travel</a></li>
             <li style="float:right"><a href="../index.php?target=User&action=logout">Log out</a></li>
             <!--TODO FIX LOGOUT !-->
         </ul>
@@ -31,31 +31,43 @@ session_start();
 <!--TODO TABLE WITH MY TRAVELS !-->
 <main id="logMain">
 
-    <table id="proTable">
-        <tr>
-            <td>
-                <img width="450px" src="../<?php echo $_SESSION["user_image"]?>"">
-            </td>
-        </tr>
-        <tr>
-            <td>Username: <?php echo $_SESSION["username"]; ?></td>
-        </tr>
-        <tr>
-            <td>Name: <?php echo $_SESSION["first_name"]." ".$_SESSION["last_name"]; ?></td>
-        </tr>
-        <tr>
-            <td>Age: <?php echo $_SESSION["age"]; ?></td>
-        </tr>
-        <tr>
-            <td>GSM: <?php echo $_SESSION["gsm"]; ?></td>
-        </tr>
-        <tr>
-            <td>Gender: <?php echo $_SESSION["gender"]; ?></td>
-        </tr>
-        <tr>
-            <td>Rating: <?php echo $_SESSION["rating"]; ?></td>
-        </tr>
-    </table>
+<!--    <table id="proTable">-->
+<!--        <tr>-->
+<!--            <td>-->
+<!--                <img width="450px"  src="../--><?php //echo $_SESSION["user_image"]?><!--"">-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Username: --><?php //echo $_SESSION["username"]; ?><!--</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Name: --><?php //echo $_SESSION["first_name"]." ".$_SESSION["last_name"]; ?><!--</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Age: --><?php //echo $_SESSION["age"]; ?><!--</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>GSM: --><?php //echo $_SESSION["gsm"]; ?><!--</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Gender: --><?php //echo $_SESSION["gender"]; ?><!--</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Rating: --><?php //echo $_SESSION["rating"]; ?><!--</td>-->
+<!--        </tr>-->
+<!--    </table>-->
+
+    <div class="card">
+        <img width="35%"  src="../<?php echo $_SESSION["user_image"]?>">
+        <div class="container">
+            <h4><b>Name: <?php echo $_SESSION["first_name"]." ".$_SESSION["last_name"]; ?></b></h4>
+            <p>Username: <?php echo $_SESSION["username"]; ?></p>
+            <p>Age: <?php echo $_SESSION["age"]; ?></p>
+            <p>GSM: <?php echo $_SESSION["gsm"]; ?></p>
+            <p>Gender: <?php echo $_SESSION["gender"]; ?></p>
+            <p>Rating: <?php echo $_SESSION["rating"]; ?></p>
+        </div>
+    </div>
 
     <form method="post">
         <div id="comment">
@@ -70,6 +82,7 @@ session_start();
         </div>
     </form>
 
+
 </body>
 </html>
 
@@ -82,6 +95,7 @@ session_start();
     <img src="https://prevozvalnik.bg/img/bulgaria-footer.png" style="margin-right: 25px">
     <h3 style="font-size: 15px;margin-right:55px;">Copyright 2019 © Nastop.bg</h3>
 </footer>
+
 </body>
 </html>
 
