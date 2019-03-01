@@ -1,9 +1,5 @@
 <?php
 
-session_start();
-
-//$cars = UserDao::getUserCars($_SESSION["username"]);
-
 ?>
 
 <!DOCTYPE html>
@@ -11,20 +7,20 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>nastop</title>
-    <link rel="stylesheet" href="../Style/style.css">
+    <link rel="stylesheet" href="Style/style.css">
 </head>
 <body>
 <header class="navHeader">
     <h1 class="smallHeader">Nastop.bg</h1>
     <div id="nav">
         <ul>
-            <li><a href="home.php">Home</a></li>
-            <li><a class="active" href="profile.php">My Profile</a></li>
-            <li><a href="history.php">My Shared Travels</a></li>
-            <li><a href="edit.php">Edit Profile</a></li>
-            <li><a href="addCar.html">Add a Car</a></li>
-            <li><a href="addTravel.php">Add a Travel</a></li>
-            <li style="float:right"><a href="../index.php?target=User&action=logout">Log out</a></li>
+            <li><a href="index.php?target=User&action=viewHome">Home</a></li>
+            <li><a class="active" href="../index.php?target=User&action=viewProfile">My Profile</a></li>
+            <li><a href="index.php?target=User&action=viewHistory">My Shared Travels</a></li>
+            <li><a href="index.php?target=User&action=viewEdit">Edit Profile</a></li>
+            <li><a href="index.php?target=Car&action=ViewAdd">Add a Car</a></li>
+            <li><a href="index.php?target=Travel&action=ViewAdd">Add a Travel</a></li>
+            <li style="float:right"><a href="index.php?target=User&action=logout">Log out</a></li>
         </ul>
     </div>
 </header>
@@ -32,34 +28,8 @@ session_start();
 <!--TODO TABLE WITH MY TRAVELS !-->
 <main id="logMain">
 
-<!--    <table id="proTable">-->
-<!--        <tr>-->
-<!--            <td>-->
-<!--                <img width="450px"  src="../--><?php //echo $_SESSION["user_image"]?><!--"">-->
-<!--            </td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>Username: --><?php //echo $_SESSION["username"]; ?><!--</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>Name: --><?php //echo $_SESSION["first_name"]." ".$_SESSION["last_name"]; ?><!--</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>Age: --><?php //echo $_SESSION["age"]; ?><!--</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>GSM: --><?php //echo $_SESSION["gsm"]; ?><!--</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>Gender: --><?php //echo $_SESSION["gender"]; ?><!--</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>Rating: --><?php //echo $_SESSION["rating"]; ?><!--</td>-->
-<!--        </tr>-->
-<!--    </table>-->
-
     <div class="card">
-        <img width="18.3%"  src="../<?php echo $_SESSION["user_image"]?>">
+        <img width="18.3%"  src="<?php echo $_SESSION["user_image"]?>">
         <div class="container">
             <h4><b>Name: <?php echo $_SESSION["first_name"]." ".$_SESSION["last_name"]; ?></b></h4>
             <p>Username: <?php echo $_SESSION["username"]; ?></p>

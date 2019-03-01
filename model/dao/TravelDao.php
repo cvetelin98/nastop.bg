@@ -61,7 +61,7 @@ class TravelDao {
         $stmt->execute(array($username));
         $travels = [];
         while($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
-            $travel = new Travel($row->getStartingDestination(),$row->getFinalDestination(),$row->getDateOfTravelling(),$row->getFreePlaces(),$row->getPrice());
+            $travel = new Travel($row->starting_destination,$row->final_destination,$row->date_of_travelling,$row->free_places,$row->price);
             $travel = $travel->setTravelId($row->travel_id);
             $travels[] = $travel;
         }

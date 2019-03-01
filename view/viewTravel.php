@@ -1,28 +1,22 @@
-<?php
-
-session_start();
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>nastop</title>
-    <link rel="stylesheet" href="../Style/style.css">
+    <link rel="stylesheet" href="Style/style.css">
 </head>
 <body>
 <header class="navHeader">
     <h1 class="smallHeader">Nastop.bg</h1>
     <div id="nav">
         <ul>
-            <li><a href="home.php">Home</a></li>
-            <li><a href="profile.php">My Profile</a></li>
-            <li><a href="history.php">My Shared Travels</a></li>
-            <li><a href="edit.php">Edit Profile</a></li>
-            <li><a href="addCar.html">Add a Car</a></li>
-            <li><a href="addTravel.php">Add a Travel</a></li>
-            <li style="float:right"><a href="../index.php?target=User&action=logout">Log out</a></li>
+            <li><a href="index.php?target=User&action=viewHome">Home</a></li>
+            <li><a href="index.php?target=User&action=viewProfile">My Profile</a></li>
+            <li><a href="index.php?target=User&action=viewHistory">My Shared Travels</a></li>
+            <li><a href="index.php?target=User&action=viewEdit">Edit Profile</a></li>
+            <li><a href="index.php?target=Car&action=ViewAdd">Add a Car</a></li>
+            <li><a href="index.php?target=Travel&action=ViewAdd">Add a Travel</a></li>
+            <li style="float:right"><a href="index.php?target=User&action=logout">Log out</a></li>
         </ul>
     </div>
 </header>

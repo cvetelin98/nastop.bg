@@ -11,16 +11,16 @@
 <head>
     <meta charset="UTF-8">
     <title>nastop</title>
-    <link rel="stylesheet" href="../Style/style.css">
+    <link rel="stylesheet" href="Style/style.css">
 </head>
 <body>
 <header id="mainHeader">
     <h1 id="mainName">Nastop.bg</h1>
     <div id="mainLinks">
-        <a href="login.html">Login</a>
+        <a href="view/login.html">Login</a>
         |
-        <a href="register.html">Register</a>
-        <a href="register.html"><span id="addTravel">
+        <a href="view/register.html">Register</a>
+        <a href="view/register.html"><span id="addTravel">
             + Wanna share a travel?
         </span></a>
     </div>

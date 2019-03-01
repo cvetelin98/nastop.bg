@@ -2,11 +2,41 @@
 
 namespace controller;
 
+use model\dao\TravelDao;
 use model\dao\UserDao;
 use model\User;
 
 class UserController
 {
+
+    public function viewHistory(){
+        $travels = TravelDao::getAllByUser($_SESSION["username"]);
+        if($_SESSION["logged"]) {
+            require "view/history.php";
+        }
+        else require "view/login.html";
+    }
+
+    public function viewHome(){
+        if($_SESSION["logged"]) {
+            require "view/home.php";
+        }
+        else require "view/login.html";
+    }
+
+    public function viewProfile(){
+        if($_SESSION["logged"]) {
+            require "view/profile.php";
+        }
+        else require "view/login.html";
+    }
+
+    public function viewEdit(){
+        if($_SESSION["logged"]) {
+            require "view/edit.php";
+        }
+        else require "view/login.html";
+    }
 
     public function register()
     {
@@ -112,71 +142,69 @@ class UserController
                     $_SESSION["gsm"] = $user->getGsm();
                     $_SESSION["logged"] = true;
 //                    echo "Successful login - welcome, " . $user->getUsername();
-                    header("Location: view/home.php");
+                    require "view/home.php";
                 }
             }
         }
     }
 
-    public function all()
-    {
-        $users = UserDao::getAll();
-        echo json_encode($users);
-    }
 
 
     public function edit()
     {
-        /** @var User $user */
-        $user = UserDao::getByUsername($_SESSION["username"]);
-        if(isset($_POST["GSM"])){
-            $user->setGsm($_POST["GSM"]);
-        }
+        if($_SESSION["logged"]) {
+            /** @var User $user */
+            $user = UserDao::getByUsername($_SESSION["username"]);
+            if (isset($_POST["GSM"])) {
+                $user->setGsm($_POST["GSM"]);
+            }
 
-        if (isset($_POST["cur_pass"], $_POST["new_pass"], $_POST["new_conf"])) {
-            $cur_pass = $_POST["cur_pass"];
-            $new_pass = $_POST["new_pass"];
-            $new_conf = $_POST["new_conf"];
-            $pass_db = $user->getPassword();
+            if (isset($_POST["cur_pass"], $_POST["new_pass"], $_POST["new_conf"])) {
+                $cur_pass = $_POST["cur_pass"];
+                $new_pass = $_POST["new_pass"];
+                $new_conf = $_POST["new_conf"];
+                $pass_db = $user->getPassword();
 
-            if (!(empty($cur_pass) || empty($new_pass) || empty($new_conf))) {
-                if (!password_verify($cur_pass, $pass_db)) {
-                    throw new \Exception("Sorry, invalid password!");
-                }
-                if ($new_pass !== $new_conf) {
-                    throw new \Exception("Sorry, new passwords - mismatch!");
-                } else {
-                    $new_pass = password_hash($new_pass, PASSWORD_BCRYPT);
-                    $user->setPassword($new_pass);
+                if (!(empty($cur_pass) || empty($new_pass) || empty($new_conf))) {
+                    if (!password_verify($cur_pass, $pass_db)) {
+                        throw new \Exception("Sorry, invalid password!");
+                    }
+                    if ($new_pass !== $new_conf) {
+                        throw new \Exception("Sorry, new passwords - mismatch!");
+                    } else {
+                        $new_pass = password_hash($new_pass, PASSWORD_BCRYPT);
+                        $user->setPassword($new_pass);
+                    }
                 }
             }
-        }
 
-        if(isset($_FILES["pic"])){
-            $temp_name = $_FILES["pic"]["tmp_name"];
+            if (isset($_FILES["pic"])) {
+                $temp_name = $_FILES["pic"]["tmp_name"];
 
-            if (is_uploaded_file($temp_name)) {
-                $filename = time();
-                if (move_uploaded_file($temp_name, "images/$filename")) {
-                    $image_url = "images/$filename";
-                    $user->setImage($image_url);
+                if (is_uploaded_file($temp_name)) {
+                    $filename = time();
+                    if (move_uploaded_file($temp_name, "images/$filename")) {
+                        $image_url = "images/$filename";
+                        $user->setImage($image_url);
 
-                } else {
-                    throw new \Exception("File is not moved!");
+                    } else {
+                        throw new \Exception("File is not moved!");
+                    }
                 }
             }
-        }
 
-        UserDao::updateUser($user);
-        $_SESSION["gsm"] = $user->getGsm();
-        $_SESSION["user_image"] = $user->getUserImage();
-        header("Location: view/profile.php");
+            UserDao::updateUser($user);
+            $_SESSION["gsm"] = $user->getGsm();
+            $_SESSION["user_image"] = $user->getUserImage();
+            require "view/profile.php";
+        }
+        else require "view/login.html";
     }
 
 
     public function logout()
     {
         session_destroy();
-        header("Location: view/main.php");
+        require "view/main.php";
     }
 }

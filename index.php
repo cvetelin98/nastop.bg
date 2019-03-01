@@ -47,5 +47,5 @@ else{
 }
 
 if($fileNotFound){
-    echo 'target or action invalid: target= ' . $controllerName . ' and action = '.$methodName;
+    require "view/pageNotFound.html";
 }
