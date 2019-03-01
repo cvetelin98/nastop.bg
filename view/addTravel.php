@@ -1,11 +1,6 @@
 <?php
 
-session_start();
 
-//TODO Travels DAO and initializing $travels and Cars DAO!
-
-//$cities = TravelDao::getAllCities();
-//$cars = UserDao::getUserCars($_SESSION["username"]);
 
 ?>
 <!DOCTYPE html>
@@ -73,10 +68,11 @@ session_start();
                 <td><input type="number" name="price" id="price" required></td>
             </tr>
             <tr>
+                <?php var_dump($cars[0]->getCarId()); ?>
                 <td>Car:</td>
                 <td><select name="car" required>
                         <?php foreach ($cars as $car) {?>
-                            <option value="<?php echo $car["car_id"] ?>"><?php echo $car["car_name"] ?></option>
+                            <option value="<?php echo $car->getCarId(); ?>"><?php echo $car->getCarName(); ?></option>
                         <?php } ?>
                     </select></td>
             </tr>

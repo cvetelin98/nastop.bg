@@ -30,7 +30,7 @@
 <main id="logMain">
 
     <br>
-    <p style="font-size: 30px;">&nbsp Selected Travels for sharing:</p>
+    <p style="font-size: 30px;">&nbsp My Past Travels:</p>
     <table>
         <?php if(count($travels) > 0) {
             foreach ($travels as $travel) { ?>

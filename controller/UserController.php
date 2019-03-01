@@ -18,6 +18,7 @@ class UserController
     }
 
     public function viewHome(){
+        $travels = TravelDao::getAll();
         if($_SESSION["logged"]) {
             require "view/home.php";
         }
@@ -103,10 +104,11 @@ class UserController
             $_SESSION["rating"] = $user->getRating();
             $_SESSION["logged"] = true;
             $validReg = true;
-            header("Location: view/home.php");
+            $travels = TravelDao::getAll();
+            require "view/home.php";
         }
         if (!$validReg) {
-            header("Location: view/register.html");
+            require "view/register.html";
 
         }
     }
@@ -142,6 +144,7 @@ class UserController
                     $_SESSION["gsm"] = $user->getGsm();
                     $_SESSION["logged"] = true;
 //                    echo "Successful login - welcome, " . $user->getUsername();
+                    $travels = TravelDao::getAll();
                     require "view/home.php";
                 }
             }
@@ -205,6 +208,7 @@ class UserController
     public function logout()
     {
         session_destroy();
+        $travels = TravelDao::getAll();
         require "view/main.php";
     }
 }

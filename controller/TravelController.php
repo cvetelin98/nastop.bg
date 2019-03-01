@@ -3,13 +3,17 @@
 namespace controller;
 
 
+use model\dao\CarDao;
 use model\dao\TravelDao;
+use model\dao\UserDao;
 use model\Travel;
 
 class TravelController{
 
     public function viewAdd(){
         if($_SESSION["logged"]) {
+            $cities = TravelDao::getAllCities();
+            $cars = UserDao::getUserCars($_SESSION["username"]);
             require "view/addTravel.php";
         }
         else require "view/login.html";

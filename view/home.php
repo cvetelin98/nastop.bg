@@ -1,7 +1,5 @@
 <?php
 
-//$travels = TravelDao::getAll();
-
 ?>
 
 <!DOCTYPE html>
