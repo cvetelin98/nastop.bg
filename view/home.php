@@ -24,7 +24,6 @@
             <li><a href="addCar.html">Add a Car</a></li>
             <li><a href="addTravel.php">Add a Travel</a></li>
             <li style="float:right"><a href="../index.php?target=User&action=logout">Log out</a></li>
-            <!--TODO FIX LOGOUT EVERYWHERE!-->
         </ul>
     </div>
 </header>

@@ -2,6 +2,8 @@
 
 session_start();
 
+//$cars = UserDao::getUserCars($_SESSION["username"]);
+
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +25,6 @@ session_start();
             <li><a href="addCar.html">Add a Car</a></li>
             <li><a href="addTravel.php">Add a Travel</a></li>
             <li style="float:right"><a href="../index.php?target=User&action=logout">Log out</a></li>
-            <!--TODO FIX LOGOUT !-->
         </ul>
     </div>
 </header>
@@ -58,7 +59,7 @@ session_start();
 <!--    </table>-->
 
     <div class="card">
-        <img width="35%"  src="../<?php echo $_SESSION["user_image"]?>">
+        <img width="18.3%"  src="../<?php echo $_SESSION["user_image"]?>">
         <div class="container">
             <h4><b>Name: <?php echo $_SESSION["first_name"]." ".$_SESSION["last_name"]; ?></b></h4>
             <p>Username: <?php echo $_SESSION["username"]; ?></p>
@@ -68,6 +69,17 @@ session_start();
             <p>Rating: <?php echo $_SESSION["rating"]; ?></p>
         </div>
     </div>
+    <h1 style="text-align: left; font-size: 3vw;">Your cars:</h1>
+    <?php foreach($cars as $car) { ?>
+    <div class="card">
+        <img width="35%"  src="../<?php echo $car["car_image"]?>">
+        <div class="container">
+            <h4><b>Name: <?php echo $car["car_name"]; ?></b></h4>
+            <p>Color: <?php echo $car["car_color"]; ?></p>
+            <p>Places: <?php echo $car["car_places"]; ?></p>
+        </div>
+    </div>
+    <?php } ?>
 
     <form method="post">
         <div id="comment">

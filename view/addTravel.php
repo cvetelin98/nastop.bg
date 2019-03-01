@@ -2,6 +2,11 @@
 
 session_start();
 
+//TODO Travels DAO and initializing $travels and Cars DAO!
+
+//$cities = TravelDao::getAllCities();
+//$cars = UserDao::getUserCars($_SESSION["username"]);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +27,6 @@ session_start();
             <li><a href="addCar.html">Add a Car</a></li>
             <li><a class="active" href="addTravel.php">Add a Travel</a></li>
             <li style="float:right"><a href="../index.php?target=User&action=logout">Log out</a></li>
-            <!--TODO FIX LOGOUT EVERYWHERE!-->
         </ul>
     </div>
     <img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="100%" height="150px;">
@@ -32,30 +36,30 @@ session_start();
 <!--    --><?php //if(UserDao::checkUserCars($_SESSION["username"])){ ?>
     <form action="../index.php?target=Travel&action=add" method="post" onsubmit="return validation()">
         <table id="loginTable">
-            <tr>
-                <td>Start:</td>
-                <td><input type="text" name="starting_destination" id="starting_destination" required></td>
-            </tr>
-            <tr>
-                <td>Final:</td>
-                <td><input type="text" name="final_destination" id="final_destination" required></td>
-            </tr>
 <!--            <tr>-->
 <!--                <td>Start:</td>-->
-<!--                <td><select name="starting_destination" required>-->
-<!--                        --><?php //foreach ($cities as $city) {?>
-<!--                        <option value="--><?php //echo $city ?><!--">--><?php //echo $city ?><!--</option>-->
-<!--                        --><?php //} ?>
-<!--                    </select></td>-->
+<!--                <td><input type="text" name="starting_destination" id="starting_destination" required></td>-->
 <!--            </tr>-->
 <!--            <tr>-->
 <!--                <td>Final:</td>-->
-<!--                <td><select name="final_destination" required>-->
-<!--                        --><?php //foreach ($cities as $city) {?>
-<!--                            <option value="--><?php //echo $city ?><!--">--><?php //echo $city ?><!--</option>-->
-<!--                        --><?php //} ?>
-<!--                    </select></td>-->
+<!--                <td><input type="text" name="final_destination" id="final_destination" required></td>-->
 <!--            </tr>-->
+            <tr>
+                <td>Start:</td>
+                <td><select name="starting_destination" required>
+                        <?php foreach ($cities as $city) {?>
+                        <option value="<?php echo $city ?>"><?php echo $city ?></option>
+                        <?php } ?>
+                    </select></td>
+            </tr>
+            <tr>
+                <td>Final:</td>
+                <td><select name="final_destination" required>
+                        <?php foreach ($cities as $city) {?>
+                            <option value="<?php echo $city ?>"><?php echo $city ?></option>
+                        <?php } ?>
+                    </select></td>
+            </tr>
             <tr>
                 <td>Date:</td>
                 <td><input type="date" name="date_of_travelling" id="date_of_travelling" required></td>
@@ -67,6 +71,14 @@ session_start();
             <tr>
                 <td>Price:</td>
                 <td><input type="number" name="price" id="price" required></td>
+            </tr>
+            <tr>
+                <td>Car:</td>
+                <td><select name="car" required>
+                        <?php foreach ($cars as $car) {?>
+                            <option value="<?php echo $car["car_id"] ?>"><?php echo $car["car_name"] ?></option>
+                        <?php } ?>
+                    </select></td>
             </tr>
             <tr>
                 <td colspan="3"><input type="submit" name="addButton" id="submit" value="Add"></td>

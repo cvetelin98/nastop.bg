@@ -3,6 +3,7 @@
 namespace model\dao;
 
 use model\User;
+use model\Car;
 
 class UserDao {
 
@@ -74,6 +75,20 @@ class UserDao {
             return true;
         }else{
             return false;
+        }
+    }
+
+    public static function getUserCars($username){
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+        $stmt = $pdo->prepare("SELECT car_id,user_id,car_name,car_image,car_color,car_places FROM cars as c JOIN users as u ON c.user_id = u.user_id 
+                                        WHERE u.username = ?");
+        $stmt->execute([$username]);
+        while($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
+            $car = new Car($row->user_id,$row->car_name,$row->car_image,$row->car_color,$row->car_places);
+            $car = $car->setCarId($row->car_id);
+            /** @var Car $car */
+            $cars[] = $car;
         }
     }
 

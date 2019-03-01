@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+
+//TODO Travels DAO and initializing $travels !
+
+//$travels = TravelDao::getAll(getAllByUser($_SESSION["username"]);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,13 +27,29 @@
             <li><a href="addCar.html">Add a Car</a></li>
             <li><a href="addTravel.php">Add a Travel</a></li>
             <li style="float:right"><a href="../index.php?target=User&action=logout">Log out</a></li>
-            <!--TODO FIX LOGOUT !-->
         </ul>
     </div>
-    <img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="100%" height="150px;">
 </header>
+<img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="80%" height="150px;">
 <!--TODO TABLE WITH MY TRAVELS !-->
 <main id="logMain">
+
+    <br>
+    <p style="font-size: 30px;">&nbsp Selected Travels for sharing:</p>
+    <table>
+        <?php if(count($travels) > 0) {
+            foreach ($travels as $travel) { ?>
+                <tr>
+                    <td><?php echo $travel["starting_destination"] ?></td>
+                    <td><?php echo $travel["final_destination"] ?></td>
+                    <td><?php echo $travel["date_of_travelling"] ?></td>
+                    <td><?php echo $travel["price"] ?></td>
+                    <td><?php echo $travel["description"] ?></td>
+                </tr>
+            <?php }
+        }
+        else { ?> <tr><td colspan="5" style="font-size: 30px"> <?php echo "No data available"; ?></td></tr> <?php } ?>
+    </table>
 
 </main>
 <footer id="mainFooter">
