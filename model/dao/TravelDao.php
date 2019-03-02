@@ -55,12 +55,13 @@ class TravelDao {
     public static function getAll(){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
-        $stmt = $pdo->prepare("SELECT travel_id,user_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels");
+        $stmt = $pdo->prepare("SELECT travel_id,user_id,car_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels");
         $stmt->execute();
         $travels = [];
         while($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
             $travel = new Travel($row->starting_destination,$row->final_destination,$row->date_of_travelling,$row->free_places,$row->price);
             $travel->setTravelId($row->travel_id);
+            $travel->setCarId($row->car_id);
             $travels[] = $travel;
         }
         return $travels;
@@ -69,13 +70,14 @@ class TravelDao {
     public static function getAllByUser($username){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
-        $stmt = $pdo->prepare("SELECT travel_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels as t 
+        $stmt = $pdo->prepare("SELECT travel_id,car_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels as t 
                                           JOIN users as u ON t.user_id = u.user_id WHERE u.username = ?");
         $stmt->execute(array($username));
         $travels = [];
         while($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
             $travel = new Travel($row->starting_destination,$row->final_destination,$row->date_of_travelling,$row->free_places,$row->price);
             $travel->setTravelId($row->travel_id);
+            $travel->setCarId($row->car_id);
             $travels[] = $travel;
         }
         return $travels;

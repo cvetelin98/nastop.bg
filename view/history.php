@@ -36,7 +36,7 @@
             <th>Starting Point</th>
             <th>Final Point</th>
             <th>Date</th>
-            <th>Free Places</th>
+            <th>Car</th>
             <th>Price</th>
         </tr>
         <?php if(count($travels) > 0) {
@@ -45,7 +45,7 @@
                     <td><?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?></td>
                     <td><?php echo \model\dao\TravelDao::getCityName($travel->getFinalDestination()); ?></td>
                     <td><?php echo $travel->getDateOfTravelling(); ?></td>
-                    <td><?php echo $travel->getFreePlaces(); ?></td>
+                    <td><img src="<?php echo \model\dao\CarDao::getCarImage($travel->getCarId()) ?>" width="15%"></td>
                     <td><?php echo $travel->getPrice(); ?></td>
                 </tr>
             <?php }

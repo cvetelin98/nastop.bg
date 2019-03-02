@@ -80,10 +80,6 @@
         </div>
     </form>
 
-
-</body>
-</html>
-
 </main>
 <footer id="mainFooter">
     <h3 style="font-size: 30px;float:left;margin-left:55px;">You can always go nastop!</h3>
