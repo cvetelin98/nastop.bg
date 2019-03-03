@@ -64,4 +64,16 @@ class TravelController{
         else require "view/login.html";
     }
 
+    public function book(){
+        $travel_id = $_POST["travel_id"];
+        if(TravelDao::bookTravel($travel_id)){
+            $result["answer"] = true;
+            echo json_encode($result);
+        }
+        else {
+            $result["answer"] = false;
+            echo json_encode($result);
+        }
+    }
+
 }

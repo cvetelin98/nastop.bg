@@ -113,4 +113,17 @@ class TravelDao {
         return $travel;
     }
 
+    public function bookTravel($travel_id){
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+        $stmt = $pdo->prepare("UPDATE travels SET free_places = free_places - 1 WHERE travel_id = ?");
+        $stmt->execute([$travel_id]);
+
+        if($stmt->rowCount() > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

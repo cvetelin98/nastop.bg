@@ -18,9 +18,9 @@
     </div>
 </header>
 <img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="80%" height="250px;">
-<main id="logMain">
+<main id="viewMain">
 
-    <table id="proTable">
+    <table id="carTable" style="top:75%; height: 50vh;">
         <tr>
             <td><?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?> ➟ <?php echo \model\dao\TravelDao::getCityName($travel->getFinalDestination()); ?> (<?php echo $travel->getDateOfTravelling(); ?>)</td>
         </tr>
@@ -39,6 +39,17 @@
         <tr>
             <td>Free Places: <?php echo $travel->getFreePlaces(); ?></td>
         </tr>
+        <?php if($travel->getFreePlaces() > 0) {?>
+        <tr>
+            <td id="book"><a href="index.php?target=User&action=viewLogin">Book</a></td>
+        </tr>
+        <?php }
+        else { ?>
+        <tr>
+            <td id="no_book">No Free Places!</td>
+        </tr>
+        <?php } ?>
+
     </table>
 
 </body>

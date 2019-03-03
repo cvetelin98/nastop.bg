@@ -23,7 +23,7 @@
 <img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="80%" height="150px;">
 <main id="viewMain">
 
-    <table id="carTable">
+    <table id="carTable" style="top:65%; height: 50vh;">
         <tr>
             <td><?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?> ➟ <?php echo \model\dao\TravelDao::getCityName($travel->getFinalDestination()); ?> (<?php echo $travel->getDateOfTravelling(); ?>)</td>
         </tr>
@@ -42,6 +42,18 @@
         <tr>
             <td>Free Places: <?php echo $travel->getFreePlaces(); ?></td>
         </tr>
+        <?php if($travel->getFreePlaces() > 0) {?>
+            <tr>
+                <!--TODO book a place-->
+                <td id="book">Book</td>
+            </tr>
+        <?php }
+        else { ?>
+        <tr>
+            <td id="no_book">No Free Places!</td>
+        </tr>
+        <?php } ?>
+
     </table>
 
 </body>
@@ -56,9 +68,6 @@
     <img src="https://prevozvalnik.bg/img/bulgaria-footer.png" style="margin-right: 25px">
     <h3 style="font-size: 15px;margin-right:55px;">Copyright 2019 © Nastop.bg</h3>
 </footer>
+
 </body>
 </html>
-
-
-
-?>
