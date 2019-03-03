@@ -25,7 +25,6 @@
     </div>
 </header>
 <img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="80%" height="150px;">
-<!--TODO TABLE WITH MY TRAVELS !-->
 <main id="logMain">
 
     <div class="card">
@@ -39,17 +38,9 @@
             <p>Rating: <?php echo $_SESSION["rating"]; ?></p>
         </div>
     </div>
+    <?php if(\model\dao\UserDao::checkUserCars($_SESSION["username"])) {?>
+    <br>
     <h1 style="text-align: left; font-size: 3vw;">Your cars:</h1>
-<!--    --><?php //foreach($cars as $car) { ?>
-<!--    <div class="card">-->
-<!--        <img width="35%"  src="--><?php //echo $car->getCarImage(); ?><!--">-->
-<!--        <div class="container">-->
-<!--            <h4><b>Name: --><?php //echo $car->getCarName(); ?><!--</b></h4>-->
-<!--            <p>Color: --><?php //echo $car->getCarColor(); ?><!--</p>-->
-<!--            <p>Places: --><?php //echo $car->getCarPlaces(); ?><!--</p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    --><?php //} ?>
     <table id="carShow">
         <tr>
             <th>Image</th>
@@ -65,6 +56,11 @@
             <td><?php echo $car->getCarPlaces(); ?></td>
         </tr>
     <?php } ?>
+        <?php }
+        else { ?>
+            <br>
+            <h1 style="text-align: left; font-size: 3vw;">If you have a car,you can add it from <a href="index.php?target=Car&action=ViewAdd" id="addCarLink">here</a> !</h1>
+        <?php } ?>
     </table>
 
     <form method="post">

@@ -97,4 +97,20 @@ class TravelDao {
         return $cities;
     }
 
+    public static function getTravel($travel_id){
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+
+        $stmt = $pdo->prepare("SELECT car_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels WHERE travel_id = ?");
+        $stmt->execute(array($travel_id));
+        $row = $stmt->fetch(\PDO::FETCH_OBJ);
+
+        /** @var Travel $travel */
+        $travel = new Travel($row->starting_destination,$row->final_destination,$row->date_of_travelling,$row->free_places,$row->price);
+        $travel->setTravelId($travel_id);
+        $travel->setCarId($row->car_id);
+
+        return $travel;
+    }
+
 }

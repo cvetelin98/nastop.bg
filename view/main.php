@@ -1,9 +1,5 @@
 <?php
 
-//TODO Travels DAO and initializing $travels !
-
-//$travels = TravelDao::getAll();
-
 ?>
 
 <!DOCTYPE html>
@@ -15,13 +11,13 @@
 </head>
 <body>
 <header id="mainHeader">
-    <h1 id="mainName">Nastop.bg</h1>
+    <a href="index.php"><h1 id="mainName">Nastop.bg</h1></a>
     <div id="mainLinks">
-        <a href="view/login.html">Login</a>
+        <a href="index.php?target=User&action=viewLogin">Login</a>
         |
-        <a href="view/register.html">Register</a>
-        <a href="view/register.html"><span id="addTravel">
-            + Wanna share a travel?
+        <a href="index.php?target=User&action=viewRegister">Register</a>
+        <a href="index.php?target=User&action=viewRegister"><span id="addTravel">
+            &nbsp+ Wanna share a travel?
         </span></a>
     </div>
 </header>
@@ -37,6 +33,7 @@
         <th>Free Places</th>
         <th>Car</th>
         <th>Price</th>
+        <th>Information</th>
     </tr>
     <?php if(count($travels) > 0) {
         foreach ($travels as $travel) { ?>
@@ -47,6 +44,10 @@
                 <td><?php echo $travel->getFreePlaces(); ?></td>
                 <td><img src="<?php echo \model\dao\CarDao::getCarImage($travel->getCarId()) ?>" width="15%"></td>
                 <td><?php echo $travel->getPrice(); ?></td>
+                <td><form method="post" action="index.php?target=Travel&action=ViewTravelGlobal">
+                        <input type=hidden name="travel_id" value="<?php echo $travel->getTravelId(); ?>">
+                        <input type="submit" id="infoButton" value="See More" name="travelSubmit">
+                    </form></td>
             </tr>
         <?php }
     }

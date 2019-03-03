@@ -26,7 +26,6 @@
     </div>
 </header>
 <img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="80%" height="150px;">
-<!--TODO TABLE WITH MY TRAVELS !-->
 <main id="logMain">
 
     <br>

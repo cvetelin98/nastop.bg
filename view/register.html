@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>nastop</title>
-    <link rel="stylesheet" href="../Style/style.css">
+    <link rel="stylesheet" href="Style/style.css">
 </head>
 <body>
 <!--<header id="regHeader">-->
     <!--<h1>Registration</h1>-->
 <!--</header>-->
 <header id="mainHeader">
-    <h1 id="mainName">Nastop.bg</h1>
+    <a href="index.php"><h1 id="mainName">Nastop.bg</h1></a>
     <div id="mainLinks">
-        <a href="login.html">Login</a>
+        <a href="index.php?target=User&action=viewLogin">Login</a>
         |
-        <a href="register.html">Register</a>
-        <a href="register.html"><span id="addTravel">
+        <a href="index.php?target=User&action=viewRegister">Register</a>
+        <a href="index.php?target=User&action=viewRegister"><span id="addTravel">
             &nbsp+ Wanna share a travel?
         </span></a>
     </div>
 </header>
 <main id="regMain">
-    <form action="../index.php?target=User&action=register" method="post" onsubmit="return passValid()" enctype="multipart/form-data">
+    <form action="index.php?target=User&action=register" method="post" onsubmit="return passValid()" enctype="multipart/form-data">
         <table id="regTable">
             <tr>
                 <td>Username:</td>

@@ -27,7 +27,7 @@
     <img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="100%" height="150px;">
 </header>
 
-<main id="logMain">
+<main id="viewMain">
     <?php if(\model\dao\UserDao::checkUserCars($_SESSION["username"])){ ?>
     <form action="index.php?target=Travel&action=add" method="post" onsubmit="return validation()">
         <table id="travelTable">

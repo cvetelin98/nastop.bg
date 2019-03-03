@@ -10,6 +10,14 @@ use model\User;
 class UserController
 {
 
+    public function viewLogin(){
+        require "view/login.html";
+    }
+
+    public function viewRegister(){
+        require "view/register.html";
+    }
+
     public function viewHistory(){
         $travels = TravelDao::getAllByUser($_SESSION["username"]);
         if($_SESSION["logged"]) {

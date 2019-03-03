@@ -19,6 +19,19 @@ class TravelController{
         else require "view/login.html";
     }
 
+    public function viewTravel(){
+        if($_SESSION["logged"]) {
+            $travel = TravelDao::getTravel($_POST["travel_id"]);
+            require "view/viewTravel.php";
+        }
+        else require "view/login.html";
+    }
+
+    public function viewTravelGlobal(){
+            $travel = TravelDao::getTravel($_POST["travel_id"]);
+            require "view/viewTravelGlobal.php";
+    }
+
     public function add(){
         if($_SESSION["logged"]) {
             if (!isset($_POST["starting_destination"], $_POST["final_destination"], $_POST["date_of_travelling"], $_POST["free_places"], $_POST["price"],$_POST["car"])) {

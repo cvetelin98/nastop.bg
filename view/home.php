@@ -37,6 +37,7 @@
             <th>Free Places</th>
             <th>Car</th>
             <th>Price</th>
+            <th>Information</th>
         </tr>
         <?php if(count($travels) > 0) {
             foreach ($travels as $travel) { ?>
@@ -47,6 +48,10 @@
                     <td><?php echo $travel->getFreePlaces(); ?></td>
                     <td><img src="<?php echo \model\dao\CarDao::getCarImage($travel->getCarId()) ?>" width="15%"></td>
                     <td><?php echo $travel->getPrice(); ?></td>
+                    <td><form method="post" action="index.php?target=Travel&action=ViewTravel">
+                            <input type=hidden name="travel_id" value="<?php echo $travel->getTravelId(); ?>">
+                        <input type="submit" id="infoButton" value="See More" name="travelSubmit">
+                    </form></td>
                 </tr>
             <?php }
         }

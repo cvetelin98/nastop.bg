@@ -6,24 +6,21 @@
     <link rel="stylesheet" href="Style/style.css">
 </head>
 <body>
-<header class="navHeader">
-    <h1 class="smallHeader">Nastop.bg</h1>
-    <div id="nav">
-        <ul>
-            <li><a href="index.php?target=User&action=viewHome">Home</a></li>
-            <li><a href="index.php?target=User&action=viewProfile">My Profile</a></li>
-            <li><a href="index.php?target=User&action=viewHistory">My Shared Travels</a></li>
-            <li><a href="index.php?target=User&action=viewEdit">Edit Profile</a></li>
-            <li><a href="index.php?target=Car&action=ViewAdd">Add a Car</a></li>
-            <li><a href="index.php?target=Travel&action=ViewAdd">Add a Travel</a></li>
-            <li style="float:right"><a href="index.php?target=User&action=logout">Log out</a></li>
-        </ul>
+<header id="mainHeader">
+    <a href="index.php"><h1 id="mainName">Nastop.bg</h1></a>
+    <div id="mainLinks">
+        <a href="index.php?target=User&action=viewLogin">Login</a>
+        |
+        <a href="index.php?target=User&action=viewRegister">Register</a>
+        <a href="index.php?target=User&action=viewRegister"><span id="addTravel">
+            &nbsp+ Wanna share a travel?
+        </span></a>
     </div>
 </header>
-<img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="80%" height="150px;">
-<main id="viewMain">
+<img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="80%" height="250px;">
+<main id="logMain">
 
-    <table id="carTable">
+    <table id="proTable">
         <tr>
             <td><?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?> ➟ <?php echo \model\dao\TravelDao::getCityName($travel->getFinalDestination()); ?> (<?php echo $travel->getDateOfTravelling(); ?>)</td>
         </tr>

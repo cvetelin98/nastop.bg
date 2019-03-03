@@ -406,3 +406,42 @@ img {
     padding: 10px 0;
 }
 
+#infoButton {
+    border-radius: 40%;
+    border: 2px solid black;
+
+    display: inline-block;
+    padding: 5px 35px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    font-weight: bold;
+    background-color: dodgerblue;
+    box-shadow: 0 9px #999;
+}
+
+#infoButton:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#infoButton:active {
+    background-color: #f2a22b;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+#addCarLink {
+    text-decoration: underline;
+}
+
+#addCarLink:hover {
+    color: blue;
+}
+
+#viewMain {
+    width: 80%;
+    height: 85vh;
+    background-color: #2dcecb;
+    margin-left: 10%;
+}
