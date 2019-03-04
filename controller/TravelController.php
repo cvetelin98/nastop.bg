@@ -66,14 +66,10 @@ class TravelController{
 
     public function book(){
         $travel_id = $_POST["travel_id"];
-        if(TravelDao::bookTravel($travel_id)){
-            $result["answer"] = true;
-            return json_encode($result);
-        }
-        else {
-            $result["answer"] = false;
-            return json_encode($result);
-        }
+
+        $result["answer"] = TravelDao::bookTravel($travel_id);
+
+        return json_encode($result);
     }
 
 }

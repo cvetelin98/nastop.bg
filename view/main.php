@@ -43,7 +43,7 @@
                 <td><?php echo $travel->getDateOfTravelling(); ?></td>
                 <td><?php echo $travel->getFreePlaces(); ?></td>
                 <td><img src="<?php echo \model\dao\CarDao::getCarImage($travel->getCarId()) ?>" width="15%"></td>
-                <td><?php echo $travel->getPrice(); ?></td>
+                <td><?php echo $travel->getPrice(); ?> BGN</td>
                 <td><form method="post" action="index.php?target=Travel&action=ViewTravelGlobal">
                         <input type=hidden name="travel_id" value="<?php echo $travel->getTravelId(); ?>">
                         <input type="submit" id="infoButton" value="See More" name="travelSubmit">

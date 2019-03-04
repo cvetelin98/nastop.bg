@@ -7,7 +7,7 @@
 </head>
 <body>
 <header class="navHeader">
-    <h1 class="smallHeader">Nastop.bg</h1>
+    <a href="index.php?target=User&action=viewHome"><h1 class="smallHeader">Nastop.bg</h1></a>
     <div id="nav">
         <ul>
             <li><a href="index.php?target=User&action=viewHome">Home</a></li>
@@ -37,11 +37,18 @@
             <td>On: <?php echo $travel->getDateOfTravelling(); ?></td>
         </tr>
         <tr>
-            <td>Price: <?php echo $travel->getPrice(); ?></td>
+            <td>Price: <?php echo $travel->getPrice(); ?> BGN</td>
         </tr>
+        <?php if($travel->getFreePlaces() > 0) {?>
         <tr>
             <td>Free Places: <?php echo $travel->getFreePlaces(); ?></td>
         </tr>
+        <?php }
+        else { ?>
+        <tr>
+            <td>Free Places: ☹</td>
+        </tr>
+        <?php } ?>
         <?php if($travel->getFreePlaces() > 0) {?>
             <tr>
                 <!--TODO book a place-->
@@ -84,7 +91,6 @@
                 .then(function (myJson) {
                     var answer = myJson.answer;
                     if(answer == true){
-                        alert(3);
                         var bookButton = document.getElementById(book);
                         bookButton.style.color = "red";
                     }

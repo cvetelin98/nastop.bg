@@ -34,14 +34,21 @@
             <td>On: <?php echo $travel->getDateOfTravelling(); ?></td>
         </tr>
         <tr>
-            <td>Price: <?php echo $travel->getPrice(); ?></td>
-        </tr>
-        <tr>
-            <td>Free Places: <?php echo $travel->getFreePlaces(); ?></td>
+            <td>Price: <?php echo $travel->getPrice(); ?> BGN</td>
         </tr>
         <?php if($travel->getFreePlaces() > 0) {?>
+            <tr>
+                <td>Free Places: <?php echo $travel->getFreePlaces(); ?></td>
+            </tr>
+        <?php }
+        else { ?>
+            <tr>
+                <td>Free Places: ☹</td>
+            </tr>
+        <?php } ?>
+        <?php if($travel->getFreePlaces() > 0) {?>
         <tr>
-            <td id="book"><a href="index.php?target=User&action=viewLogin">Book</a></td>
+            <td><a href="index.php?target=User&action=viewLogin"><button id="book">Book</button></a></td>
         </tr>
         <?php }
         else { ?>
