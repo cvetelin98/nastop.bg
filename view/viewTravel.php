@@ -45,7 +45,7 @@
         <?php if($travel->getFreePlaces() > 0) {?>
             <tr>
                 <!--TODO book a place-->
-                <td id="book">Book</td>
+                <td><button id="book" onclick="book(<?php echo $travel->getTravelId(); ?>)">Book</button></td>
             </tr>
         <?php }
         else { ?>
@@ -68,6 +68,33 @@
     <img src="https://prevozvalnik.bg/img/bulgaria-footer.png" style="margin-right: 25px">
     <h3 style="font-size: 15px;margin-right:55px;">Copyright 2019 © Nastop.bg</h3>
 </footer>
+
+<script>
+
+    function book(travel_id) {
+            fetch("index.php?target=Travel&action=book",
+                {
+                    method: "POST",
+                    headers: {'Content-type': 'application/x-www-form-urlencoded'},
+                    body: "travel_id=" + travel_id
+                })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (myJson) {
+                    var answer = myJson.answer;
+                    if(answer == true){
+                        alert(3);
+                        var bookButton = document.getElementById(book);
+                        bookButton.style.color = "red";
+                    }
+                })
+                .catch(function (e) {
+                    alert(e.message);
+                })
+    }
+
+</script>
 
 </body>
 </html>
