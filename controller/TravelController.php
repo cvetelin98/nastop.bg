@@ -68,8 +68,9 @@ class TravelController{
         $travel_id = $_POST["travel_id"];
 
         $result["answer"] = TravelDao::bookTravel($travel_id);
+        $result["new_places"] = TravelDao::getPlaces($travel_id);
 
-        return json_encode($result);
+        echo json_encode($result);
     }
 
 }

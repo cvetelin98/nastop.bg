@@ -126,4 +126,16 @@ class TravelDao {
         }
     }
 
+    public static function getPlaces($travel_id)
+    {
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+
+        $stmt = $pdo->prepare("SELECT free_places FROM travels WHERE travel_id = ?");
+        $stmt->execute(array($travel_id));
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return $row["free_places"];
+    }
+
 }
