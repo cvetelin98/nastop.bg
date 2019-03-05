@@ -32,6 +32,19 @@ class UserDao {
         }
     }
 
+    public static function getUsernameById($user_id){
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+        $stmt = $pdo->prepare("SELECT username FROM users WHERE user_id = ?");
+        $stmt->execute([$user_id]);
+        if($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
+            return $row->username;
+        }
+        else{
+            return null;
+        }
+    }
+
     public static function getAll(){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
@@ -92,6 +105,49 @@ class UserDao {
             $cars[] = $car;
         }
         return $cars;
+    }
+
+    public static function getCommentsToUser($username){
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+        $stmt = $pdo->prepare("SELECT comment,from_user FROM comments as c JOIN users as u ON c.to_user = u.user_id 
+                                        WHERE u.username = ?");
+        $stmt->execute([$username]);
+        $comments = [];
+        while($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
+            $comment["comment"] = $row->comment;
+            $comment["from_user"] = UserDao::getUsernameById($row->from_user);
+            $comments[] = $comment;
+        }
+        return $comments;
+    }
+
+    public static function getComments($username){
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+        $stmt = $pdo->prepare("SELECT comment FROM comments as c JOIN users as u ON c.to_user = u.user_id 
+                                        WHERE u.username = ?");
+        $stmt->execute([$username]);
+        $comments = [];
+        while($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $comment = $row["comment"];
+            $comments[] = $comment;
+        }
+        return $comments;
+    }
+
+    public function sendComment($comment,$to_user){
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+        $stmt = $pdo->prepare("INSERT INTO comments (comment,from_user,to_user) VALUES (?,?,?)");
+        $from_user = self::getByUsername($_SESSION["username"]);
+        $stmt->execute([$comment,$from_user->getUserId(),$to_user]);
+
+        if($stmt->rowCount() > 0){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

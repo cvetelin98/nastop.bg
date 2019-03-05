@@ -36,10 +36,25 @@ class UserController
 
     public function viewProfile(){
         $cars = UserDao::getUserCars($_SESSION["username"]);
+        $comments = UserDao::getCommentsToUser($_SESSION["username"]);
         if($_SESSION["logged"]) {
             require "view/profile.php";
         }
         else require "view/login.html";
+    }
+
+    public function viewProfileUser(){
+        $username = $_POST["username"];
+        $user = UserDao::getByUsername($username);
+        $user_id = $user->getUserId();
+        $cars = UserDao::getUserCars($username);
+        $comments = UserDao::getCommentsToUser($username);
+        if($_SESSION["logged"]) {
+            require "view/profileUser.php";
+        }
+        else {
+            require "view/profileGuest.php";
+        }
     }
 
     public function viewEdit(){
@@ -220,4 +235,16 @@ class UserController
         $travels = TravelDao::getAll();
         require "view/main.php";
     }
+
+    public function comment(){
+        $comment = $_POST["comment"];
+        $to_user = $_POST["to_user"];
+
+        $result["answer"] = UserDao::sendComment($comment,$to_user);
+        $result["new_comments"] = UserDao::getComments(UserDao::getUsernameById($to_user));
+        $result["from_user"] = $_SESSION["username"];
+
+        echo json_encode($result);
+    }
+
 }

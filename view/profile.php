@@ -63,18 +63,21 @@
         <?php } ?>
     </table>
 
-    <form method="post">
-        <div id="comment">
-            <table>
-                <tr>
-        <td><textarea name="comment" rows="4" cols="35" placeholder="add a comment ?" style="text-align:center;"></textarea></td>
-                </tr>
-                    <tr>
-                    <td><input type="submit" name="sendComment" value="Comment"></td>
-                </tr>
-            </table>
-        </div>
-    </form>
+    <?php if(count($comments) > 0){ ?>
+    <table id="commentShow">
+        <tr>
+            <th>From</th>
+            <th>Comment</th>
+        </tr>
+        <?php foreach($comments as $comment) { ?>
+        <tr>
+            <td><?php echo $comment["from"]; ?></td>
+            <td><?php echo $comment["comment"] ?></td>
+        </tr>
+        <?php } ?>
+
+    </table>
+    <?php } ?>
 
 </main>
 <footer id="mainFooter">
