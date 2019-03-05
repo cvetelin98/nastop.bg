@@ -51,7 +51,7 @@
             </tr>
         <?php }
     }
-    else { ?> <tr><td colspan="5" style="font-size: 30px"> <?php echo "cNo data available"; ?></td></tr> <?php } ?>
+    else { ?> <tr><td colspan="5" style="font-size: 30px"> <?php echo "No data available"; ?></td></tr> <?php } ?>
 </table>
 
 </main>

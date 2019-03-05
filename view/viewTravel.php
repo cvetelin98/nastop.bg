@@ -41,7 +41,7 @@
         </tr>
         <?php if($travel->getFreePlaces() > 0) {?>
         <tr>
-            <td>Free Places: <?php echo $travel->getFreePlaces(); ?></td>
+            <td id="places">Free Places: <?php echo $travel->getFreePlaces(); ?></td>
         </tr>
         <?php }
         else { ?>
@@ -90,9 +90,23 @@
                 })
                 .then(function (myJson) {
                     var answer = myJson.answer;
-                    if(answer == true){
-                        var bookButton = document.getElementById(book);
-                        bookButton.style.color = "red";
+                    var new_places = myJson.new_places;
+                    if(answer === true){
+                        var places = document.getElementById("places");
+                        if(new_places > 0) {
+                            places.innerHTML = "Free Places: " + new_places;
+                        }
+                        else {
+                            places.innerHTML = "Free Places: ☹";
+                            var button = document.getElementById("book");
+                            button.outerText = "";
+
+                            var table = document.getElementById("carTable");
+                            var row = table.insertRow(-1);
+                            var cell = row.insertCell(-1);
+                            cell.innerHTML = "Already Booked";
+                            cell.id = "no_book";
+                        }
                     }
                 })
                 .catch(function (e) {
