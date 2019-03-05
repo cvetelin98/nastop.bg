@@ -7,7 +7,7 @@
 </head>
 <body>
 <header class="navHeader">
-    <h1 class="smallHeader">Nastop.bg</h1>
+    <a href="index.php?target=User&action=viewHome"><h1 class="smallHeader">Nastop.bg</h1></a>
     <div id="nav">
         <ul>
             <li><a href="index.php?target=User&action=viewHome">Home</a></li>
@@ -21,30 +21,47 @@
     </div>
 </header>
 <img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="80%" height="150px;">
-<!--TODO TABLE WITH MY TRAVELS !-->
-<main id="logMain">
+<main id="viewMain">
 
-<!--    <table id="proTable">-->
-<!--        <tr>-->
-<!--            <td>--><?php //$travel["starting_destination"] ?><!-- -> --><?php //$travel["final_destination"] ?><!-- (--><?php //$travel["date"] ?><!--)</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>From: --><?php //$travel["starting_destination"] ?><!--</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>To: --><?php //$travel["final_destination"] ?><!--</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>On: --><?php //$travel["date"] ?><!--</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>Price: --><?php //$travel["price"] ?><!--</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>Free Places: --><?php //$travel["free_places"] ?><!--</td>-->
-<!--        </tr>-->
-<!--    </table>-->
+    <table id="carTable" style="top:65%; height: 50vh;">
+        <tr>
+            <td><?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?> ➟ <?php echo \model\dao\TravelDao::getCityName($travel->getFinalDestination()); ?> (<?php echo $travel->getDateOfTravelling(); ?>)</td>
+        </tr>
+        <tr>
+            <td>From: <?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?></td>
+        </tr>
+        <tr>
+            <td>To: <?php echo \model\dao\TravelDao::getCityName($travel->getFinalDestination()); ?></td>
+        </tr>
+        <tr>
+            <td>On: <?php echo $travel->getDateOfTravelling(); ?></td>
+        </tr>
+        <tr>
+            <td>Price: <?php echo $travel->getPrice(); ?> BGN</td>
+        </tr>
+        <?php if($travel->getFreePlaces() > 0) {?>
+        <tr>
+            <td>Free Places: <?php echo $travel->getFreePlaces(); ?></td>
+        </tr>
+        <?php }
+        else { ?>
+        <tr>
+            <td>Free Places: ☹</td>
+        </tr>
+        <?php } ?>
+        <?php if($travel->getFreePlaces() > 0) {?>
+            <tr>
+                <!--TODO book a place-->
+                <td><button id="book" onclick="book(<?php echo $travel->getTravelId(); ?>)">Book</button></td>
+            </tr>
+        <?php }
+        else { ?>
+        <tr>
+            <td id="no_book">No Free Places!</td>
+        </tr>
+        <?php } ?>
 
+    </table>
 
 </body>
 </html>
@@ -58,9 +75,32 @@
     <img src="https://prevozvalnik.bg/img/bulgaria-footer.png" style="margin-right: 25px">
     <h3 style="font-size: 15px;margin-right:55px;">Copyright 2019 © Nastop.bg</h3>
 </footer>
+
+<script>
+
+    function book(travel_id) {
+            fetch("index.php?target=Travel&action=book",
+                {
+                    method: "POST",
+                    headers: {'Content-type': 'application/x-www-form-urlencoded'},
+                    body: "travel_id=" + travel_id
+                })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (myJson) {
+                    var answer = myJson.answer;
+                    if(answer == true){
+                        var bookButton = document.getElementById(book);
+                        bookButton.style.color = "red";
+                    }
+                })
+                .catch(function (e) {
+                    alert(e.message);
+                })
+    }
+
+</script>
+
 </body>
 </html>
-
-
-
-?>

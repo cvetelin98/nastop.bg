@@ -81,15 +81,17 @@ class UserDao {
     public static function getUserCars($username){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
-        $stmt = $pdo->prepare("SELECT car_id,user_id,car_name,car_image,car_color,car_places FROM cars as c JOIN users as u ON c.user_id = u.user_id 
+        $stmt = $pdo->prepare("SELECT car_id,c.user_id,car_name,car_image,car_color,car_places FROM cars as c JOIN users as u ON c.user_id = u.user_id 
                                         WHERE u.username = ?");
         $stmt->execute([$username]);
+        $cars = [];
         while($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
-            $car = new Car($row->user_id,$row->car_name,$row->car_image,$row->car_color,$row->car_places);
-            $car = $car->setCarId($row->car_id);
             /** @var Car $car */
+            $car = new Car($row->user_id,$row->car_name,$row->car_image,$row->car_color,$row->car_places);
+            $car->setCarId($row->car_id);
             $cars[] = $car;
         }
+        return $cars;
     }
 
 }

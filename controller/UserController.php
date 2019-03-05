@@ -2,12 +2,21 @@
 
 namespace controller;
 
+use model\dao\CarDao;
 use model\dao\TravelDao;
 use model\dao\UserDao;
 use model\User;
 
 class UserController
 {
+
+    public function viewLogin(){
+        require "view/login.html";
+    }
+
+    public function viewRegister(){
+        require "view/register.html";
+    }
 
     public function viewHistory(){
         $travels = TravelDao::getAllByUser($_SESSION["username"]);
@@ -18,6 +27,7 @@ class UserController
     }
 
     public function viewHome(){
+        $travels = TravelDao::getAll();
         if($_SESSION["logged"]) {
             require "view/home.php";
         }
@@ -25,6 +35,7 @@ class UserController
     }
 
     public function viewProfile(){
+        $cars = UserDao::getUserCars($_SESSION["username"]);
         if($_SESSION["logged"]) {
             require "view/profile.php";
         }
@@ -103,10 +114,12 @@ class UserController
             $_SESSION["rating"] = $user->getRating();
             $_SESSION["logged"] = true;
             $validReg = true;
-            header("Location: view/home.php");
+            $travels = TravelDao::getAll();
+//            require "view/home.php";
+            header("Location: index.php?target=User&action=viewHome");
         }
         if (!$validReg) {
-            header("Location: view/register.html");
+            require "view/register.html";
 
         }
     }
@@ -142,13 +155,13 @@ class UserController
                     $_SESSION["gsm"] = $user->getGsm();
                     $_SESSION["logged"] = true;
 //                    echo "Successful login - welcome, " . $user->getUsername();
-                    require "view/home.php";
+                    $travels = TravelDao::getAll();
+//                    require "view/home.php";
+                    header("Location: index.php?target=User&action=viewHome");
                 }
             }
         }
     }
-
-
 
     public function edit()
     {
@@ -201,10 +214,10 @@ class UserController
         else require "view/login.html";
     }
 
-
     public function logout()
     {
         session_destroy();
+        $travels = TravelDao::getAll();
         require "view/main.php";
     }
 }

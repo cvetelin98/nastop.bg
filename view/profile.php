@@ -11,11 +11,11 @@
 </head>
 <body>
 <header class="navHeader">
-    <h1 class="smallHeader">Nastop.bg</h1>
+    <a href="index.php?target=User&action=viewHome"><h1 class="smallHeader">Nastop.bg</h1></a>
     <div id="nav">
         <ul>
             <li><a href="index.php?target=User&action=viewHome">Home</a></li>
-            <li><a class="active" href="../index.php?target=User&action=viewProfile">My Profile</a></li>
+            <li><a class="active" href="index.php?target=User&action=viewProfile">My Profile</a></li>
             <li><a href="index.php?target=User&action=viewHistory">My Shared Travels</a></li>
             <li><a href="index.php?target=User&action=viewEdit">Edit Profile</a></li>
             <li><a href="index.php?target=Car&action=ViewAdd">Add a Car</a></li>
@@ -25,11 +25,10 @@
     </div>
 </header>
 <img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="80%" height="150px;">
-<!--TODO TABLE WITH MY TRAVELS !-->
 <main id="logMain">
 
     <div class="card">
-        <img width="18.3%"  src="<?php echo $_SESSION["user_image"]?>">
+        <img width="30%" height="212vh" src="<?php echo $_SESSION["user_image"]?>">
         <div class="container">
             <h4><b>Name: <?php echo $_SESSION["first_name"]." ".$_SESSION["last_name"]; ?></b></h4>
             <p>Username: <?php echo $_SESSION["username"]; ?></p>
@@ -39,17 +38,30 @@
             <p>Rating: <?php echo $_SESSION["rating"]; ?></p>
         </div>
     </div>
+    <?php if(\model\dao\UserDao::checkUserCars($_SESSION["username"])) {?>
+    <br>
     <h1 style="text-align: left; font-size: 3vw;">Your cars:</h1>
+    <table id="carShow">
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Places</th>
+        </tr>
     <?php foreach($cars as $car) { ?>
-    <div class="card">
-        <img width="35%"  src="../<?php echo $car["car_image"]?>">
-        <div class="container">
-            <h4><b>Name: <?php echo $car["car_name"]; ?></b></h4>
-            <p>Color: <?php echo $car["car_color"]; ?></p>
-            <p>Places: <?php echo $car["car_places"]; ?></p>
-        </div>
-    </div>
+        <tr>
+            <td><img width="65%"  src="<?php echo $car->getCarImage(); ?>"></td>
+            <td><?php echo $car->getCarName(); ?></td>
+            <td><?php echo $car->getCarColor(); ?></td>
+            <td><?php echo $car->getCarPlaces(); ?></td>
+        </tr>
     <?php } ?>
+        <?php }
+        else { ?>
+            <br>
+            <h1 style="text-align: left; font-size: 3vw;">If you have a car,you can add it from <a href="index.php?target=Car&action=ViewAdd" id="addCarLink">here</a> !</h1>
+        <?php } ?>
+    </table>
 
     <form method="post">
         <div id="comment">
@@ -63,10 +75,6 @@
             </table>
         </div>
     </form>
-
-
-</body>
-</html>
 
 </main>
 <footer id="mainFooter">

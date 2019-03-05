@@ -1,11 +1,6 @@
 <?php
 
-session_start();
 
-//TODO Travels DAO and initializing $travels and Cars DAO!
-
-//$cities = TravelDao::getAllCities();
-//$cars = UserDao::getUserCars($_SESSION["username"]);
 
 ?>
 <!DOCTYPE html>
@@ -17,7 +12,7 @@ session_start();
 </head>
 <body>
 <header class="navHeader">
-    <h1 class="smallHeader">Nastop.bg</h1>
+    <a href="index.php?target=User&action=viewHome"><h1 class="smallHeader">Nastop.bg</h1></a>
     <div id="nav">
         <ul>
             <li><a href="index.php?target=User&action=viewHome">Home</a></li>
@@ -29,24 +24,16 @@ session_start();
             <li style="float:right"><a href="index.php?target=User&action=logout">Log out</a></li>
         </ul>
     </div>
-    <img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="100%" height="150px;">
 </header>
+<img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="80%" height="150px;">
 
-<main id="logMain">
-<!--    --><?php //if(UserDao::checkUserCars($_SESSION["username"])){ ?>
-    <form action="../index.php?target=Travel&action=add" method="post" onsubmit="return validation()">
-        <table id="loginTable">
-<!--            <tr>-->
-<!--                <td>Start:</td>-->
-<!--                <td><input type="text" name="starting_destination" id="starting_destination" required></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td>Final:</td>-->
-<!--                <td><input type="text" name="final_destination" id="final_destination" required></td>-->
-<!--            </tr>-->
+<main id="viewMain">
+    <?php if(\model\dao\UserDao::checkUserCars($_SESSION["username"])){ ?>
+    <form action="index.php?target=Travel&action=add" method="post" onsubmit="return validation()">
+        <table id="travelTable">
             <tr>
                 <td>Start:</td>
-                <td><select name="starting_destination" required>
+                <td><select name="starting_destination" id="starting_destination" required>
                         <?php foreach ($cities as $city) {?>
                         <option value="<?php echo $city ?>"><?php echo $city ?></option>
                         <?php } ?>
@@ -54,7 +41,7 @@ session_start();
             </tr>
             <tr>
                 <td>Final:</td>
-                <td><select name="final_destination" required>
+                <td><select name="final_destination" id="final_destination" required>
                         <?php foreach ($cities as $city) {?>
                             <option value="<?php echo $city ?>"><?php echo $city ?></option>
                         <?php } ?>
@@ -76,7 +63,7 @@ session_start();
                 <td>Car:</td>
                 <td><select name="car" required>
                         <?php foreach ($cars as $car) {?>
-                            <option value="<?php echo $car["car_id"] ?>"><?php echo $car["car_name"] ?></option>
+                            <option value="<?php echo $car->getCarId(); ?>"><?php echo $car->getCarName(); ?></option>
                         <?php } ?>
                     </select></td>
             </tr>
@@ -85,10 +72,12 @@ session_start();
             </tr>
         </table>
     </form>
-<!--    --><?php //}
-//    else { ?>
-<!--    <h1>You don't have car for sharing ! Sorry :( </h1>-->
-<!--    --><?php //} ?>
+    <?php }
+    else { ?>
+        <div id="noCars">
+    <h1 style="font-size: 3vw;";>You don't have car for sharing ! Sorry :( </h1>
+        </div>
+    <?php } ?>
 </main>
 <footer id="mainFooter">
     <h3 style="font-size: 30px;float:left;margin-left:55px;">You can always go nastop!</h3>

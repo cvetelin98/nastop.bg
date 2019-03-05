@@ -17,5 +17,15 @@ class CarDao{
         $car->setCarId($pdo->lastInsertId());
     }
 
+    public static function getCarImage($car_id){
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+
+        $stmt = $pdo->prepare("SELECT car_image FROM cars WHERE car_id = ?");
+        $stmt->execute(array($car_id));
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return $row["car_image"];
+    }
 
 }

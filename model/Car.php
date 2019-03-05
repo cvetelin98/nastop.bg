@@ -73,7 +73,7 @@ class Car extends JsonObject{
     /**
      * @param mixed $car_id
      */
-    public function setCarId($car_id)
+    public function setCarId(int $car_id)
     {
         $this->car_id = $car_id;
     }

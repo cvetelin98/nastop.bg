@@ -92,23 +92,41 @@ main {
 
 #regMain {
     width: 80%;
-    height: 79vh;
+    height: 80vh;
     background-color: #2dcecb;
     margin-left: 10%;
 }
 
 #logMain {
     width: 80%;
-    height: 83vh;
+    height: 120vh;
+    background-color: #2dcecb;
+    margin-left: 10%;
+}
+
+#editMain {
+    width: 80%;
+    height: 80vh;
     background-color: #2dcecb;
     margin-left: 10%;
 }
 
 #regTable {
     text-align: center;
-    width: 70%;
-    font-size: 2vw;
+    width: 50%;
+    height: 20vh;
+    background-color: #f2a22b;
+    border-radius: 3%;
     margin: auto;
+    font-size: 1.5vw;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+#regTable td,th,tr {
+    text-align: center;
 }
 
 #regButton {
@@ -128,6 +146,7 @@ footer {
     width: 20%;
     height: 20vh;
     background-color: #f2a22b;
+    border-radius: 3%;
     margin: auto;
     font-size: 1.5vw;
     position: absolute;
@@ -135,6 +154,10 @@ footer {
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+}
+
+#loginTable td,th,tr {
+     text-align: center;
 }
 
 #mainHeader {
@@ -259,6 +282,7 @@ li a:hover:not(.active) {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 5px;
+    background-color: #f2a22b;
 }
 
 .card img {
@@ -272,4 +296,193 @@ li a:hover:not(.active) {
 
 img {
     border-radius: 5px 5px 0 0;
+}
+
+#noCars {
+    height: 60vh;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+#showTable {
+    font-size: 1.5vw;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#showTable th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+#showTable th {
+    text-align: center;
+    background-color: #f2a22b;
+    color: white;
+}
+
+#editTable {
+    text-align: center;
+    width: 50%;
+    height: 20vh;
+    background-color: #f2a22b;
+    border-radius: 3%;
+    margin: auto;
+    font-size: 1.5vw;
+    position: absolute;
+    top: 73%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+#editTable td,th,tr {
+    text-align: center;
+}
+
+#carTable {
+    text-align: center;
+    width: 20%;
+    height: 20vh;
+    background-color: #f2a22b;
+    border-radius: 3%;
+    margin: auto;
+    font-size: 1.5vw;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#carTable td,th,tr {
+    text-align: center;
+}
+
+#travelTable {
+    text-align: center;
+    width: 20%;
+    height: 20vh;
+    background-color: #f2a22b;
+    border-radius: 3%;
+    margin: auto;
+    font-size: 1.5vw;
+    position: absolute;
+    top: 62%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#travelTable td,th,tr {
+    text-align: center;
+}
+
+#carShow {
+    font-size: 2.5vw;
+    /*margin-left: -12.5%;*/
+    margin: auto;
+    width: 85%;
+    /*border: 3px solid black;*/
+    padding: 10px;
+    border-collapse: separate;
+    border-spacing: 50px 0;
+}
+
+#carShow tr, td,th {
+    text-align: center;
+    padding: 8px;
+}
+
+#carShow th {
+    color: black;
+    font-weight: bold;
+    font-size: 3vw;
+}
+
+#carShow td {
+    padding: 10px 0;
+}
+
+#infoButton {
+    border-radius: 40%;
+    border: 2px solid black;
+
+    display: inline-block;
+    padding: 5px 35px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    font-weight: bold;
+    background-color: dodgerblue;
+    box-shadow: 0 9px #999;
+}
+
+#infoButton:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#infoButton:active {
+    background-color: #f2a22b;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+#addCarLink {
+    text-decoration: underline;
+}
+
+#addCarLink:hover {
+    color: blue;
+}
+
+#viewMain {
+    width: 80%;
+    height: 85vh;
+    background-color: #2dcecb;
+    margin-left: 10%;
+}
+
+#book {
+    border-radius: 20%;
+    border: 3px solid black;
+
+    display: inline-block;
+    padding: 1px 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    font-weight: bold;
+    background-color: dodgerblue;
+    box-shadow: 0 9px #999;
+}
+
+#book:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#book:active {
+    background-color: #f2a22b;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+#no_book {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    border-radius: 20%;
+
+    display: inline-block;
+    padding: 1px 15px;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    font-weight: bold;
+    background-color: dodgerblue;
+    box-shadow: 0 9px #999;
 }

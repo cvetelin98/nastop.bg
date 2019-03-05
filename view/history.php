@@ -12,7 +12,7 @@
 </head>
 <body">
 <header class="navHeader">
-    <h1 class="smallHeader">Nastop.bg</h1>
+    <a href="index.php?target=User&action=viewHome"><h1 class="smallHeader">Nastop.bg</h1></a>
     <div id="nav">
         <ul>
             <li><a href="index.php?target=User&action=viewHome">Home</a></li>
@@ -26,24 +26,30 @@
     </div>
 </header>
 <img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="80%" height="150px;">
-<!--TODO TABLE WITH MY TRAVELS !-->
 <main id="logMain">
 
     <br>
-    <p style="font-size: 30px;">&nbsp Selected Travels for sharing:</p>
-    <table>
+    <p style="font-size: 30px;">&nbsp My Past Travels:</p>
+    <table id="showTable">
+        <tr>
+            <th>Starting Point</th>
+            <th>Final Point</th>
+            <th>Date</th>
+            <th>Car</th>
+            <th>Price</th>
+        </tr>
         <?php if(count($travels) > 0) {
             foreach ($travels as $travel) { ?>
                 <tr>
-                    <td><?php echo $travel["starting_destination"] ?></td>
-                    <td><?php echo $travel["final_destination"] ?></td>
-                    <td><?php echo $travel["date_of_travelling"] ?></td>
-                    <td><?php echo $travel["price"] ?></td>
-                    <td><?php echo $travel["description"] ?></td>
+                    <td><?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?></td>
+                    <td><?php echo \model\dao\TravelDao::getCityName($travel->getFinalDestination()); ?></td>
+                    <td><?php echo $travel->getDateOfTravelling(); ?></td>
+                    <td><img src="<?php echo \model\dao\CarDao::getCarImage($travel->getCarId()) ?>" width="15%"></td>
+                    <td><?php echo $travel->getPrice(); ?></td>
                 </tr>
             <?php }
         }
-        else { ?> <tr><td colspan="5" style="font-size: 30px"> <?php echo "No data available"; ?></td></tr> <?php } ?>
+        else { ?> <tr><td colspan="5" style="font-size: 30px"> <?php echo "&nbspNo data available"; ?></td></tr> <?php } ?>
     </table>
 
 </main>

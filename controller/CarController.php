@@ -50,7 +50,7 @@ class CarController{
             $car = new Car($user_id, $brand, $image_url, $color, $places);
 
             CarDao::add($car);
-            require "view/profile.php";
+            header("Location: index.php?target=User&action=viewProfile");
         }
         else require "view/login.html";
     }

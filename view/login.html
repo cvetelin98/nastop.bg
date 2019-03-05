@@ -6,11 +6,22 @@
     <link rel="stylesheet" href="Style/style.css">
 </head>
 <body>
-<header id="logHeader">
-    <h1>Welcome</h1>
+<!--<header id="logHeader">-->
+    <!--<h1>Welcome</h1>-->
+<!--</header>-->
+<header id="mainHeader">
+    <a href="index.php"><h1 id="mainName">Nastop.bg</h1></a>
+    <div id="mainLinks">
+        <a href="index.php?target=User&action=viewLogin">Login</a>
+        |
+        <a href="index.php?target=User&action=viewRegister">Register</a>
+        <a href="index.php?target=User&action=viewRegister"><span id="addTravel">
+            &nbsp+ Wanna share a travel?
+        </span></a>
+    </div>
 </header>
 <main id="logMain">
-    <form action="../index.php?target=User&action=login" method="post">
+    <form action="index.php?target=User&action=login" method="post">
         <table id="loginTable">
             <tr>
                 <td>Username:</td>
