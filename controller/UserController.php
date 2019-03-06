@@ -62,16 +62,21 @@ class UserController
     }
 
     public function viewProfileUser(){
-        $username = $_POST["username"];
-        $user = UserDao::getByUsername($username);
-        $user_id = $user->getUserId();
-        $cars = UserDao::getUserCars($username);
-        $comments = UserDao::getCommentsToUser($username);
-        if($_SESSION["logged"]) {
-            require "view/profileUser.php";
+        if(!isset($_POST["username"])){
+            require "view/pageNotFound.html";
         }
-        else {
-            require "view/profileGuest.php";
+        else{
+            $username = $_POST["username"];
+            $user = UserDao::getByUsername($username);
+            $user_id = $user->getUserId();
+            $cars = UserDao::getUserCars($username);
+            $comments = UserDao::getCommentsToUser($username);
+            if($_SESSION["logged"]) {
+                require "view/profileUser.php";
+            }
+            else {
+                require "view/profileGuest.php";
+            }
         }
     }
 
