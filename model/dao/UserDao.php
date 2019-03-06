@@ -162,5 +162,85 @@ class UserDao {
         return $user_travels;
     }
 
+    public static function addRate($from_user, $to_user, $rate){
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+        try {
+            $pdo->beginTransaction();
+            $queryRate = "INSERT INTO rates(from_id, to_id, vote) VALUES (?, ?, ?)";
+            $stmt = $pdo->prepare($queryRate);
+            $stmt->execute([$from_user, $to_user, $rate]);
+
+            $querySum = "SELECT SUM(vote) AS sum FROM rates WHERE to_id = ? ";
+            $stmt = $pdo->prepare($querySum);
+            $stmt->execute([$to_user]);
+
+            if($stmt->rowCount() != 0){
+                $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+                $sum = $row["sum"];
+
+                $queryVoted = "UPDATE users SET total_voted = total_voted + 1 WHERE user_id = ?";
+                $stmt = $pdo->prepare($queryVoted);
+                $stmt->execute([$to_user]);
+
+                $query = "SELECT total_voted FROM users WHERE user_id = ?";
+                $stmt = $pdo->prepare($query);
+                $stmt->execute([$to_user]);
+
+                $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+                $total_voted = $row["total_voted"];
+
+                if ($total_voted !== 0){
+                    $rate = $sum/$total_voted;
+                }
+
+                $queryUpdate = "UPDATE users SET rating = ROUND(?, 2) WHERE user_id = ?";
+                $stmt = $pdo->prepare($queryUpdate);
+                $stmt->execute([$rate, $to_user]);
+
+                $pdo->commit();
+                return true;
+
+            }
+
+        }catch(\PDOException $e){
+            echo "Error -> ".$e->getMessage();
+            $pdo->rollBack();
+            return false;
+        }
+
+    }
+
+    public static function getRatingById($user_id){
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+
+        $query = "SELECT rating FROM users WHERE user_id = ?";
+        $stmt= $pdo->prepare($query);
+        $stmt->execute([$user_id]);
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        $rating = $row["rating"];
+        return $rating;
+    }
+
+    public static function getVoteById($to_user, $from_user){
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+
+        $query = "SELECT vote FROM rates WHERE from_id = ? AND to_id = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$from_user, $to_user]);
+        $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if($stmt->rowCount() != 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+
 }
 

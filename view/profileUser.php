@@ -36,7 +36,15 @@
             <p>Age: <?php echo $user->getAge(); ?></p>
             <p>GSM: <?php echo $user->getGsm(); ?></p>
             <p>Gender: <?php echo $user->getGender(); ?></p>
-            <p>Rating: <?php echo $user->getRating(); ?></p>
+            <div>
+                <p>Rating:<?php
+                    for($i = 1 ; $i <= 5 ; $i++){
+                        echo "<button id='". $i."' onclick='rate(".$user_id.",".$i.")' value='".$i."'>".$i."</button>";
+                    }
+                    ?>
+                <div id="rating"><?php echo $user_rating ?></div>
+                </p>
+            </div>
         </div>
     </div>
     <?php if(\model\dao\UserDao::checkUserCars($user->getUsername())) {?>
@@ -145,6 +153,34 @@
         alert(e.message);
     })
     }
+
+    function rate(user_id, rate_value){
+        fetch("index.php?target=User&action=rateUser",
+            {
+                method: "POST",
+                headers: {'Content-type': 'application/x-www-form-urlencoded'},
+                body: "user_id=" + user_id + "&rate=" + rate_value
+            })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                var answer = myJson.answer;
+                var new_rating = myJson.new_rating;
+                var rating = document.getElementById('rating');
+
+                if(answer === true){
+                    rating.innerHTML = new_rating;
+                    }
+                    else {
+                        alert("You already voted!");
+                    }
+                })
+            .catch(function (e) {
+                alert(e.message);
+            })
+    }
+
 
 </script>
 
