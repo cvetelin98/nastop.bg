@@ -19,8 +19,8 @@ class UserController
     }
 
     public function viewHistory(){
-        $my_travels = TravelDao::getAllByUser($_SESSION["username"]);
-//        $guest_travels = TravelDao::getShared($_SESSION["username"]);
+        $my_travels = TravelDao::getAllByUser($_SESSION["user_id"]);
+        $guest_travels = TravelDao::getShared($_SESSION["user_id"]);
         if($_SESSION["logged"]) {
             require "view/history.php";
         }

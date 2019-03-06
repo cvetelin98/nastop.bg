@@ -31,7 +31,7 @@
             <td>(<?php echo $travel->getDateOfTravelling(); ?>)</td>
         </tr>
         <tr>
-            <td>By: <a href="index.php?target=User&action=viewProfileUser"><?php echo \model\dao\UserDao::getUsernameById($travel->getUserId()); ?></a></td>
+            <td>By: <?php echo \model\dao\UserDao::getUsernameById($travel->getUserId()); ?></td>
             <td><form method="post" action="index.php?target=User&action=viewProfileUser">
                     <input type=hidden name="username" value="<?php echo \model\dao\UserDao::getUsernameById($travel->getUserId()); ?>">
                     <input type="submit" value="See Profile" name="view_profile">
@@ -59,13 +59,15 @@
             <td>Free Places: ☹</td>
         </tr>
         <?php } ?>
-        <?php if($_SESSION["username"] ==  \model\dao\UserDao::getUsernameById($travel->getUserId())){
-            ?>
+        <?php if($_SESSION["user_id"] ==  $travel->getUserId()){ ?>
             <td id="no_book">You are the driver!</td>
-        <?php } else {?>
+        <?php }
+        else if (in_array($travel->getTravelId(),\model\dao\UserDao::getUserTravels($_SESSION["user_id"]))){ ?>
+            <td id="no_book">Already Booked!</td>
+            <?php }
+            else { ?>
             <?php if($travel->getFreePlaces() > 0) {?>
                 <tr>
-                    <!--TODO book a place-->
                     <td><button id="book" onclick="book(<?php echo $travel->getTravelId(); ?>)">Book</button></td>
                 </tr>
             <?php }
@@ -108,18 +110,24 @@
                     var new_places = myJson.new_places;
                     if(answer === true){
                         var places = document.getElementById("places");
+
+                        var button = document.getElementById("book");
+                        var table = document.getElementById("carTable");
+                        var row = table.insertRow(-1);
+                        var cell = row.insertCell(-1);
+
                         if(new_places > 0) {
                             places.innerHTML = "Free Places: " + new_places;
+                            button.outerText = "";
+
+                            cell.innerHTML = "Already Booked";
+                            cell.id = "no_book";
 
                         }
                         else {
                             places.innerHTML = "Free Places: ☹";
-                            var button = document.getElementById("book");
                             button.outerText = "";
 
-                            var table = document.getElementById("carTable");
-                            var row = table.insertRow(-1);
-                            var cell = row.insertCell(-1);
                             cell.innerHTML = "Already Booked";
                             cell.id = "no_book";
                         }

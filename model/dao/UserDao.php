@@ -150,5 +150,17 @@ class UserDao {
         }
     }
 
+    public static function getUserTravels($user_id){
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+        $stmt = $pdo->prepare("SELECT t.travel_id FROM users as u JOIN history as h ON h.user_id = u.user_id JOIN travels as t ON h.travel_id = t.travel_id WHERE t.user_id <> u.user_id AND u.user_id = ?");
+        $stmt->execute([$user_id]);
+        $user_travels = [];
+        while($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
+            $user_travels[] = $row->travel_id;
+        }
+        return $user_travels;
+    }
+
 }
 

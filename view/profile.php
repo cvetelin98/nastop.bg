@@ -71,7 +71,7 @@
         </tr>
         <?php foreach($comments as $comment) { ?>
         <tr>
-            <td><?php echo $comment["from"]; ?></td>
+            <td><?php echo $comment["from_user"]; ?></td>
             <td><?php echo $comment["comment"] ?></td>
         </tr>
         <?php } ?>
