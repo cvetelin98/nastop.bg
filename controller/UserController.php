@@ -132,7 +132,7 @@ class UserController
         if ($userDB != null) {
             throw new \Exception("User already exists!");
         } else {
-            if ($password !== $password2 && strlen($password) < 6) {
+            if ($password !== $password2 || strlen($password) < 6) {
                 throw new \Exception("Password mismatch");
             }
             if ($age < 16 && !(is_int($age))) {
@@ -140,6 +140,9 @@ class UserController
             }
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 throw new \Exception("Invalid data - email");
+            }
+            if(strlen($GSM) < 10){
+                throw new \Exception("Invalid data - gsm");
             }
             UserDao::addUser($user);
             self::addInSession($user);
