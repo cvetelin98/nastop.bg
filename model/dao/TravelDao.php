@@ -70,18 +70,36 @@ class TravelDao {
     public static function getAllByUser($username){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
-        $stmt = $pdo->prepare("SELECT travel_id,car_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels as t 
+        $stmt = $pdo->prepare("SELECT travel_id,t.user_id,car_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels as t 
                                           JOIN users as u ON t.user_id = u.user_id WHERE u.username = ?");
         $stmt->execute(array($username));
         $travels = [];
         while($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
             $travel = new Travel($row->starting_destination,$row->final_destination,$row->date_of_travelling,$row->free_places,$row->price);
             $travel->setTravelId($row->travel_id);
+            $travel->setUserId($row->user_id);
             $travel->setCarId($row->car_id);
             $travels[] = $travel;
         }
         return $travels;
     }
+
+//    public static function getShared($username){
+//        /** @var \PDO $pdo */
+//        $pdo = $GLOBALS["PDO"];
+//        $stmt = $pdo->prepare("SELECT travel_id,t.user_id,car_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels as t
+//                                          JOIN users as u ON t.user_id = u.user_id WHERE u.username = ?");
+//        $stmt->execute(array($username));
+//        $travels = [];
+//        while($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
+//            $travel = new Travel($row->starting_destination,$row->final_destination,$row->date_of_travelling,$row->free_places,$row->price);
+//            $travel->setTravelId($row->travel_id);
+//            $travel->setUserId($row->user_id);
+//            $travel->setCarId($row->car_id);
+//            $travels[] = $travel;
+//        }
+//        return $travels;
+//    }
 
     public static function getAllCities(){
         /** @var \PDO $pdo */
@@ -101,13 +119,14 @@ class TravelDao {
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
 
-        $stmt = $pdo->prepare("SELECT car_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels WHERE travel_id = ?");
+        $stmt = $pdo->prepare("SELECT user_id,car_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels WHERE travel_id = ?");
         $stmt->execute(array($travel_id));
         $row = $stmt->fetch(\PDO::FETCH_OBJ);
 
         /** @var Travel $travel */
         $travel = new Travel($row->starting_destination,$row->final_destination,$row->date_of_travelling,$row->free_places,$row->price);
         $travel->setTravelId($travel_id);
+        $travel->setUserId($row->user_id);
         $travel->setCarId($row->car_id);
 
         return $travel;
@@ -116,14 +135,22 @@ class TravelDao {
     public function bookTravel($travel_id){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
-        $stmt = $pdo->prepare("UPDATE travels SET free_places = free_places - 1 WHERE travel_id = ?");
-        $stmt->execute([$travel_id]);
+        try {
+            $pdo->beginTransaction();
+            $stmt = $pdo->prepare("UPDATE travels SET free_places = free_places - 1 WHERE travel_id = ?");
+            $stmt->execute([$travel_id]);
+            $stmt = $pdo->prepare("INSERT INTO history (user_id,travel_id) VALUES (?,?);");
+            $stmt->execute([$_SESSION["user_id"],$travel_id]);
 
-        if($stmt->rowCount() > 0){
+            $pdo->commit();
             return true;
-        }else{
-            return false;
         }
+
+        catch (\PDOException $e){
+                echo "Problem - " . $e->getMessage();
+                $pdo->rollBack();
+                return false;
+            }
     }
 
     public static function getPlaces($travel_id)

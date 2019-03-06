@@ -25,7 +25,17 @@
 
     <table id="carTable" style="top:65%; height: 50vh;">
         <tr>
-            <td><?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?> ➟ <?php echo \model\dao\TravelDao::getCityName($travel->getFinalDestination()); ?> (<?php echo $travel->getDateOfTravelling(); ?>)</td>
+            <td><?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?> ➟ <?php echo \model\dao\TravelDao::getCityName($travel->getFinalDestination()); ?></td>
+        </tr>
+        <tr>
+            <td>(<?php echo $travel->getDateOfTravelling(); ?>)</td>
+        </tr>
+        <tr>
+            <td>By: <a href="index.php?target=User&action=viewProfileUser"><?php echo \model\dao\UserDao::getUsernameById($travel->getUserId()); ?></a></td>
+            <td><form method="post" action="index.php?target=User&action=viewProfileUser">
+                    <input type=hidden name="username" value="<?php echo \model\dao\UserDao::getUsernameById($travel->getUserId()); ?>">
+                    <input type="submit" value="See Profile" name="view_profile">
+                </form></td>
         </tr>
         <tr>
             <td>From: <?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?></td>
@@ -49,16 +59,21 @@
             <td>Free Places: ☹</td>
         </tr>
         <?php } ?>
-        <?php if($travel->getFreePlaces() > 0) {?>
+        <?php if($_SESSION["username"] ==  \model\dao\UserDao::getUsernameById($travel->getUserId())){
+            ?>
+            <td id="no_book">You are the driver!</td>
+        <?php } else {?>
+            <?php if($travel->getFreePlaces() > 0) {?>
+                <tr>
+                    <!--TODO book a place-->
+                    <td><button id="book" onclick="book(<?php echo $travel->getTravelId(); ?>)">Book</button></td>
+                </tr>
+            <?php }
+            else { ?>
             <tr>
-                <!--TODO book a place-->
-                <td><button id="book" onclick="book(<?php echo $travel->getTravelId(); ?>)">Book</button></td>
+                <td id="no_book">No Free Places!</td>
             </tr>
-        <?php }
-        else { ?>
-        <tr>
-            <td id="no_book">No Free Places!</td>
-        </tr>
+            <?php } ?>
         <?php } ?>
 
     </table>
@@ -95,6 +110,7 @@
                         var places = document.getElementById("places");
                         if(new_places > 0) {
                             places.innerHTML = "Free Places: " + new_places;
+
                         }
                         else {
                             places.innerHTML = "Free Places: ☹";
