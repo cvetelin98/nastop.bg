@@ -10,6 +10,23 @@ use model\User;
 class UserController
 {
 
+    public function addInSession(User $user){
+
+        $_SESSION["username"] = $user->getUsername();
+        $_SESSION["user_id"] = $user->getUserId();
+        $_SESSION["first_name"] = $user->getFirstName();
+        $_SESSION["last_name"] = $user->getLastName();
+        $_SESSION["gender"] = $user->getGender();
+        $_SESSION["age"] = $user->getAge();
+        $_SESSION["gsm"] = $user->getGsm();
+        $_SESSION["user_image"] = $user->getUserImage();
+        $_SESSION["total_voted"] = $user->getTotalVoted();
+        $_SESSION["rating"] = $user->getRating();
+        $_SESSION["logged"] = true;
+        $validReg = true;
+    }
+
+
     public function viewLogin(){
         require "view/login.html";
     }
@@ -118,18 +135,8 @@ class UserController
                 throw new \Exception("Invalid data - email");
             }
             UserDao::addUser($user);
-            $_SESSION["username"] = $user->getUsername();
-            $_SESSION["user_id"] = $user->getUserId();
-            $_SESSION["first_name"] = $user->getFirstName();
-            $_SESSION["last_name"] = $user->getLastName();
-            $_SESSION["gender"] = $user->getGender();
-            $_SESSION["age"] = $user->getAge();
-            $_SESSION["gsm"] = $user->getGsm();
-            $_SESSION["user_image"] = $user->getUserImage();
-            $_SESSION["total_voted"] = $user->getTotalVoted();
-            $_SESSION["rating"] = $user->getRating();
-            $_SESSION["logged"] = true;
-            $validReg = true;
+           self::addInSession($user);
+
             $travels = TravelDao::getAll();
 //            require "view/home.php";
             header("Location: index.php?target=User&action=viewHome");
@@ -159,17 +166,7 @@ class UserController
                     die();
                     //include "../View/login.html";
                 } else {
-                    $_SESSION["username"] = $user->getUsername();
-                    $_SESSION["user_id"] = $user->getUserId();
-                    $_SESSION["first_name"] = $user->getFirstName();
-                    $_SESSION["last_name"] = $user->getLastName();
-                    $_SESSION["gender"] = $user->getGender();
-                    $_SESSION["age"] = $user->getAge();
-                    $_SESSION["user_image"] = $user->getUserImage();
-                    $_SESSION["total_voted"] = $user->getTotalVoted();
-                    $_SESSION["rating"] = $user->getRating();
-                    $_SESSION["gsm"] = $user->getGsm();
-                    $_SESSION["logged"] = true;
+                     self::addInSession($user);
 //                    echo "Successful login - welcome, " . $user->getUsername();
                     $travels = TravelDao::getAll();
 //                    require "view/home.php";
@@ -225,7 +222,7 @@ class UserController
             UserDao::updateUser($user);
             $_SESSION["gsm"] = $user->getGsm();
             $_SESSION["user_image"] = $user->getUserImage();
-            require "view/profile.php";
+            header("Location: index.php?target=User&action=viewProfile");
         }
         else require "view/login.html";
     }

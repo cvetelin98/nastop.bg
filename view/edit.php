@@ -29,7 +29,7 @@
 <div>
     <h1 style="font-size: 5vh; text-align: center;">Edit your profile:</h1>
     <br>
-    <form action="../index.php?target=User&action=edit" method="post" enctype="multipart/form-data">
+    <form action="index.php?target=User&action=edit" method="post" enctype="multipart/form-data">
         <table id="editTable">
             <tr>
                 <td>GSM:</td>
