@@ -32,7 +32,8 @@
             <p>Age: <?php echo $user->getAge(); ?></p>
             <p>GSM: <?php echo $user->getGsm(); ?></p>
             <p>Gender: <?php echo $user->getGender(); ?></p>
-            <p>Rating: <?php echo $user->getRating(); ?></p>
+            <p>Rating: <?php if($user->getRating() > 1) { echo $user->getRating(); }
+            else { echo "Not Voted Yet!"; }?></p>
         </div>
     </div>
     <?php if(\model\dao\UserDao::checkUserCars($user->getUsername())) {?>
@@ -68,7 +69,7 @@
             </tr>
             <?php foreach($comments as $comment) { ?>
                 <tr>
-                    <td><?php echo $comment["from"]; ?></td>
+                    <td><?php echo $comment["from_user"]; ?></td>
                     <td><?php echo $comment["comment"] ?></td>
                 </tr>
             <?php } ?>

@@ -19,12 +19,13 @@ class UserDao {
     public static function getByUsername($username){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
-        $stmt = $pdo->prepare("SELECT user_id,first_name,last_name,gender,age,email,password,GSM,user_image
+        $stmt = $pdo->prepare("SELECT user_id,first_name,last_name,gender,age,email,password,GSM,user_image,rating
                                         FROM users WHERE username = ?");
         $stmt->execute([$username]);
         if($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
             $user = new User($username,$row->first_name,$row->last_name,$row->gender,$row->age,$row->email,$row->password,$row->GSM,$row->user_image);
             $user->setUserId($row->user_id);
+            $user->setRating($row->rating);
             return $user;
         }
         else{

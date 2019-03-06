@@ -42,7 +42,11 @@
                         echo "<button id='". $i."' onclick='rate(".$user_id.",".$i.")' value='".$i."'>".$i."</button>";
                     }
                     ?>
+                <?php if($user_rating >= 1){ ?>
                 <div id="rating"><?php echo $user_rating ?></div>
+                <?php } else {?>
+                <div id="rating">Not Voted Yet!</div>
+                <?php } ?>
                 </p>
             </div>
         </div>
