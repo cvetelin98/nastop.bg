@@ -10,7 +10,8 @@ use model\User;
 class UserController
 {
 
-    public function addInSession(User $user){
+    public function addInSession(User $user)
+    {
 
         $_SESSION["username"] = $user->getUsername();
         $_SESSION["user_id"] = $user->getUserId();
@@ -27,64 +28,65 @@ class UserController
     }
 
 
-    public function viewLogin(){
+    public function viewLogin()
+    {
         require "view/login.html";
     }
 
-    public function viewRegister(){
+    public function viewRegister()
+    {
         require "view/register.html";
     }
 
-    public function viewHistory(){
+    public function viewHistory()
+    {
         $my_travels = TravelDao::getAllByUser($_SESSION["user_id"]);
         $guest_travels = TravelDao::getShared($_SESSION["user_id"]);
-        if($_SESSION["logged"]) {
+        if ($_SESSION["logged"]) {
             require "view/history.php";
-        }
-        else require "view/login.html";
+        } else require "view/login.html";
     }
 
-    public function viewHome(){
+    public function viewHome()
+    {
         $travels = TravelDao::getAll();
-        if($_SESSION["logged"]) {
+        if ($_SESSION["logged"]) {
             require "view/home.php";
-        }
-        else require "view/login.html";
+        } else require "view/login.html";
     }
 
-    public function viewProfile(){
+    public function viewProfile()
+    {
         $cars = UserDao::getUserCars($_SESSION["username"]);
         $comments = UserDao::getCommentsToUser($_SESSION["username"]);
-        if($_SESSION["logged"]) {
+        if ($_SESSION["logged"]) {
             require "view/profile.php";
-        }
-        else require "view/login.html";
+        } else require "view/login.html";
     }
 
-    public function viewProfileUser(){
-        if(!isset($_POST["username"])){
+    public function viewProfileUser()
+    {
+        if (!isset($_POST["username"])) {
             require "view/pageNotFound.html";
-        }
-        else{
+        } else {
             $username = $_POST["username"];
             $user = UserDao::getByUsername($username);
             $user_id = $user->getUserId();
             $cars = UserDao::getUserCars($username);
             $comments = UserDao::getCommentsToUser($username);
-            if($_SESSION["logged"]) {
+            if ($_SESSION["logged"]) {
                 require "view/profileUser.php";
-            }
-            else {
+            } else {
                 require "view/profileGuest.php";
             }
         }
     }
 
-    public function viewEdit(){
-        if($_SESSION["logged"]) {
+    public function viewEdit()
+    {
+        if ($_SESSION["logged"]) {
             require "view/edit.php";
-        }
-        else require "view/login.html";
+        } else require "view/login.html";
     }
 
     public function register()
@@ -136,11 +138,11 @@ class UserController
             if ($age < 16 && !(is_int($age))) {
                 throw new \Exception("Invalid data - age");
             }
-            if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 throw new \Exception("Invalid data - email");
             }
             UserDao::addUser($user);
-           self::addInSession($user);
+            self::addInSession($user);
 
             $travels = TravelDao::getAll();
 //            require "view/home.php";
@@ -155,35 +157,41 @@ class UserController
     public function login()
     {
         if (isset($_POST["logButton"])) {
-            $username = $_POST["username"];
-            $password = $_POST["password"];
-            /** @var User $user */
-            $user = UserDao::getByUsername($username);
-            if ($user == null) {
-                echo "KYDE SME? NQMA POTREBITEL";
+            if (!empty($_POST["username"] && !empty($_POST["password"]))) {
+                $username = $_POST["username"];
+                $password = $_POST["password"];
+
+
+                /** @var User $user */
+                $user = UserDao::getByUsername($username);
+                if ($user == null) {
+                    echo "KYDE SME? NQMA POTREBITEL";
 //                header("HTTP/1.1 401 Wrong Credentials");
-                die();
-                //include "../View/register.html";
-            } else {
-                if (!password_verify($password, $user->getPassword())) {
-                    echo "KYDE SME? GRESHNA PAROLA";
-//                    header("HTTP/1.1 401 Wrong Credentials");
                     die();
-                    //include "../View/login.html";
+                    //include "../View/register.html";
                 } else {
-                     self::addInSession($user);
+                    if (!password_verify($password, $user->getPassword())) {
+                        echo "KYDE SME? GRESHNA PAROLA";
+//                    header("HTTP/1.1 401 Wrong Credentials");
+                        die();
+                        //include "../View/login.html";
+                    } else {
+                        self::addInSession($user);
 //                    echo "Successful login - welcome, " . $user->getUsername();
-                    $travels = TravelDao::getAll();
+                        $travels = TravelDao::getAll();
 //                    require "view/home.php";
-                    header("Location: index.php?target=User&action=viewHome");
+                        header("Location: index.php?target=User&action=viewHome");
+                    }
                 }
             }
+        } else {
+            require "view/login.html";
         }
     }
 
     public function edit()
     {
-        if($_SESSION["logged"]) {
+        if ($_SESSION["logged"]) {
             /** @var User $user */
             $user = UserDao::getByUsername($_SESSION["username"]);
             if (isset($_POST["GSM"])) {
@@ -228,8 +236,7 @@ class UserController
             $_SESSION["gsm"] = $user->getGsm();
             $_SESSION["user_image"] = $user->getUserImage();
             header("Location: index.php?target=User&action=viewProfile");
-        }
-        else require "view/login.html";
+        } else require "view/login.html";
     }
 
     public function logout()
@@ -239,15 +246,22 @@ class UserController
         require "view/main.php";
     }
 
-    public function comment(){
-        $comment = $_POST["comment"];
-        $to_user = $_POST["to_user"];
+    public function comment()
+    {
+        if (isset($_POST["comment"], $_POST["to_user"])) {
+            $comment = $_POST["comment"];
+            $to_user = $_POST["to_user"];
 
-        $result["answer"] = UserDao::sendComment($comment,$to_user);
-        $result["new_comments"] = UserDao::getComments(UserDao::getUsernameById($to_user));
-        $result["from_user"] = $_SESSION["username"];
-
+            if (empty($comment) && empty($to_user)) {
+                $result["answer"] = UserDao::sendComment($comment, $to_user);
+                $result["new_comments"] = UserDao::getComments(UserDao::getUsernameById($to_user));
+                $result["from_user"] = $_SESSION["username"];
+            } else {
+                $result["answer"] = false;
+            }
+        } else {
+            $result["answer"] = false;
+        }
         echo json_encode($result);
     }
-
 }
