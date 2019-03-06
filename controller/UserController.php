@@ -252,7 +252,7 @@ class UserController
             $comment = $_POST["comment"];
             $to_user = $_POST["to_user"];
 
-            if (empty($comment) && empty($to_user)) {
+            if (!empty($comment) && !empty($to_user)) {
                 $result["answer"] = UserDao::sendComment($comment, $to_user);
                 $result["new_comments"] = UserDao::getComments(UserDao::getUsernameById($to_user));
                 $result["from_user"] = $_SESSION["username"];

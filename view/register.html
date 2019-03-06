@@ -21,7 +21,7 @@
     </div>
 </header>
 <main id="regMain">
-    <form action="index.php?target=User&action=register" method="post" onsubmit="return passValid()" enctype="multipart/form-data">
+    <form action="index.php?target=User&action=register" method="post" onsubmit="return regValidation()" enctype="multipart/form-data">
         <table id="regTable">
             <tr>
                 <td>Username:</td>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>Age:</td>
-                <td><input type="number" required name="age" style="width: 50%;"></td>
+                <td><input type="number" required name="age" style="width: 50%;" id="age"></td>
             </tr>
             <tr>
                 <td>E-mail:</td>
@@ -60,7 +60,7 @@
             </tr>
             <tr>
                 <td>GSM:</td>
-                <td><input type="text" required name="GSM" style="width: 50%;"></td>
+                <td><input type="text" required name="GSM" style="width: 50%;" id="gsm"></td>
             </tr>
             <tr>
                 <td>Image:</td>
@@ -84,6 +84,25 @@
 
 <script>
 
+    function ageValid(){
+        var age;
+        age = document.getElementById("age").value;
+        if(age < 16){
+            alert("Your age must be at least 16!");
+            return false;
+        }
+        else return true;
+    }
+
+    function gsmValid(){
+        var gsm = document.getElementById("gsm").value;
+        if(gsm.length < 10){
+            alert("GSM must be at least 10 digits!");
+            return false;
+        }
+        else return true;
+    }
+
     function passValid(){
         var password,repass;
         password = document.getElementById("password").value;
@@ -92,7 +111,20 @@
             alert("Passwords must be same!");
             return false;
         }
-        else return true;
+        else {
+            if(password.length < 6){
+                alert("Passwords must be at least 6 symbols!");
+                return false;
+            }
+            return true;
+        }
+    }
+
+    function regValidation(){
+        if(ageValid() && passValid() && gsmValid()){
+            return true;
+        }
+        else return false;
     }
 
 </script>
