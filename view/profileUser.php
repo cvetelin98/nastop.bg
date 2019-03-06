@@ -127,11 +127,13 @@
                     var row = table.insertRow(-1);
                     var cell_from_user = row.insertCell(-1);
                     var cell_comment = row.insertCell(-1);
+                    var comment = document.getElementById("comment");
                     if(new_comments.length > 0) {
 
                         for(var i = 0; i < new_comments.length; i++) {
                             cell_from_user.innerHTML = from_user;
                             cell_comment.innerHTML = new_comments[i];
+                            comment.value = "";
                         }
                     }
                     else {
