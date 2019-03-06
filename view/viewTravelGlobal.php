@@ -31,7 +31,7 @@
             <td>From: <?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?></td>
         </tr>
         <tr>
-            <td>By: <a href="index.php?target=User&action=viewProfileUser"><?php echo \model\dao\UserDao::getUsernameById($travel->getUserId()); ?></a></td>
+            <td>By: <?php echo \model\dao\UserDao::getUsernameById($travel->getUserId()); ?></td>
             <td><form method="post" action="index.php?target=User&action=viewProfileUser">
                     <input type=hidden name="username" value="<?php echo \model\dao\UserDao::getUsernameById($travel->getUserId()); ?>">
                     <input type="submit" value="See Profile" name="view_profile">

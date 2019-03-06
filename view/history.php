@@ -47,7 +47,7 @@
                     <td><?php echo $my_travel->getDateOfTravelling(); ?></td>
                     <td><img src="<?php echo \model\dao\CarDao::getCarImage($my_travel->getCarId()) ?>" width="15%"></td>
                     <td><?php echo \model\dao\UserDao::getUsernameById($my_travel->getUserId()); ?></td>
-                    <td><?php echo $my_travel->getPrice(); ?></td>
+                    <td><?php echo $my_travel->getPrice(); ?> BGN</td>
                 </tr>
             <?php }
         }
@@ -55,29 +55,29 @@
     </table>
     <br>
     <p style="font-size: 30px;">&nbsp My Guest Travels:</p>
-<!--    <table id="showTable">-->
-<!--        <tr>-->
-<!--            <th>Starting Point</th>-->
-<!--            <th>Final Point</th>-->
-<!--            <th>Date</th>-->
-<!--            <th>Car</th>-->
-<!--            <th>User</th>-->
-<!--            <th>Price</th>-->
-<!--        </tr>-->
-<!--        --><?php //if(count($guest_travels) > 0) {
-//            foreach ($guest_travels as $guest_travel) { ?>
-<!--                <tr>-->
-<!--                    <td>--><?php //echo \model\dao\TravelDao::getCityName($guest_travel->getStartingDestination()); ?><!--</td>-->
-<!--                    <td>--><?php //echo \model\dao\TravelDao::getCityName($guest_travel->getFinalDestination()); ?><!--</td>-->
-<!--                    <td>--><?php //echo $guest_travel->getDateOfTravelling(); ?><!--</td>-->
-<!--                    <td><img src="--><?php //echo \model\dao\CarDao::getCarImage($guest_travel->getCarId()) ?><!--" width="15%"></td>-->
-<!--                    <td>--><?php //echo \model\dao\UserDao::getUsernameById($guest_travel->getUserId()); ?><!--</td>-->
-<!--                    <td>--><?php //echo $guest_travel->getPrice(); ?><!--</td>-->
-<!--                </tr>-->
-<!--            --><?php //}
-//        }
-//        else { ?><!-- <tr><td colspan="5" style="font-size: 30px"> --><?php //echo "&nbspNo data available"; ?><!--</td></tr> --><?php //} ?>
-<!--    </table>-->
+    <table id="showTable">
+        <tr>
+            <th>Starting Point</th>
+            <th>Final Point</th>
+            <th>Date</th>
+            <th>Car</th>
+            <th>User</th>
+            <th>Price</th>
+        </tr>
+        <?php if(count($guest_travels) > 0) {
+            foreach ($guest_travels as $guest_travel) { ?>
+                <tr>
+                    <td><?php echo \model\dao\TravelDao::getCityName($guest_travel->getStartingDestination()); ?></td>
+                    <td><?php echo \model\dao\TravelDao::getCityName($guest_travel->getFinalDestination()); ?></td>
+                    <td><?php echo $guest_travel->getDateOfTravelling(); ?></td>
+                    <td><img src="<?php echo \model\dao\CarDao::getCarImage($guest_travel->getCarId()) ?>" width="15%"></td>
+                    <td><?php echo \model\dao\UserDao::getUsernameById($guest_travel->getUserId()); ?></td>
+                    <td><?php echo $guest_travel->getPrice(); ?> BGN</td>
+                </tr>
+            <?php }
+        }
+        else { ?> <tr><td colspan="5" style="font-size: 30px"> <?php echo "&nbspNo data available"; ?></td></tr> <?php } ?>
+    </table>
 
 </main>
 <footer id="mainFooter">
