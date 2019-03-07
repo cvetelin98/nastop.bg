@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../style/try.css">
+</head>
+<body>
+<div style="width: 80%;" class="search-panel">
+    <div class="container">
+        <div class="row">
+            <div class="slogan">Connecting  <strong>drivers</strong> with free places and <strong>people</strong>, who wants to travel.</div>
+            <div class="location">
+                <h1>Find travel:</h1>
+                <form method="POST" action="../index.php?target=Travel&action=search">
+                    <div id="from-location">
+                        <input type="text" placeholder="From" name="from" id="from" class="from ui-autocomplete-input" autocomplete="off">
+                        <input type="hidden" name="from_city_id">
+                        <ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-2" tabindex="0" style="display: none;"></ul></div>
+                    <div id="to-location">
+                        <input type="text" placeholder="To" name="to" id="to" class="to ui-autocomplete-input" autocomplete="off">
+                        <input type="hidden" name="to_city_id">
+                        <ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-1" tabindex="0" style="display: none;"></ul></div>
+                    <button type="submit" class="btn-momchi momchi-blue" name="searchButton">Search</button>
+                </form>
+                <div class="clearfix"></div>
+
+            </div>
+            <div  align="right" class="question hidden-xs hidden-sm">
+                <p>
+                    Sharing your travels,<br>
+                    save money and find new friends!
+                </p>
+                <a href="/%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D1%83%D0%B2%D0%B0%D0%B9" title="Wanna share a travel?">
+                    <img src="https://i.pinimg.com/originals/2b/ec/f1/2becf13fe32fe57918319c7f93330e1e.png"
+                        width="10%" height="100px" alt="Want to travel?">
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<!--<script>-->
+    <!--function searchButton() {-->
+        <!--var from = document.getElementById('from');-->
+        <!--var to = document.getElementById('to');-->
+        <!--fetch("../index.php?target=Travel&action=search",-->
+            <!--{-->
+                <!--method: "POST",-->
+                <!--headers: {'Content-type': 'application/x-www-form-urlencoded'},-->
+                <!--body: "from=" + from + "&to=" + to-->
+            <!--})-->
+            <!--.then(function (response) {-->
+                <!--return response.json();-->
+            <!--})-->
+            <!--.then(function (myJson) {-->
+                <!--var travels = myJson;-->
+                <!--var new_travel = [];-->
+                <!--var travel = [];-->
+
+
+                <!--for(var i = 0; i <= travels.length; i++){-->
+                    <!--travel['travel_id'] = travels[i]['travel_id'];-->
+                    <!--travel['date_of_travelling'] = travels[i]['date_of_travelling'];-->
+                    <!--travel['free_places'] = travels[i]['free_places'];-->
+                    <!--travel['price'] = travels[i]['price'];-->
+                <!--}-->
+
+
+
+            <!--})-->
+            <!--.catch(function (e) {-->
+                <!--alert(e.message);-->
+            <!--})-->
+    <!--}-->
+<!--</script>-->

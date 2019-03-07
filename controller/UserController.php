@@ -142,7 +142,7 @@ class UserController
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 throw new \Exception("Invalid data - email");
             }
-            if (strlen($GSM) < 10) {
+            if(strlen($GSM) < 10){
                 throw new \Exception("Invalid data - gsm");
             }
             UserDao::addUser($user);
@@ -269,21 +269,18 @@ class UserController
         echo json_encode($result);
     }
 
-    public function rateUser()
-    {
+    public function rateUser(){
         if (isset($_POST["user_id"], $_POST["rate"])) {
             $to_user = $_POST["user_id"];
             $rate = $_POST["rate"];
             $from_user = $_SESSION["user_id"];
             $voted = UserDao::getVoteById($to_user, $from_user);
 
-            if (!$voted) {
-                if (!empty($to_user) && !empty($rate)) {
-                    $result["answer"] = UserDao::addRate($from_user, $to_user, $rate);
-                    $result["new_rating"] = UserDao::getRatingById($to_user);
-                } else {
-                    $result["answer"] = false;
-                }
+            if(!$voted){}
+
+            if (!empty($to_user) && !empty($rate)) {
+                $result["answer"] = UserDao::addRate($from_user, $to_user, $rate);
+                $result["new_rating"] = UserDao::getRatingById($to_user);
             } else {
                 $result["answer"] = false;
             }

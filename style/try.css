@@ -1,0 +1,621 @@
+.search-panel {
+    height: 186px;
+    background: #f0f0f0;
+    border-bottom: 1px solid #dcdcdc
+}
+
+.search-panel .slogan {
+    color: #0aadcd;
+    font-size: 20px;
+    padding-top: 13px;
+    margin-bottom: 12px
+}
+
+.search-panel .slogan strong {
+    color: #07829a
+}
+
+.search-panel .location {
+    background: #0aadcd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 683px;
+    padding: 16px 20px;
+    height: 113px;
+    position: relative;
+    z-index: 9999;
+}
+
+.search-panel .location button.btn-momchi, .search-panel .location input.btn-momchi, .search-panel .location a.btn-momchi {
+    padding: 0 16px !important
+}
+
+.search-panel h1 {
+    margin: 0 0 10px;
+    color: #fff;
+    font-size: 32px
+}
+
+.search-panel input[type="text"] {
+    border: medium none;
+    border-radius: 5px;
+    font-size: 16px;
+    height: 36px;
+    margin-right: 5px;
+    padding: 0 10px 0 34px;
+    width: 250px
+}
+
+.search-panel input[type="text"].error {
+    border: 1px solid red
+}
+
+.search-panel button.btn-momchi {
+    height: 37px
+}
+
+.search-panel .from {
+    background: #fff url("https://prevozvalnik.bg/img/svg/ico/from.svg") no-repeat scroll 7px 5px
+}
+
+.search-panel .to {
+    background: #fff url("https://prevozvalnik.bg/img/svg/ico/to.svg") no-repeat scroll 7px 5px;
+    padding-left: 36px
+}
+
+.search-panel #from-location, .search-panel #to-location {
+    float: left;
+    position: relative;
+    margin-right: 3px
+}
+
+.search-panel .container {
+    position: relative
+}
+
+.search-panel .container .question {
+    position: absolute;
+    right: 10%;
+    top: 25%;
+}
+
+.search-panel .container .question p {
+    line-height: 1.1em;
+    color: #666;
+    font-size: 15px;
+    max-width: 260px;
+    display: inline-block;
+}
+
+.search-panel div.location div.bids {
+    display: none;
+    position: absolute;
+    z-index: 10000;
+    top: 36px;
+    left: 0;
+    width: 250px;
+    background: #FFF;
+    border: 0px solid #CCC;
+    border-top: none;
+    border-radius: 5px;
+    overflow: hidden;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7)
+}
+
+.search-panel div.searchPanel div.location div.bids a {
+    display: block;
+    border-top: 1px solid #CCC;
+    line-height: 32px;
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    padding-left: 35px;
+    padding-right: 10px;
+    cursor: default
+}
+
+.search-panel div.searchPanel div.location div.from div.bids a {
+    background: url("/img/svg/ico/pos.svg") no-repeat
+}
+
+.search-panel div.searchPanel div.location div.from div.bids a:hover {
+    font-weight: bold;
+    background: url("/img/svg/ico/iStart.svg") no-repeat;
+    background-color: #F6F6F6;
+    font-size: 16px
+}
+
+.search-panel div.searchPanel div.location div.to div.bids a {
+    background: url("/img/svg/ico/iEnd.svg") no-repeat
+}
+
+.ui-autocomplete {
+    z-index: 10000;
+    width: 250px;
+    background: #FFF;
+    border: 0px solid #CCC;
+    border-top: none;
+    border-radius: 5px;
+    overflow: hidden;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7)
+}
+
+.ui-autocomplete .ui-menu-item {
+    display: block;
+    border-top: 1px solid #CCC;
+    line-height: 32px;
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    padding-left: 35px !important;
+    padding-right: 10px;
+    cursor: default;
+    float: none;
+    background: url("/img/svg/ico/pos.svg") 10px 10px no-repeat
+}
+
+.ui-autocomplete .ui-menu-item:hover {
+    font-weight: bold;
+    background-color: #F6F6F6;
+    margin: 0px !important;
+    border: none !important;
+    border-top: 1px solid #CCC !important
+}
+
+#from-location .ui-menu-item:hover {
+    background: url("/img/svg/ico/iStart.svg") 10px 10px no-repeat
+}
+
+#to-location .ui-menu-item:hover {
+    background: url("/img/svg/ico/iEnd.svg") 10px 10px no-repeat
+}
+
+.item1stPage {
+    position: relative;
+    height: 152px;
+    border: 1px solid #AAA;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 0 #AAA;
+    overflow: hidden;
+    margin-bottom: 12px;
+    min-width: 480px;
+    transition: .2s background;
+    float: left
+}
+
+.item1stPage:hover {
+    background: #ecf1f3
+}
+
+.item1stPage li.user {
+    width: 168px;
+    margin-right: 4px
+}
+
+.item1stPage li.content {
+    width: 280px;
+    line-height: normal
+}
+
+.item1stPage li.user ul {
+    width: 168px
+}
+
+.item1stPage li.user ul li.photo {
+    width: 60px
+}
+
+.item1stPage li.user ul li.photo img {
+    width: 52px
+}
+
+.item1stPage li.user ul li.name {
+    width: 108px;
+    line-height: normal;
+    color: #888;
+    line-height: 16px
+}
+
+.item1stPage li.user ul li.name strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #333;
+    font-size: 13px
+}
+
+.item1stPage li.user ul li.info {
+    width: 168px;
+    line-height: normal;
+    margin-top: 5px
+}
+
+.item1stPage li.user ul li.info strong {
+    color: #555
+}
+
+.item1stPage li.user ul li.info div.raiting {
+    color: #888
+}
+
+.item1stPage li.user div.raiting img {
+    width: 14px;
+    vertical-align: -1px;
+    margin-right: 5px
+}
+
+.item1stPage li.user div.raiting strong {
+    display: inline-block !important
+}
+
+.item1stPage li.user ul li.info div.social {
+    color: #555;
+    margin-top: 6px
+}
+
+.item1stPage li.user ul li.info div.social img {
+    width: 16px;
+    vertical-align: -4px;
+    margin-right: 5px
+}
+
+.item1stPage li.user ul li.info div.icons {
+    color: #555;
+    margin-top: 9px;
+    line-height: 0;
+    position: relative
+}
+
+.item1stPage li.user ul li.info div.icons i {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    margin-right: 5px;
+    background: url(/img/svg/ico/userIcons.svg) 0 0 no-repeat
+}
+
+.item1stPage li.user ul li.info div.icons i div {
+    line-height: 14px;
+    position: absolute;
+    top: 38px;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    margin-left: 14px;
+    z-index: 103;
+    padding: 5px 10px;
+    background: #09adcd;
+    color: #FFF;
+    font-size: 12px;
+    font-style: normal;
+    border-radius: 5px;
+    white-space: nowrap
+}
+
+.item1stPage li.user ul li.info div.icons i div img {
+    position: absolute;
+    z-index: 20;
+    top: -8px;
+    left: 50%;
+    margin-left: -10px
+}
+
+.infoRed {
+    background: #F00 !important
+}
+
+.infoGreen {
+    background: #46984c !important
+}
+
+.item1stPage li.user ul li.info div.icons i.chat {
+    background-position: 0 0
+}
+
+.item1stPage li.user ul li.info div.icons i.cigarette {
+    background-position: -35px 0
+}
+
+.item1stPage li.user ul li.info div.icons i.dog {
+    background-position: -70px 0
+}
+
+.item1stPage li.user ul li.info div.icons i.music {
+    background-position: -105px 0
+}
+
+.item1stPage li.user ul li.info div.icons i.chatNO {
+    background-position: 0 -35px
+}
+
+.item1stPage li.user ul li.info div.icons i.cigaretteNO {
+    background-position: -35px -35px
+}
+
+.item1stPage li.user ul li.info div.icons i.dogNO {
+    background-position: -70px -35px
+}
+
+.item1stPage li.user ul li.info div.icons i.musicNO {
+    background-position: -105px -35px
+}
+
+.item1stPage li.content div.offer-date {
+    font-size: 20px;
+    font-weight: normal;
+    color: #333
+}
+
+.item1stPage li.content div.offer-date span {
+    float: right;
+    color: #419647;
+    font-size: 25px;
+    margin-top: -5px
+}
+
+.item1stPage li.content div.offer-date span i {
+    font-size: 20px
+}
+
+.item1stPage li.content div.destination {
+    font-size: 17px;
+    margin-top: 3px;
+    color: #333
+}
+
+.item1stPage li.content div.destination i {
+    display: inline-block;
+    background: url(/img/svg/ico/destArroww.svg) 0 center no-repeat;
+    width: 17px;
+    margin: 0 7px
+}
+
+.item1stPage li.content div.destination span {
+    display: inline-block;
+    color: #999
+}
+
+.item1stPage li.content div.start {
+    color: #666;
+    font-size: 14px;
+    margin-top: 7px;
+    line-height: 18px
+}
+
+.item1stPage li.content div.end {
+    color: #666;
+    font-size: 14px;
+    margin-top: 4px;
+    line-height: 18px
+}
+
+.item1stPage li.content div.car {
+    color: #666;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 10px;
+    line-height: 18px;
+    background: url(/img/svg/ico/iCar.svg) 0 0 no-repeat;
+    padding-left: 42px
+}
+
+.item1stPage li.content div.car img {
+    vertical-align: -2px;
+    margin-right: 1px
+}
+
+.item1stPage button {
+    position: absolute;
+    z-index: 200;
+    width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0
+}
+
+ul {
+    list-style: none;
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    padding: 0
+}
+
+ul, li, input, button {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box
+}
+
+li {
+    float: left
+}
+
+.popular-destinations ul {
+    margin-bottom: 20px
+}
+
+.popular-destinations ul li {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 8px;
+    background: url(/img/svg/ico/iDest.svg) 0 0 no-repeat;
+    padding-left: 20px;
+    width: 325px;
+    float: left
+}
+
+.popular-destinations ul li a {
+    color: #333;
+    font-size: 15px;
+    line-height: 18px;
+    text-decoration: none
+}
+
+.popular-destinations ul li a:hover {
+    color: #40abcb
+}
+
+.popular-destinations ul li i {
+    display: inline-block;
+    background: url(/img/svg/ico/destArroww.svg) 0 center no-repeat;
+    width: 17px;
+    margin: 0 7px
+}
+
+.popular-destinations ul li:hover {
+    background-position: 0 -40px
+}
+
+.partners {
+    border-top: 1px solid #DCDCDC;
+    padding-top: 15px;
+    margin-top: 20px;
+    margin-bottom: 25px
+}
+
+.partners div.loga {
+    text-align: center
+}
+
+.partners div.loga a {
+    display: inline-block;
+    margin: 0px 20px
+}
+
+.partners div.pageTitle {
+    color: #5B5B5B;
+    font-size: 22px;
+    margin-bottom: 20px
+}
+
+.ad {
+    line-height: 0;
+    margin-top: 20px
+}
+
+.ad div.yt, .ad div.banner {
+    float: left
+}
+
+.ad div.yt {
+    text-align: right;
+    width: 410px
+}
+
+@media (max-width: 992px) {
+    .ad {
+        display: none
+    }
+
+    .popular-destinations {
+        display: none
+    }
+
+    .search-panel {
+        height: auto
+    }
+
+    div.searchPanel div.wrapper {
+        width: 100% !important
+    }
+
+    .location #from-location, .location #to-location {
+        width: 44%;
+        margin-right: 2%
+    }
+
+    .search-panel input[type="text"] {
+        width: 100%
+    }
+
+    .results2columns {
+        width: 100% !important
+    }
+
+    div.sorting span.distantion {
+        float: none
+    }
+
+    .search-panel .location {
+        width: 100%;
+        height: auto;
+        border-radius: 0px;
+        padding: 10px
+    }
+
+    .item1stPage {
+        width: 100% !important;
+        min-width: none !important;
+        box-shadow: none !important;
+        margin-right: 0px !important
+    }
+
+    .item1stPage li.content div.offer-date > span {
+        display: block;
+        position: absolute;
+        right: 5px;
+        top: 10px;
+        font-size: 15pt !important
+    }
+
+    .item1stPage li.content div.offer-date span i {
+        font-size: 13pt !important
+    }
+
+    .item1stPage li.content div.offer-date .note {
+        display: none !important
+    }
+
+    .item1stPage li.content div.offer-date, .item1stPage li.content div.destination strong {
+        font-weight: normal;
+        font-size: 12pt;
+        line-height: 17pt
+    }
+
+    .item1stPage li.content div.destination strong {
+        font-weight: bold
+    }
+
+    .location button.btn-momchi {
+        width: 37px;
+        overflow: hidden;
+        padding: 3px 5px
+    }
+
+    .locationOptions li {
+        float: none;
+        margin-left: 20px !important
+    }
+
+    .slogan {
+        text-align: center
+    }
+
+    .location #from-location, .location #to-location {
+        float: none;
+        margin-bottom: 7px;
+        width: 100%
+    }
+
+    .location input[type="text"] {
+        width: 100% !important
+    }
+
+    .search-panel button.btn-momchi {
+        width: 100%;
+        overflow: visible;
+        padding: 3px 5px
+    }
+}

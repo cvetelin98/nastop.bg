@@ -211,4 +211,49 @@ class TravelDao {
         }
     }
 
+
+    public static function getTravelFromSearch($from, $to){
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+
+        try {
+            $queryNameFrom = "SELECT city_id FROM cities WHERE city_name = ?";
+            $stmt = $pdo->prepare($queryNameFrom);
+            $stmt->execute([$from]);
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $fromDB = $row["city_id"];
+
+
+            $queryNameTo = "SELECT city_id FROM cities WHERE city_name = ?";
+            $stmt = $pdo->prepare($queryNameTo);
+            $stmt->execute([$to]);
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $toDB = $row["city_id"];
+
+            $query = "SELECT  travel_id, user_id, car_id, date_of_travelling, free_places, price 
+                  FROM travels
+                  WHERE starting_destination = ? 
+                  AND final_destination = ?";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([$fromDB, $toDB]);
+
+            while ($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
+                /** @var Travel $travel */
+                $travel = new Travel($fromDB, $toDB, $row->date_of_travelling, $row->free_places, $row->price);
+                $travel->setCarId($row->car_id);
+                $travel->setTravelId($row->travel_id);
+                $travels[] = $travel;
+                $pdo->commit();
+
+                return $travels;
+
+            }
+        }catch(\PDOException $e){
+            echo "Problem - " . $e->getMessage();
+            $pdo->rollBack();
+            $travels = [];
+            return $travels;
+
+        }
+    }
 }

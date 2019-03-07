@@ -8,33 +8,36 @@ use model\dao\TravelDao;
 use model\dao\UserDao;
 use model\Travel;
 
-class TravelController{
+class TravelController
+{
 
-    public function viewAdd(){
-        if($_SESSION["logged"]) {
+    public function viewAdd()
+    {
+        if ($_SESSION["logged"]) {
             $cities = TravelDao::getAllCities();
             $cars = UserDao::getUserCars($_SESSION["username"]);
             require "view/addTravel.php";
-        }
-        else require "view/login.html";
+        } else require "view/login.html";
     }
 
-    public function viewTravel(){
-        if($_SESSION["logged"]) {
+    public function viewTravel()
+    {
+        if ($_SESSION["logged"]) {
             $travel = TravelDao::getTravel($_POST["travel_id"]);
             require "view/viewTravel.php";
-        }
-        else require "view/login.html";
+        } else require "view/login.html";
     }
 
-    public function viewTravelGlobal(){
-            $travel = TravelDao::getTravel($_POST["travel_id"]);
-            require "view/viewTravelGlobal.php";
+    public function viewTravelGlobal()
+    {
+        $travel = TravelDao::getTravel($_POST["travel_id"]);
+        require "view/viewTravelGlobal.php";
     }
 
-    public function add(){
-        if($_SESSION["logged"]) {
-            if (!isset($_POST["starting_destination"], $_POST["final_destination"], $_POST["date_of_travelling"], $_POST["free_places"], $_POST["price"],$_POST["car"])) {
+    public function add()
+    {
+        if ($_SESSION["logged"]) {
+            if (!isset($_POST["starting_destination"], $_POST["final_destination"], $_POST["date_of_travelling"], $_POST["free_places"], $_POST["price"], $_POST["car"])) {
                 throw new \Exception("Sorry, invalid data! - isset");
             }
 
@@ -60,11 +63,11 @@ class TravelController{
             } else {
                 // TODO error header;
             }
-        }
-        else require "view/login.html";
+        } else require "view/login.html";
     }
 
-    public function book(){
+    public function book()
+    {
         $travel_id = $_POST["travel_id"];
 
         $result["answer"] = TravelDao::bookTravel($travel_id);
@@ -73,5 +76,22 @@ class TravelController{
         echo json_encode($result);
     }
     
+
+    public function search()
+    {
+        if (isset($_POST["from"], $_POST["to"])) {
+            $from = $_POST["from"];
+            $to = $_POST["to"];
+
+            if (empty($from) || empty($to)) {
+                throw new \Exception("Invalid data - empty");
+            } else {
+                /** @var Travel $travel */
+             $travels = TravelDao::getTravelFromSearch($from, $to);
+             require "view/main.php";
+
+            }
+        }
+    }
 
 }

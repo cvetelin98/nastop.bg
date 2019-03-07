@@ -39,7 +39,7 @@
             <div>
                 <p>Rating:<?php
                     for($i = 1 ; $i <= 5 ; $i++){
-                        echo "<button id='". $i."' onclick='rate(".$user_id.",".$i.")' value='".$i."'>".$i."</button>";
+                        echo "<button id='". $i."' onclick='rate(".$user_id.",".$i.")' value='".$i."' >".$i."</button>";
                     }
                     ?>
                 <?php if($user_rating >= 1){ ?>
