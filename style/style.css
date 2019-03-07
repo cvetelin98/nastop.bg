@@ -1211,3 +1211,12 @@ li {
         padding: 3px 5px
     }
 }
+
+.star {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+}
+

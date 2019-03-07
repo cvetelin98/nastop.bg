@@ -32,8 +32,15 @@
             <p>Age: <?php echo $user->getAge(); ?></p>
             <p>GSM: <?php echo $user->getGsm(); ?></p>
             <p>Gender: <?php echo $user->getGender(); ?></p>
-            <p>Rating: <?php if($user->getRating() > 1) { echo $user->getRating(); }
-            else { echo "Not Voted Yet!"; }?></p>
+            <div>
+                <p>Rating:<?php
+                    for($i = 1 ; $i <= 5 ; $i++){
+                        echo "<a href='index.php?target=User&action=viewLogin'><button class='star' id='". $i."' value='".$i."'><img src='https://image.flaticon.com/icons/png/512/56/56786.png' width='25px' height='25px''></button></a>";
+                    }
+                    echo ($user_rating >= 1) ? ' → '.$user_rating : " ☞ Not Voted Yet!";
+                    ?>
+                </p>
+            </div>
         </div>
     </div>
     <?php if(\model\dao\UserDao::checkUserCars($user->getUsername())) {?>

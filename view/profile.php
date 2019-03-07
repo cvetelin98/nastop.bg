@@ -35,7 +35,13 @@
             <p>Age: <?php echo $_SESSION["age"]; ?></p>
             <p>GSM: <?php echo $_SESSION["gsm"]; ?></p>
             <p>Gender: <?php echo $_SESSION["gender"]; ?></p>
-            <p>Rating: <?php echo (\model\dao\UserDao::getRatingById($_SESSION["user_id"]) > 1) ? \model\dao\UserDao::getRatingById($_SESSION["user_id"]) : "Not Voted Yet!"; ?></p>
+            <div>
+                <p>Rating:<?php
+                            echo (\model\dao\UserDao::getRatingById($_SESSION["user_id"]) >= 1) ? ' '.\model\dao\UserDao::getRatingById($_SESSION["user_id"]) : " Not Voted Yet!";
+                    echo "<button class='star' onclick='noVote();'><img src='https://image.flaticon.com/icons/png/512/56/56786.png' width='25px' height='25px''></button>";
+                            ?>
+                </p>
+            </div>
         </div>
     </div>
     <?php if(\model\dao\UserDao::checkUserCars($_SESSION["username"])) {?>
@@ -92,6 +98,14 @@
     <img src="https://prevozvalnik.bg/img/bulgaria-footer.png" style="margin-right: 25px">
     <h3 style="font-size: 15px;margin-right:55px;">Copyright 2019 © Nastop.bg</h3>
 </footer>
+
+<script>
+
+    function noVote(){
+        alert("You can't rate yourself!")
+    }
+
+</script>
 
 </body>
 </html>
