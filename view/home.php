@@ -50,7 +50,7 @@
                     Sharing your travels,<br>
                     save money and find new friends!
                 </p>
-                <a href="/%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D1%83%D0%B2%D0%B0%D0%B9" title="Wanna share a travel?">
+                <a href="index.php?target=Travel&action=ViewAdd" title="Wanna share a travel?">
                     <img src="https://i.pinimg.com/originals/2b/ec/f1/2becf13fe32fe57918319c7f93330e1e.png"
                          width="10%" height="100px" alt="Want to travel?">
                 </a>
@@ -75,7 +75,8 @@
                 <th>Information</th>
             </tr>
             <?php if(count($travels) > 0) {
-                foreach ($travels as $travel) { ?>
+                foreach ($travels as $travel) {
+                    if($travel->getFreePlaces() > 0) { ?>
                     <tr>
                         <td><?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?></td>
                         <td><?php echo \model\dao\TravelDao::getCityName($travel->getFinalDestination()); ?></td>
@@ -88,6 +89,7 @@
                             <input type="submit" id="infoButton" value="See More" name="travelSubmit">
                         </form></td>
                     </tr>
+                    <?php } ?>
                 <?php }
             }
             else { ?> <tr><td colspan="5" style="font-size: 30px"> <?php echo "&nbsp No data available"; ?></td></tr> <?php } ?>

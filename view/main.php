@@ -37,7 +37,8 @@
                 <th>Information</th>
             </tr>
             <?php if(count($travels) > 0) {
-                foreach ($travels as $travel) { ?>
+                foreach ($travels as $travel) {
+                    if($travel->getFreePlaces() > 0) { ?>
                     <tr>
                         <td><?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?></td>
                         <td><?php echo \model\dao\TravelDao::getCityName($travel->getFinalDestination()); ?></td>
@@ -50,6 +51,7 @@
                                 <input type="submit" id="infoButton" value="See More" name="travelSubmit">
                             </form></td>
                     </tr>
+                    <?php } ?>
                 <?php }
             }
             else { ?> <tr><td colspan="5" style="font-size: 30px"> <?php echo "No data available"; ?></td></tr> <?php } ?>
