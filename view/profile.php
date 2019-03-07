@@ -35,7 +35,7 @@
             <p>Age: <?php echo $_SESSION["age"]; ?></p>
             <p>GSM: <?php echo $_SESSION["gsm"]; ?></p>
             <p>Gender: <?php echo $_SESSION["gender"]; ?></p>
-            <p>Rating: <?php echo $_SESSION["rating"]; ?></p>
+            <p>Rating: <?php echo (\model\dao\UserDao::getRatingById($_SESSION["user_id"]) > 1) ? \model\dao\UserDao::getRatingById($_SESSION["user_id"]) : "Not Voted Yet!"; ?></p>
         </div>
     </div>
     <?php if(\model\dao\UserDao::checkUserCars($_SESSION["username"])) {?>

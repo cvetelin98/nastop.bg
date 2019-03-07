@@ -1,5 +1,7 @@
 <?php
 
+ini_set('error_reporting', E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
+
 spl_autoload_register(function ($class) {
     $class = str_replace('\\',DIRECTORY_SEPARATOR,$class).'.php';
     require_once __DIR__ . DIRECTORY_SEPARATOR . $class;

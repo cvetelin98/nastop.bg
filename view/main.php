@@ -25,34 +25,36 @@
 <main id="mainInMain">
     <br>
 <p style="font-size: 30px;">&nbsp Selected Travels for sharing:</p>
-<table id="showTable">
-    <tr>
-        <th>Starting Point</th>
-        <th>Final Point</th>
-        <th>Date</th>
-        <th>Free Places</th>
-        <th>Car</th>
-        <th>Price</th>
-        <th>Information</th>
-    </tr>
-    <?php if(count($travels) > 0) {
-        foreach ($travels as $travel) { ?>
+    <div id="travelScroll">
+        <table id="showTable">
             <tr>
-                <td><?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?></td>
-                <td><?php echo \model\dao\TravelDao::getCityName($travel->getFinalDestination()); ?></td>
-                <td><?php echo $travel->getDateOfTravelling(); ?></td>
-                <td><?php echo $travel->getFreePlaces(); ?></td>
-                <td><img src="<?php echo \model\dao\CarDao::getCarImage($travel->getCarId()) ?>" width="15%"></td>
-                <td><?php echo $travel->getPrice(); ?> BGN</td>
-                <td><form method="post" action="index.php?target=Travel&action=ViewTravelGlobal">
-                        <input type=hidden name="travel_id" value="<?php echo $travel->getTravelId(); ?>">
-                        <input type="submit" id="infoButton" value="See More" name="travelSubmit">
-                    </form></td>
+                <th>Starting Point</th>
+                <th>Final Point</th>
+                <th>Date</th>
+                <th>Free Places</th>
+                <th>Car</th>
+                <th>Price</th>
+                <th>Information</th>
             </tr>
-        <?php }
-    }
-    else { ?> <tr><td colspan="5" style="font-size: 30px"> <?php echo "No data available"; ?></td></tr> <?php } ?>
-</table>
+            <?php if(count($travels) > 0) {
+                foreach ($travels as $travel) { ?>
+                    <tr>
+                        <td><?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?></td>
+                        <td><?php echo \model\dao\TravelDao::getCityName($travel->getFinalDestination()); ?></td>
+                        <td><?php echo $travel->getDateOfTravelling(); ?></td>
+                        <td><?php echo $travel->getFreePlaces(); ?></td>
+                        <td><img src="<?php echo \model\dao\CarDao::getCarImage($travel->getCarId()) ?>" width="15%"></td>
+                        <td><?php echo $travel->getPrice(); ?> BGN</td>
+                        <td><form method="post" action="index.php?target=Travel&action=ViewTravelGlobal">
+                                <input type=hidden name="travel_id" value="<?php echo $travel->getTravelId(); ?>">
+                                <input type="submit" id="infoButton" value="See More" name="travelSubmit">
+                            </form></td>
+                    </tr>
+                <?php }
+            }
+            else { ?> <tr><td colspan="5" style="font-size: 30px"> <?php echo "No data available"; ?></td></tr> <?php } ?>
+        </table>
+    </div>
 
 </main>
 <footer id="mainFooter">

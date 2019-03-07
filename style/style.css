@@ -104,9 +104,16 @@ main {
     margin-left: 10%;
 }
 
-#editMain {
+#loginMain {
     width: 80%;
     height: 80vh;
+    background-color: #2dcecb;
+    margin-left: 10%;
+}
+
+#editMain {
+    width: 80%;
+    height: 70vh;
     background-color: #2dcecb;
     margin-left: 10%;
 }
@@ -333,7 +340,7 @@ img {
     margin: auto;
     font-size: 1.5vw;
     position: absolute;
-    top: 73%;
+    top: 57%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -345,13 +352,13 @@ img {
 #carTable {
     text-align: center;
     width: 20%;
-    height: 20vh;
+    /*height: 20vh;*/
     background-color: #f2a22b;
     border-radius: 3%;
     margin: auto;
     font-size: 1.5vw;
     position: absolute;
-    top: 55%;
+    /*top: 50%;*/
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -370,7 +377,7 @@ img {
     margin: auto;
     font-size: 1.5vw;
     position: absolute;
-    top: 62%;
+    top: 50%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -441,7 +448,7 @@ img {
 
 #viewMain {
     width: 80%;
-    height: 85vh;
+    height: 70vh;
     background-color: #2dcecb;
     margin-left: 10%;
 }
@@ -557,4 +564,23 @@ img {
 }
 :-moz-placeholder { /* Firefox 18- */
     text-align: center;
+}
+
+#travelScroll {
+    height: 70vh;
+    overflow-y : scroll;
+}
+
+#historyScroll {
+    height: 53vh;
+    overflow-y : scroll;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid black;
+    margin: 1em 0;
+    padding: 0;
 }
