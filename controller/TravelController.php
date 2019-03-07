@@ -72,5 +72,6 @@ class TravelController{
 
         echo json_encode($result);
     }
+    
 
 }
