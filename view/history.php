@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <title>nastop</title>
-    <link rel="stylesheet" href="Style/style.css">
+    <link rel="stylesheet" href="style/style.css">
 </head>
 <body">
 <header class="navHeader">
@@ -29,7 +29,7 @@
 <main id="logMain">
 
     <br>
-    <p style="font-size: 30px;">&nbsp My Past Travels:</p>
+    <span id="mainSpan" style="margin-left: 39%">&nbsp My Past Travels:</span>
     <div id="historyScroll">
         <table id="showTable">
             <tr>
@@ -56,7 +56,7 @@
         </table>
     </div>
     <hr style="color: red;">
-    <p style="font-size: 30px;">&nbsp My Guest Travels:</p>
+    <span id="mainSpan" style="margin-left: 38%">&nbsp My Guest Travels:</span>
     <div id="historyScroll">
         <table id="showTable">
             <tr>

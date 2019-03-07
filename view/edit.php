@@ -26,8 +26,8 @@
 </header>
 <img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="80%" height="150px;">
 <main id="editMain">
-    <h1 style="font-size: 5vh; text-align: center;">Edit your profile:</h1>
     <br>
+    <span id="mainSpan" style="margin-left: 41%;">&nbsp Edit your profil:&nbsp</span>
     <form action="index.php?target=User&action=edit" method="post" enctype="multipart/form-data">
         <table id="editTable">
             <tr>
