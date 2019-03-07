@@ -88,7 +88,7 @@ class TravelController
             } else {
                 /** @var Travel $travel */
              $travels = TravelDao::getTravelFromSearch($from, $to);
-             require "view/main.php";
+             require "view/home.php";
 
             }
         }

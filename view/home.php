@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>nastop</title>
-    <link rel="stylesheet" href="Style/style.css">
+    <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
 
@@ -25,6 +25,40 @@
         </ul>
     </div>
 </header>
+<div style="width: 80%; margin:auto; height:160px;" class="search-panel">
+    <div class="container">
+        <div class="row">
+            <div class="slogan">Connecting  <strong>drivers</strong> with free places and <strong>people</strong>, who wants to travel.</div>
+            <div class="location">
+                <h1>Find travel:</h1>
+                <form method="POST" action="index.php?target=Travel&action=search">
+                    <div id="from-location">
+                        <input type="text" placeholder="From" name="from" id="from" class="from ui-autocomplete-input" autocomplete="off">
+                        <input type="hidden" name="from_city_id">
+                        <ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-2" tabindex="0" style="display: none;"></ul></div>
+                    <div id="to-location">
+                        <input type="text" placeholder="To" name="to" id="to" class="to ui-autocomplete-input" autocomplete="off">
+                        <input type="hidden" name="to_city_id">
+                        <ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-1" tabindex="0" style="display: none;"></ul></div>
+                    <button type="submit" class="btn-momchi momchi-blue" name="searchButton">Search</button>
+                </form>
+                <div class="clearfix"></div>
+
+            </div>
+            <div  align="right" class="question hidden-xs hidden-sm">
+                <p>
+                    Sharing your travels,<br>
+                    save money and find new friends!
+                </p>
+                <a href="/%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D1%83%D0%B2%D0%B0%D0%B9" title="Wanna share a travel?">
+                    <img src="https://i.pinimg.com/originals/2b/ec/f1/2becf13fe32fe57918319c7f93330e1e.png"
+                         width="10%" height="100px" alt="Want to travel?">
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
 <img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="80%" height="150px;">
 <main id="mainInMain">
     <br>
