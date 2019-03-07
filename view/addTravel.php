@@ -114,7 +114,7 @@
             var selectedDate = new Date(selectedText);
             var now = new Date();
             if (selectedDate < now) {
-                alert("Date must be in the future");
+                alert("Date must be in the future!");
                 return false;
         }
         else return true;
@@ -124,15 +124,25 @@
         var places,price;
         places = document.getElementById("free_places").value;
         price = document.getElementById("price").value;
-        if(places < 0 || price < 0){
-            if(places < 0) {
+        if(places <= 0 || price <= 0){
+            if(places <= 0) {
                 alert("Places must be positive number!");
                 return false;
             }
-            if(price < 0) {
+            if(price <= 0) {
                 alert("Price must be positive number! If you want to win something?");
                 return false;
             }
+        }
+
+        else return validPlaces();
+    }
+
+    function validPlaces(){
+        places = document.getElementById("free_places").value;
+        if (places > 32) {
+            alert("Places limit is 32!");
+            return false;
         }
         else return true;
     }

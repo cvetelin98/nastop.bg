@@ -38,30 +38,33 @@
     </div>
     <?php if(\model\dao\UserDao::checkUserCars($user->getUsername())) {?>
 <br>
-    <h1 style="text-align: left; font-size: 3vw;">Your cars:</h1>
-    <table id="carShow">
-        <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Color</th>
-            <th>Places</th>
-        </tr>
-        <?php foreach($cars as $car) { ?>
+    <h1 style="text-align: left; font-size: 3vw;"><?php echo $user->getUsername(); ?>'s cars:</h1>
+    <div id="carsScroll">
+        <table id="carShow">
             <tr>
-                <td><img width="65%"  src="<?php echo $car->getCarImage(); ?>"></td>
-                <td><?php echo $car->getCarName(); ?></td>
-                <td><?php echo $car->getCarColor(); ?></td>
-                <td><?php echo $car->getCarPlaces(); ?></td>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Color</th>
+                <th>Places</th>
             </tr>
-        <?php } ?>
-        <?php }
-        else { ?>
-            <br>
-            <h1 style="text-align: left; font-size: 3vw;">User don't have cars!</h1>
-        <?php } ?>
-    </table>
+            <?php foreach($cars as $car) { ?>
+                <tr>
+                    <td><img width="65%"  src="<?php echo $car->getCarImage(); ?>"></td>
+                    <td><?php echo $car->getCarName(); ?></td>
+                    <td><?php echo $car->getCarColor(); ?></td>
+                    <td><?php echo $car->getCarPlaces(); ?></td>
+                </tr>
+            <?php } ?>
+            <?php }
+            else { ?>
+                <br>
+                <h1 style="text-align: left; font-size: 3vw;">User don't have cars!</h1>
+            <?php } ?>
+        </table>
+    </div>
 
     <?php if(count($comments) > 0){ ?>
+    <div id="commentScroll">
         <table id="commentShow">
             <tr>
                 <th>From</th>
@@ -76,6 +79,7 @@
 
         </table>
     <?php } ?>
+    </div>
 
 
 </main>

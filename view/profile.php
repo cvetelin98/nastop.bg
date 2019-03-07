@@ -41,43 +41,47 @@
     <?php if(\model\dao\UserDao::checkUserCars($_SESSION["username"])) {?>
     <br>
     <h1 style="text-align: left; font-size: 3vw;">Your cars:</h1>
-    <table id="carShow">
-        <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Color</th>
-            <th>Places</th>
-        </tr>
-    <?php foreach($cars as $car) { ?>
-        <tr>
-            <td><img width="65%"  src="<?php echo $car->getCarImage(); ?>"></td>
-            <td><?php echo $car->getCarName(); ?></td>
-            <td><?php echo $car->getCarColor(); ?></td>
-            <td><?php echo $car->getCarPlaces(); ?></td>
-        </tr>
-    <?php } ?>
-        <?php }
-        else { ?>
-            <br>
-            <h1 style="text-align: left; font-size: 3vw;">If you have a car,you can add it from <a href="index.php?target=Car&action=ViewAdd" id="addCarLink">here</a> !</h1>
+    <div id="carsScroll">
+        <table id="carShow">
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Color</th>
+                <th>Places</th>
+            </tr>
+        <?php foreach($cars as $car) { ?>
+            <tr>
+                <td><img width="65%"  src="<?php echo $car->getCarImage(); ?>"></td>
+                <td><?php echo $car->getCarName(); ?></td>
+                <td><?php echo $car->getCarColor(); ?></td>
+                <td><?php echo $car->getCarPlaces(); ?></td>
+            </tr>
         <?php } ?>
-    </table>
+            <?php }
+            else { ?>
+                <br>
+                <h1 style="text-align: left; font-size: 3vw;">If you have a car,you can add it from <a href="index.php?target=Car&action=ViewAdd" id="addCarLink">here</a> !</h1>
+            <?php } ?>
+        </table>
+    </div>
 
     <?php if(count($comments) > 0){ ?>
-    <table id="commentShow">
-        <tr>
-            <th>From</th>
-            <th>Comment</th>
-        </tr>
-        <?php foreach($comments as $comment) { ?>
-        <tr>
-            <td><?php echo $comment["from_user"]; ?></td>
-            <td><?php echo $comment["comment"] ?></td>
-        </tr>
-        <?php } ?>
+    <div id="commentScroll">
+        <table id="commentShow">
+            <tr>
+                <th>From</th>
+                <th>Comment</th>
+            </tr>
+            <?php foreach($comments as $comment) { ?>
+            <tr>
+                <td><?php echo $comment["from_user"]; ?></td>
+                <td><?php echo $comment["comment"] ?></td>
+            </tr>
+            <?php } ?>
 
-    </table>
+        </table>
     <?php } ?>
+    </div>
 
 </main>
 <footer id="mainFooter">
