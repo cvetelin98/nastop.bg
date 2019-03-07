@@ -39,14 +39,10 @@
             <div>
                 <p>Rating:<?php
                     for($i = 1 ; $i <= 5 ; $i++){
-                        echo "<button id='". $i."' onclick='rate(".$user_id.",".$i.")' value='".$i."'>".$i."</button>";
+                        echo "<button class='star' id='". $i."' onclick='rate(".$user_id.",".$i.")' value='".$i."'><img src='https://image.flaticon.com/icons/png/512/56/56786.png' width='25px' height='25px''></button>";
                     }
+                    echo ($user_rating >= 1) ? ' → '.$user_rating : " ☞ Not Voted Yet!";
                     ?>
-                <?php if($user_rating >= 1){ ?>
-                <div id="rating"><?php echo $user_rating ?></div>
-                <?php } else {?>
-                <div id="rating">Not Voted Yet!</div>
-                <?php } ?>
                 </p>
             </div>
         </div>

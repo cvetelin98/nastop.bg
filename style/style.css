@@ -589,3 +589,11 @@ hr {
     height: 45vh;
     overflow-y : scroll;
 }
+
+.star {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+}
