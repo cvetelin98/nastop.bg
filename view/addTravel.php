@@ -93,8 +93,11 @@
 <script>
 
     function validation(){
-        if(validDest() && validDate() && validPlaceAndPrice() && checkPlace()){
-            return true;
+        if(validDest() && validDate() && validPlaceAndPrice()){
+            if(checkPlace()) {
+                return true;
+            }
+            else return false;
         }
         else return false;
 
