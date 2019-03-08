@@ -41,11 +41,11 @@
                         echo "<button class='star' id='". $i."' onclick='rate(".$user_id.",".$i.")' value='".$i."'><img src='https://image.flaticon.com/icons/png/512/56/56786.png' width='25px' height='25px''></button>";
                     }
                     ?>
-<!--                    <div id="rating"> ОТ тук JS го взема,НО НЕ РАБОТИ КАКТО ТРЯБВА ВЕЧЕ!-->
+                    <div id="ratingID">
                     <?php
                     echo ($user_rating >= 1) ? ' → '.$user_rating : " ☞ Not Voted Yet!";
                     ?>
-<!--                </div>-->
+                </div>
                 </p>
         </div>
     </div>
@@ -158,6 +158,7 @@
     })
     }
 
+
     function rate(user_id, rate_value){
         fetch("index.php?target=User&action=rateUser",
             {
@@ -171,7 +172,7 @@
             .then(function (myJson) {
                 var answer = myJson.answer;
                 var new_rating = myJson.new_rating;
-                var rating = document.getElementById('rating');
+                var rating = document.getElementById('ratingID');
 
                 if(answer === true){
                     rating.innerHTML = new_rating;
