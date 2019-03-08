@@ -58,9 +58,9 @@
     </div>
     <?php if(\model\dao\UserDao::checkUserCars($user->getUsername())) {?>
 <br>
-    <h1 style="text-align: left; font-size: 3vw;"><?php echo $user->getUsername(); ?>'s cars:</h1>
+    <h1 style="text-align: center; font-size: 3vw;"><?php echo $user->getUsername(); ?>'s cars:</h1>
     <div id="carsScroll">
-        <table id="carShow">
+        <table id="mainDiv"  style="margin-left: 34%;">
             <tr>
                 <th>Image</th>
                 <th>Name</th>
