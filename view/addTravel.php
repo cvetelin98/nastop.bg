@@ -54,7 +54,7 @@
                 <td><input type="date" name="date_of_travelling" id="date_of_travelling" required></td>
             </tr>
             <tr>
-                <td>Free Places:</td>
+                <td>Free places:</td>
                 <td><input type="number" name="free_places" id="free_places" onfocus="this.value=''"required></td>
             </tr>
             <tr>

@@ -34,23 +34,21 @@
                 <td>GSM:</td>
                 <td><input type="number" value="<?php echo $_SESSION["gsm"] ?>" name="GSM" value="" style="width: 50%;"></td>
             </tr>
-            <tr><td><br></td></tr>
+            <tr><td></td></tr>
             <tr>
                 <td>Current password:</td>
                 <td><input type="password" name="cur_pass" style="width: 50%;"></td>
             </tr>
-            <tr><td><br></td></tr>
+            <tr><td></td></tr>
             <tr>
                 <td>New password:</td>
                 <td><input type="password"  name="new_pass" style="width: 50%;"></td>
             </tr>
-            <tr><td><br></td></tr>
-            <tr>
+            <tr><td></td></tr>            <tr>
                 <td>Confirm password:</td>
                 <td><input type="password"  name="new_conf" style="width: 50%;"></td>
             </tr>
-            <tr><td><br></td></tr>
-            <tr>
+            <tr><td></td></tr>            <tr>
                 <td>Profile picture:</td>
                 <td><input type="file"  name="pic" style="width: 50%;"></td>
             </tr>

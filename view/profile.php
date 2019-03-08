@@ -28,7 +28,7 @@
 <main id="logMain">
 
     <div class="card">
-        <img width="30%" height="212vh" src="<?php echo $_SESSION["user_image"]?>">
+        <img width="20%" height="200vh" margin="auto" src="<?php echo $_SESSION["user_image"]?>">
         <div class="container">
             <h4><b>Name: <?php echo $_SESSION["first_name"]." ".$_SESSION["last_name"]; ?></b></h4>
             <p>Username: <?php echo $_SESSION["username"]; ?></p>
@@ -46,9 +46,10 @@
     </div>
     <?php if(\model\dao\UserDao::checkUserCars($_SESSION["username"])) {?>
     <br>
-    <h1 style="text-align: left; font-size: 3vw;">Your cars:</h1>
+    <h1 id="mainSpan" style="margin-left: 41%;">&nbspYour car/s:&nbsp</h1>
     <div id="carsScroll">
-        <table id="carShow">
+<!--        <table id="carShow">-->
+        <table id="mainDiv" style="margin-left: 34%;">
             <tr>
                 <th>Image</th>
                 <th>Name</th>
@@ -66,7 +67,7 @@
             <?php }
             else { ?>
                 <br>
-                <h1 style="text-align: left; font-size: 3vw;">If you have a car,you can add it from <a href="index.php?target=Car&action=ViewAdd" id="addCarLink">here</a> !</h1>
+                <h1 id="mainSpan" style="text-align: left; font-size: 3vw;">If you have a car,you can add it from <a href="index.php?target=Car&action=ViewAdd" id="addCarLink">here</a> !</h1>
             <?php } ?>
         </table>
     </div>
