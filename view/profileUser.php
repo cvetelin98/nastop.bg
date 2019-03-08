@@ -37,8 +37,15 @@
             <p>GSM: <?php echo $user->getGsm(); ?></p>
             <p>Gender: <?php echo $user->getGender(); ?></p>
                 <p>Rating:<?php
-                    for($i = 1 ; $i <= 5 ; $i++){
-                        echo "<button class='star' id='". $i."' onclick='rate(".$user_id.",".$i.")' value='".$i."'><img src='https://image.flaticon.com/icons/png/512/56/56786.png' width='25px' height='25px''></button>";
+                    if($_SESSION["user_id"] != $user_id) {
+                        for ($i = 1; $i <= 5; $i++) {
+                            echo "<button class='star' id='" . $i . "' onclick='rate(" . $user_id . "," . $i . ")' value='" . $i . "'><img src='https://image.flaticon.com/icons/png/512/56/56786.png' width='25px' height='25px''></button>";
+                        }
+                    }
+                    else {
+                        for ($i = 1; $i <= 5; $i++) {
+                            echo "<button class='star' id='" . $i . "' onclick='noVote()' value='" . $i . "'><img src='https://image.flaticon.com/icons/png/512/56/56786.png' width='25px' height='25px''></button>";
+                        }
                     }
                     ?>
                     <div id="ratingID">
@@ -184,6 +191,10 @@
             .catch(function (e) {
                 alert(e.message);
             })
+    }
+
+    function noVote(){
+        alert("You can't rate yourself!")
     }
 
 
