@@ -55,4 +55,10 @@ class CarController{
         else require "view/login.html";
     }
 
+    public function getPlaces(){
+        $car = $_POST["car"];
+        $answer["real_places"] = CarDao::getPlaces($car);
+        echo json_encode($answer);
+    }
+
 }

@@ -172,7 +172,6 @@ class TravelDao {
         $pdo = $GLOBALS["PDO"];
 
         try {
-            $pdo->beginTransaction();
             $queryNameFrom = "SELECT city_id FROM cities WHERE city_name = ?";
             $stmt = $pdo->prepare($queryNameFrom);
             $stmt->execute([$from]);
@@ -199,17 +198,49 @@ class TravelDao {
                 $travel->setCarId($row->car_id);
                 $travel->setTravelId($row->travel_id);
                 $travels[] = $travel;
-                $pdo->commit();
-
-                return $travels;
-
             }
-        }catch(\PDOException $e){
+
+            return $travels;
+        }
+        catch(\PDOException $e){
             echo "Problem - " . $e->getMessage();
-            $pdo->rollBack();
             $travels = [];
             return $travels;
 
         }
     }
+
+    public static function getAllTo($to){
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+        $stmt = $pdo->prepare("SELECT travel_id,user_id,car_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels 
+                                        JOIN cities ON city_id = final_destination WHERE city_name = ?");
+        $stmt->execute([$to]);
+        $travels = [];
+        while($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
+            $travel = new Travel($row->starting_destination,$row->final_destination,$row->date_of_travelling,$row->free_places,$row->price);
+            $travel->setTravelId($row->travel_id);
+            $travel->setCarId($row->car_id);
+            $travels[] = $travel;
+        }
+        return $travels;
+    }
+
+    public static function getAllFrom($from){
+        /** @var \PDO $pdo */
+        $pdo = $GLOBALS["PDO"];
+        $stmt = $pdo->prepare("SELECT travel_id,user_id,car_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels 
+                                        JOIN cities ON city_id = starting_destination WHERE city_name = ?");
+        $stmt->execute([$from]);
+        $travels = [];
+        while($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
+            $travel = new Travel($row->starting_destination,$row->final_destination,$row->date_of_travelling,$row->free_places,$row->price);
+            $travel->setTravelId($row->travel_id);
+            $travel->setCarId($row->car_id);
+            $travels[] = $travel;
+        }
+        return $travels;
+    }
+
+
 }

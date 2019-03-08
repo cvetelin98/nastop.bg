@@ -55,7 +55,7 @@
             </tr>
             <tr>
                 <td>Free Places:</td>
-                <td><input type="number" name="free_places" id="free_places" required></td>
+                <td><input type="number" name="free_places" id="free_places" onfocus="this.value=''"required></td>
             </tr>
             <tr>
                 <td>Price:</td>
@@ -63,7 +63,7 @@
             </tr>
             <tr>
                 <td>Car:</td>
-                <td><select name="car" required>
+                <td><select name="car" id="car" onchange="checkPlace();" required>
                         <?php foreach ($cars as $car) {?>
                             <option value="<?php echo $car->getCarId(); ?>"><?php echo $car->getCarName(); ?></option>
                         <?php } ?>
@@ -93,7 +93,7 @@
 <script>
 
     function validation(){
-        if(validDest() && validDate() && validPlaceAndPrice()){
+        if(validDest() && validDate() && validPlaceAndPrice() && checkPlace()){
             return true;
         }
         else return false;
@@ -147,6 +147,34 @@
             return false;
         }
         else return true;
+    }
+
+    function checkPlace() {
+        var entered_places = document.getElementById("free_places").value;
+        var car = document.getElementById("car").value;
+
+        fetch("index.php?target=Car&action=getPlaces",
+            {
+                method: "POST",
+                headers: {'Content-type': 'application/x-www-form-urlencoded'},
+                body: "car=" + car
+            })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                var real_places = myJson.real_places;
+
+                if(real_places < entered_places){
+                    alert("Not so many places in the car!");
+                    entered_places = '';
+                    return false;
+                }
+                else return true;
+            })
+            .catch(function (e) {
+                alert(e.message);
+            })
     }
 
 </script>

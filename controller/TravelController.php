@@ -45,9 +45,15 @@ class TravelController
             $starting_destination = $_POST["starting_destination"];
             $final_destination = $_POST["final_destination"];
             $date_of_travelling = $_POST["date_of_travelling"];
-            $free_places = $_POST["free_places"];
             $price = $_POST["price"];
             $car_id = $_POST["car"];
+
+            if($_POST["free_places"] < CarDao::getPlaces($car_id)) {
+                $free_places = $_POST["free_places"];
+            }
+            else {
+                throw new \Exception("Sorry,not so many places in the car!");
+            }
 
             if (empty($starting_destination) || empty($final_destination) || empty($date_of_travelling) || empty($free_places) || empty($price) || empty($car_id)) {
                 throw new \Exception("Sorry, invalid data! - empty");
@@ -83,14 +89,23 @@ class TravelController
             $from = $_POST["from"];
             $to = $_POST["to"];
 
-            if (empty($from) || empty($to)) {
+            if (empty($from) && empty($to)) {
                 throw new \Exception("Invalid data - empty");
-            } else {
-                /** @var Travel $travel */
-             $travels = TravelDao::getTravelFromSearch($from, $to);
-             require "view/home.php";
-
             }
+
+            else if(empty($from) && !empty($to)){
+                $travels = TravelDao::getAllTo($to);
+                require "view/home.php";
+            }
+            else if(empty($to) && !empty($from)){
+                $travels = TravelDao::getAllFrom($from);
+                require "view/home.php";
+            }
+            else if(!empty($from) && !empty($to)){
+                $travels = TravelDao::getTravelFromSearch($from, $to);
+                require "view/home.php";
+            }
+
         }
     }
 
