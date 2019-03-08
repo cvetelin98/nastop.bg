@@ -74,6 +74,7 @@
             </tr>
         </table>
     </form>
+        <input type="hidden" id="check-place-value" value="true">
     <?php }
     else { ?>
         <div id="noCars">
@@ -93,14 +94,14 @@
 <script>
 
     function validation(){
-        if(validDest() && validDate() && validPlaceAndPrice()){
-            if(checkPlace()) {
+        var check = document.getElementById("check-place-value").value;
+        if(check == "false"){
+            alert("Not so many places in the car!");
+        }
+        if(validDest() && validDate() && validPlaceAndPrice() && (check == "true")){
                 return true;
-            }
-            else return false;
         }
         else return false;
-
     }
 
     function validDest(){
@@ -152,33 +153,29 @@
         else return true;
     }
 
-    function checkPlace() {
+    async function checkPlace() {
         var entered_places = document.getElementById("free_places").value;
         var car = document.getElementById("car").value;
 
-        fetch("index.php?target=Car&action=getPlaces",
+        var response = await fetch("index.php?target=Car&action=getPlaces",
             {
                 method: "POST",
                 headers: {'Content-type': 'application/x-www-form-urlencoded'},
                 body: "car=" + car
-            })
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (myJson) {
-                var real_places = myJson.real_places;
-
-                if(real_places < entered_places){
-                    alert("Not so many places in the car!");
-                    entered_places = '';
-                    return false;
-                }
-                else return true;
-            })
-            .catch(function (e) {
-                alert(e.message);
-            })
-    }
+            });
+        var myJson = await response.json();
+        var real_places = myJson.real_places;
+        var result = null;
+        if(real_places < entered_places){
+            alert("Not so many places in the car!");
+            result = false;
+        }
+        else {
+            result = true;
+        }
+        document.getElementById("check-place-value").value = result;
+        return result;
+     }
 
 </script>
 
