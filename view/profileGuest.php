@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-    <?php if(\model\dao\UserDao::checkUserCars($user->getUsername())) {?>
+    <?php if($checkCars) {?>
 <br>
     <h1 style="text-align: left; font-size: 3vw;"><?php echo $user->getUsername(); ?>'s cars:</h1>
     <div id="carsScroll">

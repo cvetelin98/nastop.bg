@@ -35,12 +35,12 @@
                 if ($travel->getFreePlaces() > 0) { ?>
                 <div id="mainDiv">
                     <table style="text-align: center">
-                        <tr><td><p>From: </td><td><?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?></p></td></tr>
-                        <tr><td><p>To: </td><td><?php echo \model\dao\TravelDao::getCityName($travel->getFinalDestination()); ?></p></td></tr>
+                        <tr><td><p>From: </td><td><?php echo $travel->getStartingDestination(); ?></p></td></tr>
+                        <tr><td><p>To: </td><td><?php echo $travel->getFinalDestination(); ?></p></td></tr>
                         <tr><td><p>Date: </td><td><?php echo $travel->getDateOfTravelling(); ?></p></td></tr>
                         <tr><td><p>Free places: </td><td><?php echo $travel->getFreePlaces(); ?></p></td></tr>
                         <tr><td><p>Price: </td><td><?php echo $travel->getPrice(); ?> BGN</p></td></tr>
-                        <tr><td colspan="2"><form method="post" action="index.php?target=Travel&action=ViewTravelGlobal" style="margin-left:20%">
+                        <tr><td colspan="2"><form method="post" action="index.php?target=Travel&action=ViewTravel" style="margin-left:20%">
                         <input type=hidden name="travel_id" value="<?php echo $travel->getTravelId(); ?>">
                         <input type="submit" id="infoButton" value="See More" name="travelSubmit"></td></tr>
                     </form>

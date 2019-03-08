@@ -56,7 +56,7 @@
                 </p>
         </div>
     </div>
-    <?php if(\model\dao\UserDao::checkUserCars($user->getUsername())) {?>
+    <?php if($checkCars) {?>
 <br>
     <h1 style="text-align: center; font-size: 3vw;"><?php echo $user->getUsername(); ?>'s cars:</h1>
     <div id="carsScroll">
@@ -182,7 +182,7 @@
                 var rating = document.getElementById('ratingID');
 
                 if(answer === true){
-                    rating.innerHTML = new_rating;
+                    rating.innerHTML = " → " + new_rating;
                     }
                     else {
                         alert("You already voted!");

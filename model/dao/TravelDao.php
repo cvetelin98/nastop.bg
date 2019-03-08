@@ -55,7 +55,10 @@ class TravelDao {
     public static function getAll(){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
-        $stmt = $pdo->prepare("SELECT travel_id,user_id,car_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels");
+        $stmt = $pdo->prepare("SELECT travel_id,user_id,car_id,start_c.city_name as starting_destination,final_c.city_name as final_destination,date_of_travelling,free_places,price 
+                                          FROM travels as t 
+                                          JOIN cities as start_c ON start_c.city_id = starting_destination
+                                          JOIN cities as final_c ON final_c.city_id = final_destination");
         $stmt->execute();
         $travels = [];
         while($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
@@ -70,7 +73,8 @@ class TravelDao {
     public static function getAllByUser($user_id){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
-        $stmt = $pdo->prepare("SELECT travel_id,t.user_id,car_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels as t 
+        $stmt = $pdo->prepare("SELECT travel_id,t.user_id,t.car_id,starting_destination,final_destination,date_of_travelling,free_places,price,car_image FROM travels as t
+										  JOIN cars as c ON c.user_id = t.user_id 
                                           JOIN users as u ON t.user_id = u.user_id WHERE u.user_id = ?");
         $stmt->execute(array($user_id));
         $travels = [];
@@ -79,6 +83,7 @@ class TravelDao {
             $travel->setTravelId($row->travel_id);
             $travel->setUserId($row->user_id);
             $travel->setCarId($row->car_id);
+            $travel->car_image = $row->car_image;
             $travels[] = $travel;
         }
         return $travels;
@@ -87,9 +92,10 @@ class TravelDao {
     public static function getShared($user_id){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
-        $stmt = $pdo->prepare("SELECT t.travel_id,t.user_id,car_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM users as u 
+        $stmt = $pdo->prepare("SELECT t.travel_id,t.user_id,t.car_id,starting_destination,final_destination,date_of_travelling,free_places,price,car_image FROM users as u
                                           JOIN history as h ON h.user_id = u.user_id 
-                                          JOIN travels as t ON h.travel_id = t.travel_id 
+                                          JOIN travels as t ON h.travel_id = t.travel_id
+                                          JOIN cars as c ON c.user_id = t.user_id
                                           WHERE t.user_id <> u.user_id AND u.user_id = ?");
         $stmt->execute(array($user_id));
         $travels = [];
@@ -98,6 +104,7 @@ class TravelDao {
             $travel->setTravelId($row->travel_id);
             $travel->setUserId($row->user_id);
             $travel->setCarId($row->car_id);
+            $travel->car_image = $row->car_image;
             $travels[] = $travel;
         }
         return $travels;
@@ -106,13 +113,15 @@ class TravelDao {
     public static function getAllCities(){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
-        $stmt = $pdo->prepare("SELECT city_name FROM cities");
+        $stmt = $pdo->prepare("SELECT city_id,city_name FROM cities");
         $stmt->execute();
         $cities = [];
             $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             $cities = [];
             foreach ($rows as $row) {
-                $cities[] = $row["city_name"];
+                $city["id"] = $row["city_id"];
+                $city["name"] = $row["city_name"];
+                $cities[] = $city;
         }
         return $cities;
     }
@@ -121,7 +130,11 @@ class TravelDao {
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
 
-        $stmt = $pdo->prepare("SELECT user_id,car_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels WHERE travel_id = ?");
+        $stmt = $pdo->prepare("SELECT t.user_id,car_id,start_c.city_name as starting_destination,final_c.city_name as final_destination,date_of_travelling,free_places,price,username FROM travels as t 
+                                          JOIN users as u ON t.user_id = u.user_id 
+                                          JOIN cities as start_c ON start_c.city_id = starting_destination
+                                          JOIN cities as final_c ON final_c.city_id = final_destination 
+                                          WHERE travel_id =  ?");
         $stmt->execute(array($travel_id));
         $row = $stmt->fetch(\PDO::FETCH_OBJ);
 
@@ -130,6 +143,7 @@ class TravelDao {
         $travel->setTravelId($travel_id);
         $travel->setUserId($row->user_id);
         $travel->setCarId($row->car_id);
+        $travel->username = $row->username;
 
         return $travel;
     }

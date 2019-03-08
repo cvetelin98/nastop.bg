@@ -37,14 +37,14 @@
             <p>Gender: <?php echo $_SESSION["gender"]; ?></p>
             <div>
                 <p>Rating:<?php
-                            echo (\model\dao\UserDao::getRatingById($_SESSION["user_id"]) >= 1) ? ' '.\model\dao\UserDao::getRatingById($_SESSION["user_id"]) : " Not Voted Yet!";
+                            echo ($user_rating >= 1) ? ' '. $user_rating : " Not Voted Yet!";
                     echo "<button class='star' onclick='noVote();'><img src='https://image.flaticon.com/icons/png/512/56/56786.png' width='25px' height='25px''></button>";
                             ?>
                 </p>
             </div>
         </div>
     </div>
-    <?php if(\model\dao\UserDao::checkUserCars($_SESSION["username"])) {?>
+    <?php if($checkCars) {?>
     <br>
     <h1 id="mainSpan" style="margin-left: 41%;">&nbspYour car/s:&nbsp</h1>
     <div id="carsScroll">

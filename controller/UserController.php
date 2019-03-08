@@ -59,6 +59,8 @@ class UserController
     {
         $cars = UserDao::getUserCars($_SESSION["username"]);
         $comments = UserDao::getCommentsToUser($_SESSION["username"]);
+        $checkCars = \model\dao\UserDao::checkUserCars($_SESSION["username"]);
+        $user_rating = \model\dao\UserDao::getRatingById($_SESSION["user_id"]);
         if ($_SESSION["logged"]) {
             require "view/profile.php";
         } else require "view/login.html";
@@ -75,6 +77,7 @@ class UserController
             $user_rating = UserDao::getRatingById($user_id);
             $cars = UserDao::getUserCars($username);
             $comments = UserDao::getCommentsToUser($username);
+            $checkCars = \model\dao\UserDao::checkUserCars($username);
             if ($_SESSION["logged"]) {
                 require "view/profileUser.php";
             } else {

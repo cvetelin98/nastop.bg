@@ -46,7 +46,7 @@
                         <td><?php echo \model\dao\TravelDao::getCityName($my_travel->getStartingDestination()); ?></td>
                         <td><?php echo \model\dao\TravelDao::getCityName($my_travel->getFinalDestination()); ?></td>
                         <td><?php echo $my_travel->getDateOfTravelling(); ?></td>
-                        <td><img src="<?php echo \model\dao\CarDao::getCarImage($my_travel->getCarId()) ?>" width="15%"></td>
+                        <td><img src="<?php echo $my_travel->car_image ?>" width="15%"></td>
                         <td><?php echo \model\dao\UserDao::getUsernameById($my_travel->getUserId()); ?></td>
                         <td><?php echo $my_travel->getPrice(); ?> BGN</td>
                     </tr>
@@ -73,7 +73,7 @@
                         <td><?php echo \model\dao\TravelDao::getCityName($guest_travel->getStartingDestination()); ?></td>
                         <td><?php echo \model\dao\TravelDao::getCityName($guest_travel->getFinalDestination()); ?></td>
                         <td><?php echo $guest_travel->getDateOfTravelling(); ?></td>
-                        <td><img src="<?php echo \model\dao\CarDao::getCarImage($guest_travel->getCarId()) ?>" width="15%"></td>
+                        <td><img src="<?php echo $my_travel->car_image ?>" width="15%"></td>
                         <td><?php echo \model\dao\UserDao::getUsernameById($guest_travel->getUserId()); ?></td>
                         <td><?php echo $guest_travel->getPrice(); ?> BGN</td>
                     </tr>

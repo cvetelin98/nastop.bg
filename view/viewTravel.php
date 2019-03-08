@@ -25,23 +25,23 @@
 
     <table id="carTable" style="top:55%; height: 50vh;">
         <tr>
-            <td><?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?> ➟ <?php echo \model\dao\TravelDao::getCityName($travel->getFinalDestination()); ?></td>
+            <td><?php echo $travel->getStartingDestination(); ?> ➟ <?php echo $travel->getFinalDestination(); ?></td>
         </tr>
         <tr>
             <td>(<?php echo $travel->getDateOfTravelling(); ?>)</td>
         </tr>
         <tr>
-            <td>By: <?php echo \model\dao\UserDao::getUsernameById($travel->getUserId()); ?></td>
+            <td>By: <?php echo $travel->username; ?></td>
             <td><form method="post" action="index.php?target=User&action=viewProfileUser">
-                    <input type=hidden name="username" value="<?php echo \model\dao\UserDao::getUsernameById($travel->getUserId()); ?>">
+                    <input type=hidden name="username" value="<?php echo $travel->username; ?>">
                     <input type="submit" value="See Profile" name="view_profile">
                 </form></td>
         </tr>
         <tr>
-            <td>From: <?php echo \model\dao\TravelDao::getCityName($travel->getStartingDestination()); ?></td>
+            <td>From: <?php echo $travel->getStartingDestination(); ?></td>
         </tr>
         <tr>
-            <td>To: <?php echo \model\dao\TravelDao::getCityName($travel->getFinalDestination()); ?></td>
+            <td>To: <?php echo $travel->getFinalDestination(); ?></td>
         </tr>
         <tr>
             <td>On: <?php echo $travel->getDateOfTravelling(); ?></td>
@@ -62,7 +62,7 @@
         <?php if($_SESSION["user_id"] ==  $travel->getUserId()){ ?>
             <td id="no_book">You are the driver!</td>
         <?php }
-        else if (in_array($travel->getTravelId(),\model\dao\UserDao::getUserTravels($_SESSION["user_id"]))){ ?>
+        else if (in_array($travel->getTravelId(),$user_travels)){ ?>
             <td id="no_book">Already Booked!</td>
             <?php }
             else { ?>

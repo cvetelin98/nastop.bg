@@ -16,22 +16,19 @@ class TravelController
         if ($_SESSION["logged"]) {
             $cities = TravelDao::getAllCities();
             $cars = UserDao::getUserCars($_SESSION["username"]);
+            $checkCars = \model\dao\UserDao::checkUserCars($_SESSION["username"]);
             require "view/addTravel.php";
         } else require "view/login.html";
     }
 
     public function viewTravel()
     {
-        if ($_SESSION["logged"]) {
-            $travel = TravelDao::getTravel($_POST["travel_id"]);
-            require "view/viewTravel.php";
-        } else require "view/login.html";
-    }
-
-    public function viewTravelGlobal()
-    {
         $travel = TravelDao::getTravel($_POST["travel_id"]);
-        require "view/viewTravelGlobal.php";
+        if ($_SESSION["logged"]) {
+            $user_travels = \model\dao\UserDao::getUserTravels($_SESSION["user_id"]);
+            require "view/viewTravel.php";
+        }
+        else require "view/viewTravelGlobal.php";
     }
 
     public function add()
@@ -42,8 +39,8 @@ class TravelController
             }
 
             $user_id = $_SESSION["user_id"];
-            $starting_destination = $_POST["starting_destination"];
-            $final_destination = $_POST["final_destination"];
+            $starting_destination = TravelDao::getCityName($_POST["starting_destination"]);
+            $final_destination = TravelDao::getCityName($_POST["final_destination"]);
             $date_of_travelling = $_POST["date_of_travelling"];
             $price = $_POST["price"];
             $car_id = $_POST["car"];

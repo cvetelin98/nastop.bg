@@ -30,14 +30,14 @@
 <main id="viewMain">
     <br>
     <span id="mainSpan" style="margin-left: 43%">&nbsp Add travel:&nbsp</span>
-    <?php if(\model\dao\UserDao::checkUserCars($_SESSION["username"])){ ?>
+    <?php if($checkCars){ ?>
     <form action="index.php?target=Travel&action=add" method="post" onsubmit="return validation()">
         <table id="travelTable">
             <tr>
                 <td>Start:</td>
                 <td><select name="starting_destination" id="starting_destination" required>
                         <?php foreach ($cities as $city) {?>
-                        <option value="<?php echo $city ?>"><?php echo $city ?></option>
+                        <option value="<?php echo $city["id"] ?>"><?php echo $city["name"] ?></option>
                         <?php } ?>
                     </select></td>
             </tr>
@@ -45,7 +45,7 @@
                 <td>Final:</td>
                 <td><select name="final_destination" id="final_destination" required>
                         <?php foreach ($cities as $city) {?>
-                            <option value="<?php echo $city ?>"><?php echo $city ?></option>
+                            <option value="<?php echo $city["id"] ?>"><?php echo $city["name"] ?></option>
                         <?php } ?>
                     </select></td>
             </tr>
