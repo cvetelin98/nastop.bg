@@ -136,8 +136,11 @@ class UserController
         if ($userDB != null) {
             throw new \Exception("User already exists!");
         } else {
-            if ($password !== $password2 || strlen($password) < 6) {
-                throw new \Exception("Password mismatch");
+            if(strlen($username) < 6 || strlen($username) > 15){
+                throw new \Exception("Sorry, username is too short or too long!");
+            }
+            if ($password !== $password2 || strlen($password) < 6 || strlen($password) > 17)  {
+                throw new \Exception("Password mismatch/too short/too long");
             }
             if ($age < 16 && !(is_int($age))) {
                 throw new \Exception("Invalid data - age");
@@ -145,7 +148,7 @@ class UserController
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 throw new \Exception("Invalid data - email");
             }
-            if (strlen($GSM) < 10) {
+            if (strlen($GSM) < 10 || strlen($GSM) > 15) {
                 throw new \Exception("Invalid data - gsm");
             }
             UserDao::addUser($user);
@@ -202,7 +205,14 @@ class UserController
             /** @var User $user */
             $user = UserDao::getByUsername($_SESSION["username"]);
             if (isset($_POST["GSM"])) {
-                $user->setGsm($_POST["GSM"]);
+                $gsm = $_POST["GSM"];
+                if(!(empty($gsm))){
+                    if(strlen($gsm) < 10 || strlen($gsm) > 15){
+                        throw new \Exception("Soryy, invalid phone number!");
+                    }else{
+                        $user->setGsm($_POST["GSM"]);
+                    }
+                }
             }
 
             if (isset($_POST["cur_pass"], $_POST["new_pass"], $_POST["new_conf"])) {
@@ -215,7 +225,7 @@ class UserController
                     if (!password_verify($cur_pass, $pass_db)) {
                         throw new \Exception("Sorry, invalid password!");
                     }
-                    if ($new_pass !== $new_conf) {
+                    if ($new_pass !== $new_conf || strlen($new_pass) < 6 || strlen($new_pass) > 17) {
                         throw new \Exception("Sorry, new passwords - mismatch!");
                     } else {
                         $new_pass = password_hash($new_pass, PASSWORD_BCRYPT);

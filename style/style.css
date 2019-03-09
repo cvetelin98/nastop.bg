@@ -294,10 +294,11 @@ li a:hover:not(.active) {
 }
 
 .card {
+
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 5px;
-    background-color: #f2a22b;
+    background-color: #E8D3A8;
     padding-top:10px;
     padding-left:10px ;
 }
@@ -345,12 +346,12 @@ img {
     text-align: center;
     width: 50%;
     height: 20vh;
-    background-color: #f2a22b;
+    background-color: #E8D3A8;
     /*border-radius: 3%;*/
     margin: auto;
     font-size: 1.5vw;
     position: absolute;
-    top: 68.5%;
+    top: 65.5%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -376,12 +377,12 @@ img {
     text-align: center;
     width: 20%;
     height: 20vh;
-    background-color: #f2a22b;
+    background-color: #E8D3A8;
     /*border-radius: 3%;*/
     margin: auto;
     font-size: 1.5vw;
     position: absolute;
-    top:55%;
+    top:57%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -399,12 +400,12 @@ img {
     text-align: center;
     width: 20%;
     height: 20vh;
-    background-color: #f2a22b;
+    background-color: #E8D3A8;
     border-radius: 3%;
     margin: auto;
     font-size: 1.5vw;
     position: absolute;
-    top: 63%;
+    top: 66%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -699,7 +700,7 @@ hr {
 
 .search-panel .container .question {
     position: absolute;
-    right: 11%;
+    right: 18%;
     top: 15%;
 }
 
@@ -1249,6 +1250,10 @@ li {
     border: none;
     cursor:pointer;
     overflow: hidden;
+}
+
+.th_car{
+    border: 2px solid black;
 }
 
 #mainDiv {

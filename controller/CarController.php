@@ -46,6 +46,15 @@ class CarController{
             if (empty($brand) || empty($color) || empty($image_url)) {
                 throw new \Exception("Sorry, invalid data! - empty");
             }
+            if(is_int($brand) || is_int($color)){
+                throw new \Exception("The field - brand/color is invalid");
+            }
+            if(strlen($brand) > 15 || strlen($color) > 10){
+                throw new \Exception("The field - brand/color is too long");
+            }
+            if(strlen($brand) < 3 || strlen($color) > 3){
+                throw new \Exception("The field - brand/color is too short");
+            }
 
             $car = new Car($user_id, $brand, $image_url, $color, $places);
 

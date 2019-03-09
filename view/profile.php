@@ -46,15 +46,15 @@
     </div>
     <?php if($checkCars) {?>
     <br>
-    <h1 id="mainSpan" style="margin-left: 41%;">&nbspYour car/s:&nbsp</h1>
+    <h1 id="mainSpan" style="margin-left: 45%; margin-top:3%">&nbspYour car/s:&nbsp</h1>
     <div id="carsScroll">
 <!--        <table id="carShow">-->
-        <table id="mainDiv" style="margin-left: 34%;">
+        <table    id="mainDiv" style="margin-left: 34%; width:37%">
             <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Color</th>
-                <th>Places</th>
+                <th class="th_car">Image</th>
+                <th class="th_car">Name</th>
+                <th class="th_car">Color</th>
+                <th class="th_car">Places</th>
             </tr>
         <?php foreach($cars as $car) { ?>
             <tr>
