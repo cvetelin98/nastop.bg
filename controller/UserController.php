@@ -50,6 +50,7 @@ class UserController
     public function viewHome()
     {
         $travels = TravelDao::getAll();
+        $cities = TravelDao::getAllCities();
         if ($_SESSION["logged"]) {
             require "view/home.php";
         } else require "view/login.html";

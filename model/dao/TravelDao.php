@@ -115,7 +115,6 @@ class TravelDao {
         $pdo = $GLOBALS["PDO"];
         $stmt = $pdo->prepare("SELECT city_id,city_name FROM cities");
         $stmt->execute();
-        $cities = [];
             $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             $cities = [];
             foreach ($rows as $row) {
@@ -186,29 +185,16 @@ class TravelDao {
         $pdo = $GLOBALS["PDO"];
 
         try {
-            $queryNameFrom = "SELECT city_id FROM cities WHERE city_name = ?";
-            $stmt = $pdo->prepare($queryNameFrom);
-            $stmt->execute([$from]);
-            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
-            $fromDB = $row["city_id"];
-
-
-            $queryNameTo = "SELECT city_id FROM cities WHERE city_name = ?";
-            $stmt = $pdo->prepare($queryNameTo);
-            $stmt->execute([$to]);
-            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
-            $toDB = $row["city_id"];
-
-            $query = "SELECT  travel_id, user_id, car_id, date_of_travelling, free_places, price 
-                  FROM travels
-                  WHERE starting_destination = ? 
-                  AND final_destination = ?";
+            $query = "SELECT travel_id,user_id,car_id,date_of_travelling,free_places,price 
+                                          FROM travels as t 
+                                          JOIN cities as start_c ON start_c.city_id = starting_destination
+                                          JOIN cities as final_c ON final_c.city_id = final_destination WHERE start_c.city_name = ? AND final_c.city_name = ?";
             $stmt = $pdo->prepare($query);
-            $stmt->execute([$fromDB, $toDB]);
-
+            $stmt->execute([$from, $to]);
+            $travels = [];
             while ($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
                 /** @var Travel $travel */
-                $travel = new Travel($fromDB, $toDB, $row->date_of_travelling, $row->free_places, $row->price);
+                $travel = new Travel($from, $to, $row->date_of_travelling, $row->free_places, $row->price);
                 $travel->setCarId($row->car_id);
                 $travel->setTravelId($row->travel_id);
                 $travels[] = $travel;
@@ -227,8 +213,10 @@ class TravelDao {
     public static function getAllTo($to){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
-        $stmt = $pdo->prepare("SELECT travel_id,user_id,car_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels 
-                                        JOIN cities ON city_id = final_destination WHERE city_name = ?");
+        $stmt = $pdo->prepare("SELECT travel_id,user_id,car_id,start_c.city_name as starting_destination,final_c.city_name as final_destination,date_of_travelling,free_places,price 
+                                          FROM travels as t 
+                                          JOIN cities as start_c ON start_c.city_id = starting_destination
+                                          JOIN cities as final_c ON final_c.city_id = final_destination WHERE final_c.city_name = ?");
         $stmt->execute([$to]);
         $travels = [];
         while($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
@@ -243,8 +231,10 @@ class TravelDao {
     public static function getAllFrom($from){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
-        $stmt = $pdo->prepare("SELECT travel_id,user_id,car_id,starting_destination,final_destination,date_of_travelling,free_places,price FROM travels 
-                                        JOIN cities ON city_id = starting_destination WHERE city_name = ?");
+        $stmt = $pdo->prepare("SELECT travel_id,user_id,car_id,start_c.city_name as starting_destination,final_c.city_name as final_destination,date_of_travelling,free_places,price 
+                                          FROM travels as t 
+                                          JOIN cities as start_c ON start_c.city_id = starting_destination
+                                          JOIN cities as final_c ON final_c.city_id = final_destination WHERE start_c.city_name = ?");
         $stmt->execute([$from]);
         $travels = [];
         while($row = $stmt->fetch(\PDO::FETCH_OBJ)) {
@@ -255,6 +245,5 @@ class TravelDao {
         }
         return $travels;
     }
-
 
 }

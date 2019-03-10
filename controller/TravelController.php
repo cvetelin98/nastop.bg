@@ -87,19 +87,24 @@ class TravelController
             $to = $_POST["to"];
 
             if (empty($from) && empty($to)) {
-                throw new \Exception("Invalid data - empty");
+                $travels = TravelDao::getAll();
+                $cities = TravelDao::getAllCities();
+                require "view/home.php";
             }
 
             else if(empty($from) && !empty($to)){
                 $travels = TravelDao::getAllTo($to);
+                $cities = TravelDao::getAllCities();
                 require "view/home.php";
             }
             else if(empty($to) && !empty($from)){
                 $travels = TravelDao::getAllFrom($from);
+                $cities = TravelDao::getAllCities();
                 require "view/home.php";
             }
             else if(!empty($from) && !empty($to)){
                 $travels = TravelDao::getTravelFromSearch($from, $to);
+                $cities = TravelDao::getAllCities();
                 require "view/home.php";
             }
 

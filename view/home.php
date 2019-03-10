@@ -33,11 +33,16 @@
                 <h1 style="text-align: left">Find travel:</h1>
                 <form method="POST" action="index.php?target=Travel&action=search">
                     <div id="from-location" style="text-align: left">
-                        <input type="text" placeholder="From" name="from" id="from" class="from ui-autocomplete-input" autocomplete="off">
+                        <input type="text" placeholder="From" name="from" id="from" class="from ui-autocomplete-input" autocomplete="off" list="cities"">
+                        <datalist id="cities">
+                            <?php foreach ($cities as $city) { ?>
+                            <option><?php echo $city["name"] ?></option>
+                            <?php } ?>
+                        </datalist>
                         <input type="hidden" name="from_city_id">
                         <ul  class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-2" tabindex="0" style="display: none;"></ul></div>
                     <div id="to-location">
-                        <input type="text" placeholder="To" name="to" id="to" class="to ui-autocomplete-input" autocomplete="off">
+                        <input type="text" placeholder="To" name="to" id="to" class="to ui-autocomplete-input" autocomplete="off" list="cities">
                         <input type="hidden" name="to_city_id">
                         <ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-1" tabindex="0" style="display: none;"></ul></div>
                     <button type="submit" class="btn-momchi momchi-blue" name="searchButton">Search</button>
