@@ -15,8 +15,8 @@ class TravelController
     {
         if ($_SESSION["logged"]) {
             $cities = TravelDao::getAllCities();
+            $checkCars = UserDao::checkUserCars($_SESSION["username"]);
             $cars = UserDao::getUserCars($_SESSION["username"]);
-            $checkCars = \model\dao\UserDao::checkUserCars($_SESSION["username"]);
             require "view/addTravel.php";
         } else require "view/login.html";
     }
@@ -25,7 +25,7 @@ class TravelController
     {
         $travel = TravelDao::getTravel($_POST["travel_id"]);
         if ($_SESSION["logged"]) {
-            $user_travels = \model\dao\UserDao::getUserTravels($_SESSION["user_id"]);
+            $user_travels = UserDao::getUserTravels($_SESSION["user_id"]);
             require "view/viewTravel.php";
         }
         else require "view/viewTravelGlobal.php";
@@ -64,7 +64,7 @@ class TravelController
             if (TravelDao::addTravel($travel)) {
                 header("Location: index.php?target=User&action=viewHome");
             } else {
-                // TODO error header;
+                header("Location: index.php?target=Travel&action=ViewAdd");
             }
         } else require "view/login.html";
     }

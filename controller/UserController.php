@@ -60,8 +60,8 @@ class UserController
     {
         $cars = UserDao::getUserCars($_SESSION["username"]);
         $comments = UserDao::getCommentsToUser($_SESSION["username"]);
-        $checkCars = \model\dao\UserDao::checkUserCars($_SESSION["username"]);
-        $user_rating = \model\dao\UserDao::getRatingById($_SESSION["user_id"]);
+        $checkCars = UserDao::checkUserCars($_SESSION["username"]);
+        $user_rating = UserDao::getRatingById($_SESSION["user_id"]);
         if ($_SESSION["logged"]) {
             require "view/profile.php";
         } else require "view/login.html";
@@ -78,7 +78,7 @@ class UserController
             $user_rating = UserDao::getRatingById($user_id);
             $cars = UserDao::getUserCars($username);
             $comments = UserDao::getCommentsToUser($username);
-            $checkCars = \model\dao\UserDao::checkUserCars($username);
+            $checkCars = UserDao::checkUserCars($username);
             if ($_SESSION["logged"]) {
                 require "view/profileUser.php";
             } else {
@@ -143,7 +143,7 @@ class UserController
             if ($password !== $password2 || strlen($password) < 6 || strlen($password) > 17)  {
                 throw new \Exception("Password mismatch/too short/too long");
             }
-            if ($age < 16 && !(is_int($age))) {
+            if ($age < 16 && !(is_int($age)) || $age > 105) {
                 throw new \Exception("Invalid data - age");
             }
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -156,7 +156,7 @@ class UserController
             self::addInSession($user);
 
             $travels = TravelDao::getAll();
-//            require "view/home.php";
+
             header("Location: index.php?target=User&action=viewHome");
         }
         if (!$validReg) {
