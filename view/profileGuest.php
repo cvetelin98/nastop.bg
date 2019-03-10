@@ -35,7 +35,7 @@
             <div>
                 <p>Rating:<?php
                     for($i = 1 ; $i <= 5 ; $i++){
-                        echo "<a href='index.php?target=User&action=viewLogin'><button class='star' id='". $i."' value='".$i."'><img src='https://image.flaticon.com/icons/png/512/56/56786.png' width='25px' height='25px''></button></a>";
+                        echo "<a href='index.php?target=User&action=viewLogin'><button class='star' id='". $i."' value='".$i."'><img src='https://image.flaticon.com/icons/png/512/56/56786.png' width='25px' height='25px'' id='star_".$i."' onmouseover='change(".$i.");''></button></a>";
                     }
                     echo ($user_rating >= 1) ? ' → '.$user_rating : " ☞ Not Voted Yet!";
                     ?>
@@ -98,6 +98,26 @@
     <img src="https://prevozvalnik.bg/img/bulgaria-footer.png" style="margin-right: 25px">
     <h3 style="font-size: 15px;margin-right:55px;">Copyright 2019 © Nastop.bg</h3>
 </footer>
+
+<script>
+
+    function change(curr){
+        var curr_star = document.getElementById("star_" + curr);
+        if(curr_star.src == "https://image.flaticon.com/icons/png/512/56/56786.png") {
+            for (var i = 1; i <= curr; i++) {
+                var star = document.getElementById("star_" + i);
+                star.src = "http://www.cliparthut.com/clip-arts/140/download-gold-star-png-image-hq-png-image-freepngimg-clipart-qGwzLj.png";
+            }
+        }
+        else {
+            for (var i = 5; i >= curr; i--) {
+                var star = document.getElementById("star_" + i);
+                star.src = "https://image.flaticon.com/icons/png/512/56/56786.png";
+            }
+        }
+    }
+
+</script>
 
 </body>
 </html>

@@ -39,12 +39,12 @@
                 <p>Rating:<?php
                     if($_SESSION["user_id"] != $user_id) {
                         for ($i = 1; $i <= 5; $i++) {
-                            echo "<button class='star' id='" . $i . "' onclick='rate(" . $user_id . "," . $i . ")' value='" . $i . "'><img src='https://image.flaticon.com/icons/png/512/56/56786.png' width='25px' height='25px''></button>";
+                            echo "<button class='star' id='" . $i . "' onclick='rate(" . $user_id . "," . $i . ")' value='" . $i . "'><img src='https://image.flaticon.com/icons/png/512/56/56786.png' width='25px' height='25px' id='star_".$i."' onmouseover='change(".$i.");''></button>";
                         }
                     }
                     else {
                         for ($i = 1; $i <= 5; $i++) {
-                            echo "<button class='star' id='" . $i . "' onclick='noVote()' value='" . $i . "'><img src='https://image.flaticon.com/icons/png/512/56/56786.png' width='25px' height='25px''></button>";
+                            echo "<button class='star' id='" . $i . "' onclick='noVote()' value='" . $i . "'><img src='https://image.flaticon.com/icons/png/512/56/56786.png' width='25px' height='25px'' id='star_".$i."' onmouseover='change(".$i.");''></button>";
                         }
                     }
                     ?>
@@ -122,6 +122,22 @@
 </footer>
 
 <script>
+
+    function change(curr){
+        var curr_star = document.getElementById("star_" + curr);
+        if(curr_star.src == "https://image.flaticon.com/icons/png/512/56/56786.png") {
+            for (var i = 1; i <= curr; i++) {
+                var star = document.getElementById("star_" + i);
+                star.src = "http://www.cliparthut.com/clip-arts/140/download-gold-star-png-image-hq-png-image-freepngimg-clipart-qGwzLj.png";
+            }
+        }
+        else {
+            for (var i = 5; i >= curr; i--) {
+                var star = document.getElementById("star_" + i);
+                star.src = "https://image.flaticon.com/icons/png/512/56/56786.png";
+            }
+        }
+    }
 
     function sendComment() {
         var comment = document.getElementById("comment").value;
