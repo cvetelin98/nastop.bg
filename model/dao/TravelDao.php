@@ -73,7 +73,9 @@ class TravelDao {
     public static function getAllByUser($user_id){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
-        $stmt = $pdo->prepare("SELECT travel_id,t.user_id,t.car_id,starting_destination,final_destination,date_of_travelling,free_places,price,car_image FROM travels as t
+        $stmt = $pdo->prepare("SELECT travel_id,t.user_id,t.car_id,start_c.city_name as starting_destination,final_c.city_name as final_destination,date_of_travelling,free_places,price,car_image FROM travels as t
+                                          JOIN cities as start_c ON start_c.city_id = starting_destination
+                                          JOIN cities as final_c ON final_c.city_id = final_destination
 										  JOIN cars as c ON c.user_id = t.user_id 
                                           JOIN users as u ON t.user_id = u.user_id WHERE u.user_id = ?");
         $stmt->execute(array($user_id));
@@ -84,6 +86,7 @@ class TravelDao {
             $travel->setUserId($row->user_id);
             $travel->setCarId($row->car_id);
             $travel->car_image = $row->car_image;
+            $travel->username = UserDao::getUsernameById($row->user_id);
             $travels[] = $travel;
         }
         return $travels;
@@ -92,9 +95,11 @@ class TravelDao {
     public static function getShared($user_id){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
-        $stmt = $pdo->prepare("SELECT t.travel_id,t.user_id,t.car_id,starting_destination,final_destination,date_of_travelling,free_places,price,car_image FROM users as u
+        $stmt = $pdo->prepare("SELECT t.travel_id,t.user_id,t.car_id,start_c.city_name as starting_destination,final_c.city_name as final_destination,date_of_travelling,free_places,price,car_image FROM users as u
                                           JOIN history as h ON h.user_id = u.user_id 
                                           JOIN travels as t ON h.travel_id = t.travel_id
+                                          JOIN cities as start_c ON start_c.city_id = t.starting_destination
+                                          JOIN cities as final_c ON final_c.city_id = t.final_destination
                                           JOIN cars as c ON c.user_id = t.user_id
                                           WHERE t.user_id <> u.user_id AND u.user_id = ?");
         $stmt->execute(array($user_id));
@@ -105,6 +110,7 @@ class TravelDao {
             $travel->setUserId($row->user_id);
             $travel->setCarId($row->car_id);
             $travel->car_image = $row->car_image;
+            $travel->username = UserDao::getUsernameById($row->user_id);
             $travels[] = $travel;
         }
         return $travels;

@@ -43,11 +43,11 @@
             <?php if(count($my_travels) > 0) {
                 foreach ($my_travels as $my_travel) { ?>
                     <tr>
-                        <td><?php echo \model\dao\TravelDao::getCityName($my_travel->getStartingDestination()); ?></td>
-                        <td><?php echo \model\dao\TravelDao::getCityName($my_travel->getFinalDestination()); ?></td>
+                        <td><?php echo $my_travel->getStartingDestination(); ?></td>
+                        <td><?php echo $my_travel->getFinalDestination(); ?></td>
                         <td><?php echo $my_travel->getDateOfTravelling(); ?></td>
                         <td><img src="<?php echo $my_travel->car_image ?>" width="15%"></td>
-                        <td><?php echo \model\dao\UserDao::getUsernameById($my_travel->getUserId()); ?></td>
+                        <td><?php echo $my_travel->username; ?></td>
                         <td><?php echo $my_travel->getPrice(); ?> BGN</td>
                     </tr>
                 <?php }
@@ -70,11 +70,11 @@
             <?php if(count($guest_travels) > 0) {
                 foreach ($guest_travels as $guest_travel) { ?>
                     <tr>
-                        <td><?php echo \model\dao\TravelDao::getCityName($guest_travel->getStartingDestination()); ?></td>
-                        <td><?php echo \model\dao\TravelDao::getCityName($guest_travel->getFinalDestination()); ?></td>
+                        <td><?php echo $guest_travel->getStartingDestination(); ?></td>
+                        <td><?php echo $guest_travel->getFinalDestination(); ?></td>
                         <td><?php echo $guest_travel->getDateOfTravelling(); ?></td>
                         <td><img src="<?php echo $my_travel->car_image ?>" width="15%"></td>
-                        <td><?php echo \model\dao\UserDao::getUsernameById($guest_travel->getUserId()); ?></td>
+                        <td><?php echo $guest_travel->username; ?></td>
                         <td><?php echo $guest_travel->getPrice(); ?> BGN</td>
                     </tr>
                 <?php }
