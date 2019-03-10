@@ -45,7 +45,7 @@
     </div>
     <?php if($checkCars) {?>
 <br>
-    <h1 id="mainSpan" style="margin-left:43%;  margin-top:3%"><?php echo $user->getUsername(); ?>'s cars:</h1>
+    <h1 id="mainSpan" style="margin-left:43%;  margin-top:3%"><?php echo $user->getUsername(); ?>'s car/s:</h1>
     <div id="carsScroll">
         <table id="mainDiv" style="margin-left:37%;  margin-top:1%">
             <tr>

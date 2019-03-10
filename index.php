@@ -7,6 +7,15 @@ spl_autoload_register(function ($class) {
     require_once __DIR__ . DIRECTORY_SEPARATOR . $class;
 });
 
+function handleErrors($e){
+//    echo "<h2>Sorry, something went wrong - ".$e->getMessage()."</h2>";
+    require "view/errorPage.html";
+}
+
+set_exception_handler("handleErrors");
+
+
+
 define("DB_HOST",'127.0.0.1');
 define("DB_NAME",'nastop');
 define("DB_USER",'root');

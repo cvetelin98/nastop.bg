@@ -25,51 +25,56 @@
         </ul>
     </div>
 </header>
-<img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="80%" height="150px;">
-<main id="logMain">
+<img id="mainCover"
+     src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w"
+     width="80%" height="150px;">
+<main id="logMain" style="height: 150vh">
 
     <div class="card">
-        <img width="20%" height="200vh" margin="auto" src="<?php echo $user->getUserImage()?>">
+        <img width="20%" height="225vh" margin="auto" src="<?php echo $user->getUserImage() ?>">
         <div class="container">
-            <h4><b>Name: <?php echo $user->getFirstName()." ".$user->getLastName(); ?></b></h4>
+            <h4><b>Name: <?php echo $user->getFirstName() . " " . $user->getLastName(); ?></b></h4>
             <p>Username: <?php echo $user->getUsername(); ?></p>
             <p>Age: <?php echo $user->getAge(); ?></p>
             <p>GSM: <?php echo $user->getGsm(); ?></p>
             <p>Gender: <?php echo $user->getGender(); ?></p>
-                <p>Rating:<?php
-                    if($_SESSION["user_id"] != $user_id) {
+            <div><p>Rating: <?php
+                    if ($_SESSION["user_id"] != $user_id) {
                         for ($i = 1; $i <= 5; $i++) {
-                            echo "<button class='star' id='" . $i . "' onclick='rate(" . $user_id . "," . $i . ")' value='" . $i . "'><img src='https://image.flaticon.com/icons/png/512/56/56786.png' width='25px' height='25px' id='star_".$i."' onmouseover='change(".$i.");''></button>";
+                            echo "<button class='star' id='" . $i . "' onclick='rate(" . $user_id . "," . $i . ")' value='" . $i . "'><img src='https://image.flaticon.com/icons/png/512/56/56786.png' width='25px' height='25px' id='star_" . $i . "' onmouseover='change(" . $i . ");''></button>";
                         }
-                    }
-                    else {
+                    } else {
                         for ($i = 1; $i <= 5; $i++) {
-                            echo "<button class='star' id='" . $i . "' onclick='noVote()' value='" . $i . "'><img src='https://image.flaticon.com/icons/png/512/56/56786.png' width='25px' height='25px'' id='star_".$i."' onmouseover='change(".$i.");''></button>";
+                            echo "<button class='star' id='" . $i . "' onclick='noVote()' value='" . $i . "'><img src='https://image.flaticon.com/icons/png/512/56/56786.png' width='25px' height='25px'' id='star_" . $i . "' onmouseover='change(" . $i . ");''></button>";
                         }
                     }
                     ?>
-                    <div id="ratingID">
-                    <?php
-                    echo ($user_rating >= 1) ? ' → '.$user_rating : " ☞ Not Voted Yet!";
-                    ?>
-                </div>
                 </p>
-        </div>
+                </div><div id="ratingID"><p>
+                        <?php
+                        echo ($user_rating >= 1) ?  "<div><p>".$user_rating."</p></div>" : " ☞ Not Voted Yet!";
+                        ?>
+                    </p></div>
+<!--                <p>-->
+<!--                -->
+<!--                </p>-->
+            </div>
     </div>
-    <?php if($checkCars) {?>
+    </div>
+    <?php if ($checkCars) { ?>
 <br>
-    <h1 id="mainSpan" style="margin-left: 41%; margin-top: 3%"><?php echo $user->getUsername(); ?>'s cars:</h1>
+    <h1 id="mainSpan" style="margin-left: 41%; margin-top: 3%"><?php echo $user->getUsername(); ?>'s car/s:</h1>
     <div id="carsScroll">
-        <table id="mainDiv"  style="margin-left: 34%; margin-top: 1%">
+        <table id="mainDiv" style="margin-left: 34%; margin-top: 1%">
             <tr>
                 <th class="th_car">Image</th>
                 <th class="th_car">Name</th>
                 <th class="th_car">Color</th>
                 <th class="th_car">Places</th>
             </tr>
-            <?php foreach($cars as $car) { ?>
+            <?php foreach ($cars as $car) { ?>
                 <tr>
-                    <td><img width="65%"  src="<?php echo $car->getCarImage(); ?>"></td>
+                    <td><img width="65%" src="<?php echo $car->getCarImage(); ?>"></td>
                     <td><?php echo $car->getCarName(); ?></td>
                     <td><?php echo $car->getCarColor(); ?></td>
                     <td><?php echo $car->getCarPlaces(); ?></td>
@@ -83,38 +88,39 @@
         </table>
     </div>
 
-    <?php if(count($comments) > 0){ ?>
-        <div id="commentScroll">
-            <table id="commentShow">
+    <?php if (count($comments) > 0){ ?>
+    <div id="commentScroll">
+        <table id="commentShow">
+            <tr>
+                <th>From</th>
+                <th>Comment</th>
+            </tr>
+            <?php foreach ($comments as $comment) { ?>
                 <tr>
-                    <th>From</th>
-                    <th>Comment</th>
+                    <td><?php echo $comment["from_user"]; ?></td>
+                    <td><?php echo $comment["comment"] ?></td>
                 </tr>
-                <?php foreach($comments as $comment) { ?>
-                    <tr>
-                        <td><?php echo $comment["from_user"]; ?></td>
-                        <td><?php echo $comment["comment"] ?></td>
-                    </tr>
-                <?php } ?>
+            <?php } ?>
 
-            </table>
-                <?php } ?>
-        </div>
-
-    <?php if($user_id != $_SESSION["user_id"]) { ?>
-
-    <div id="comment-section">
-        <textarea placeholder="Comment Here!" rows="5" cols="50" id="comment"></textarea>
-        <input type="hidden" value="<?php echo $user_id ?>" id="to_user">
-        <button onclick="sendComment()">Comment</button>
+        </table>
+        <?php } ?>
     </div>
+
+    <?php if ($user_id != $_SESSION["user_id"]) { ?>
+
+        <div id="comment-section">
+            <textarea placeholder="Comment Here!" rows="5" cols="50" id="comment"></textarea>
+            <input type="hidden" value="<?php echo $user_id ?>" id="to_user">
+            <button onclick="sendComment()">Comment</button>
+        </div>
 
     <?php } ?>
 
 </main>
 <footer id="mainFooter">
     <h3 style="font-size: 30px;float:left;margin-left:55px;">You can always go nastop!</h3>
-    <h3 style="font-size: 20px;float:left; margin-left:25px;">Nastop.bg е място, където се срещат шофьори със свободни места и желаещи да пътуват.
+    <h3 style="font-size: 20px;float:left; margin-left:25px;">Nastop.bg е място, където се срещат шофьори със свободни
+        места и желаещи да пътуват.
         Вие сте шофьор: Не плащайте сам цялото гориво! Споделете този разход с други хора!
         Желате да пътувате: Возете се удобно в кола на по-ниска цена от билет за автобус.</h3>
     <img src="https://prevozvalnik.bg/img/bulgaria-footer.png" style="margin-right: 25px">
@@ -123,9 +129,9 @@
 
 <script>
 
-    function change(curr){
+    function change(curr) {
         var curr_star = document.getElementById("star_" + curr);
-        if(curr_star.src == "https://image.flaticon.com/icons/png/512/56/56786.png") {
+        if (curr_star.src == "https://image.flaticon.com/icons/png/512/56/56786.png") {
             for (var i = 1; i <= curr; i++) {
                 var star = document.getElementById("star_" + i);
                 star.src = "http://www.cliparthut.com/clip-arts/140/download-gold-star-png-image-hq-png-image-freepngimg-clipart-qGwzLj.png";
@@ -157,15 +163,15 @@
                 var new_comments = myJson.new_comments;
                 var from_user = myJson.from_user;
 
-                if(answer === true){
+                if (answer === true) {
                     var table = document.getElementById("commentShow");
                     var row = table.insertRow(-1);
                     var cell_from_user = row.insertCell(-1);
                     var cell_comment = row.insertCell(-1);
                     var comment = document.getElementById("comment");
-                    if(new_comments.length > 0) {
+                    if (new_comments.length > 0) {
 
-                        for(var i = 0; i < new_comments.length; i++) {
+                        for (var i = 0; i < new_comments.length; i++) {
                             cell_from_user.innerHTML = from_user;
                             cell_comment.innerHTML = new_comments[i];
                             comment.value = "";
@@ -175,14 +181,14 @@
                         alert("Try again!");
                     }
                 }
-    })
-    .catch(function (e) {
-        alert(e.message);
-    })
+            })
+            .catch(function (e) {
+                alert(e.message);
+            })
     }
 
 
-    function rate(user_id, rate_value){
+    function rate(user_id, rate_value) {
         fetch("index.php?target=User&action=rateUser",
             {
                 method: "POST",
@@ -197,19 +203,19 @@
                 var new_rating = myJson.new_rating;
                 var rating = document.getElementById('ratingID');
 
-                if(answer === true){
+                if (answer === true) {
                     rating.innerHTML = " → " + new_rating;
-                    }
-                    else {
-                        alert("You already voted!");
-                    }
-                })
+                }
+                else {
+                    alert("You already voted!");
+                }
+            })
             .catch(function (e) {
                 alert(e.message);
             })
     }
 
-    function noVote(){
+    function noVote() {
         alert("You can't rate yourself!")
     }
 

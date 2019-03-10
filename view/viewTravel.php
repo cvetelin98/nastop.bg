@@ -23,7 +23,7 @@
 <img id="mainCover" src="https://static1.squarespace.com/static/55c1d8bce4b081fdca9dc5fd/t/573c76938259b5b384b45f7e/1463580310514/Individuals.jpg?format=1500w" width="80%" height="150px;">
 <main id="viewMain">
 
-    <table id="carTable" style="top:55%; height: 50vh;">
+    <table id="carTable" style="margin-top:2%; height: 50vh;">
         <tr>
             <td><?php echo $travel->getStartingDestination(); ?> ➟ <?php echo $travel->getFinalDestination(); ?></td>
         </tr>
