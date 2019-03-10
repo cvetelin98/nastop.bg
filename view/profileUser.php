@@ -29,7 +29,7 @@
 <main id="logMain">
 
     <div class="card">
-        <img width="30%" height="212vh" src="<?php echo $user->getUserImage()?>">
+        <img width="20%" height="200vh" margin="auto" src="<?php echo $user->getUserImage()?>">
         <div class="container">
             <h4><b>Name: <?php echo $user->getFirstName()." ".$user->getLastName(); ?></b></h4>
             <p>Username: <?php echo $user->getUsername(); ?></p>
@@ -58,14 +58,14 @@
     </div>
     <?php if($checkCars) {?>
 <br>
-    <h1 style="text-align: center; font-size: 3vw;"><?php echo $user->getUsername(); ?>'s cars:</h1>
+    <h1 id="mainSpan" style="margin-left: 41%; margin-top: 3%"><?php echo $user->getUsername(); ?>'s cars:</h1>
     <div id="carsScroll">
-        <table id="mainDiv"  style="margin-left: 34%;">
+        <table id="mainDiv"  style="margin-left: 34%; margin-top: 1%">
             <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Color</th>
-                <th>Places</th>
+                <th class="th_car">Image</th>
+                <th class="th_car">Name</th>
+                <th class="th_car">Color</th>
+                <th class="th_car">Places</th>
             </tr>
             <?php foreach($cars as $car) { ?>
                 <tr>
@@ -78,7 +78,7 @@
             <?php }
             else { ?>
                 <br>
-                <h1 style="text-align: left; font-size: 3vw;">User don't have cars!</h1>
+                <h1 id="mainSpan" style="text-align: left; font-size: 3vw;">User don't have cars!</h1>
             <?php } ?>
         </table>
     </div>

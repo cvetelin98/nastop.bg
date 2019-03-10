@@ -63,6 +63,7 @@
                 <td><?php echo $car->getCarColor(); ?></td>
                 <td><?php echo $car->getCarPlaces(); ?></td>
             </tr>
+
         <?php } ?>
             <?php }
             else { ?>
