@@ -553,7 +553,7 @@ img {
 
 #commentScroll {
     height: 25vh;
-    overflow-y : scroll;
+    overflow-y : auto;
 }
 
 .error{
@@ -599,12 +599,12 @@ img {
 
 #travelScroll {
     height: 70vh;
-    overflow-y : scroll;
+    overflow-y : auto;
 }
 
 #historyScroll {
     height: 47vh;
-    overflow-y : scroll;
+    overflow-y : auto;
 }
 
 hr {
@@ -618,7 +618,7 @@ hr {
 
 #carsScroll {
     height: 45vh;
-    overflow-y : scroll;
+    overflow-y : auto;
 }
 
 .search-panel {
