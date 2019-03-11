@@ -143,43 +143,32 @@ class UserDao {
     public static function addRate($from_user, $to_user, $rate){
         /** @var \PDO $pdo */
         $pdo = $GLOBALS["PDO"];
+        $pdo->beginTransaction();
+
         try {
-            $pdo->beginTransaction();
             $queryRate = "INSERT INTO rates(from_id, to_id, vote) VALUES (?, ?, ?)";
             $stmt = $pdo->prepare($queryRate);
             $stmt->execute([$from_user, $to_user, $rate]);
 
-            $querySum = "SELECT SUM(vote) AS sum FROM rates WHERE to_id = ? ";
-            $stmt = $pdo->prepare($querySum);
-            $stmt->execute([$to_user]);
 
-            if($stmt->rowCount() != 0){
-                $row = $stmt->fetch(\PDO::FETCH_ASSOC);
-                $sum = $row["sum"];
+            $queryGetRating = "SELECT AVG(vote) AS rating FROM rates WHERE to_id = ?";
+            $stmt = $pdo->prepare($queryGetRating);
+            $stmt->execute([$to_user]);
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $rating = $row["rating"];
 
                 $queryVoted = "UPDATE users SET total_voted = total_voted + 1 WHERE user_id = ?";
                 $stmt = $pdo->prepare($queryVoted);
                 $stmt->execute([$to_user]);
 
-                $query = "SELECT total_voted FROM users WHERE user_id = ?";
-                $stmt = $pdo->prepare($query);
-                $stmt->execute([$to_user]);
-
-                $row = $stmt->fetch(\PDO::FETCH_ASSOC);
-                $total_voted = $row["total_voted"];
-
-                if ($total_voted !== 0){
-                    $rate = $sum/$total_voted;
-                }
 
                 $queryUpdate = "UPDATE users SET rating = ROUND(?, 2) WHERE user_id = ?";
                 $stmt = $pdo->prepare($queryUpdate);
-                $stmt->execute([$rate, $to_user]);
+                $stmt->execute([$rating, $to_user]);
 
                 $pdo->commit();
                 return true;
 
-            }
 
         }catch(\PDOException $e){
             echo "Error -> ".$e->getMessage();
