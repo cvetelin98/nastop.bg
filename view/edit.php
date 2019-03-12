@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <title>Edit</title>
     <link rel="stylesheet" href="Style/style.css">
+    <link rel="icon" href="http://pngimg.com/uploads/road/road_PNG48.png">
 </head>
 <body>
 <header class="navHeader">
