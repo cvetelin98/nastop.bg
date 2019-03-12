@@ -88,9 +88,9 @@
         </table>
     </div>
 
-    <?php if (count($comments) > 0){ ?>
     <div id="commentScroll">
         <table id="commentShow">
+    <?php if (count($comments) > 0){ ?>
             <tr>
                 <th>From</th>
                 <th>Comment</th>
@@ -101,9 +101,8 @@
                     <td><?php echo $comment["comment"] ?></td>
                 </tr>
             <?php } ?>
-
-        </table>
         <?php } ?>
+        </table>
     </div>
 
     <?php if ($user_id != $_SESSION["user_id"]) { ?>
