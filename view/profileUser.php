@@ -66,7 +66,7 @@
 <br>
     <h1 id="mainSpan" style="margin-left: 41%; margin-top: 3%"><?php echo $user->getUsername(); ?>'s car/s:</h1>
     <div id="carsScroll">
-        <table id="mainDiv" style="margin-left: 34%; margin-top: 1%; width:35%">
+        <table id="mainDiv" style="margin-left: 34%; margin-top: 1%; width:35%;">
             <tr>
                 <th class="th_car">Image</th>
                 <th class="th_car">Name</th>
