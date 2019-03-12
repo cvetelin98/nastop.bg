@@ -29,7 +29,7 @@
 
 <main id="viewMain">
     <br>
-    <span id="mainSpan" style="margin-left: 43%; margin-top:3%;">&nbsp Add travel:&nbsp</span>
+    <span id="mainSpan" style="margin-left: 43%; margin-top:1.5%;">&nbsp Add travel:&nbsp</span>
     <?php if($checkCars){ ?>
     <form action="index.php?target=Travel&action=add" method="post" onsubmit="return validation()">
         <table id="travelTable">
